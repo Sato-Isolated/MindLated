@@ -1,7 +1,7 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.MD;
 using dnlib.DotNet.Writer;
-using Isolator.Utils;
+using Isolated.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using static Isolator.Utils.WriterUtils.ModuleWriterListener;
 
-namespace Isolator.Protection.Fake
+namespace Isolated.Fake
 {
     internal class FakeNative
     {
