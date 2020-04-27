@@ -1,9 +1,9 @@
-﻿using dnlib.DotNet;
+using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 using System;
 using System.Linq;
 
-namespace Isolator.Protection.Calli
+namespace Isolated.Protection.Calli
 {
     internal class Calli
     {
