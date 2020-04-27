@@ -6,6 +6,7 @@ using Isolated.Protection.InvalidMD;
 using Isolated.Protection.Other;
 using Isolated.Protection.Proxy;
 using Isolated.Protection.Renamer;
+using Isolator.Protection.LocalField;
 using Isolated.Protection.String;
 using System;
 using System.IO;
@@ -32,6 +33,10 @@ namespace Isolated
             { StringEncPhase.Execute(module); }
             /*    if (checkBox2.Checked)
                 { OnlinePhase.Execute(module); }  */
+                
+            L2F.Execute(module);
+            L2FV2.Execute(module);
+            
             if (checkBox3.Checked)
             { ProxyString.Execute(module); }
             if (checkBox5.Checked)
