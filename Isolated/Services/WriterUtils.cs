@@ -7,7 +7,7 @@ using OpCode = dnlib.DotNet.Emit.OpCode;
 using ReflOpCode = System.Reflection.Emit.OpCode;
 using ReflOpCodes = System.Reflection.Emit.OpCodes;
 
-namespace Isolator.Utils
+namespace Isolated.Services
 {
     internal static class WriterUtils
     {
