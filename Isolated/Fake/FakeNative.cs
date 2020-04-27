@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using static Isolator.Utils.WriterUtils.ModuleWriterListener;
 
-namespace Isolated.Fake
+namespace Isolated.Protection.Fake
 {
     internal class FakeNative
     {
