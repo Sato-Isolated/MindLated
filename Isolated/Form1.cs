@@ -2,6 +2,8 @@
 using dnlib.DotNet.Writer;
 using Isolated.Protection.CtrlFlow;
 using Isolated.Protection.INT;
+using Isolator.Protection.Calli;
+using Isolator.Protection.Fake;
 using Isolated.Protection.InvalidMD;
 using Isolated.Protection.Other;
 using Isolated.Protection.Proxy;
@@ -37,6 +39,11 @@ namespace Isolated
             L2F.Execute(module);
             L2FV2.Execute(module);
             
+            Calli.Execute(module);
+            
+            FakeNative FFakeNative = new FakeNative();
+            FFakeNative.Execute(module);
+            
             if (checkBox3.Checked)
             { ProxyString.Execute(module); }
             if (checkBox5.Checked)
@@ -62,7 +69,7 @@ namespace Isolated
             { text2 += "\\"; }
             string path = text2 + Path.GetFileNameWithoutExtension(textBox1.Text) + "_protected" +
                           Path.GetExtension(textBox1.Text);
-            var opts = new ModuleWriterOptions(module);
+         var opts = new ModuleWriterOptions(module) { Listener = Utils.WriterUtils.listener };
             opts.PEHeadersOptions.NumberOfRvaAndSizes = 13;
             opts.MetaDataOptions.TablesHeapOptions.ExtraData = 0x1337;
             opts.Logger = DummyLogger.NoThrowInstance;
