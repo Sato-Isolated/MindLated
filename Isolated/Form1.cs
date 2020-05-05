@@ -2,17 +2,18 @@
 using dnlib.DotNet.Writer;
 using Isolated.Protection.CtrlFlow;
 using Isolated.Protection.INT;
-using Isolator.Protection.Calli;
-using Isolator.Protection.Fake;
+using Isolated.Protection.Calli;
+using Isolated.Protection.Fake;
 using Isolated.Protection.InvalidMD;
 using Isolated.Protection.Other;
 using Isolated.Protection.Proxy;
 using Isolated.Protection.Renamer;
-using Isolator.Protection.LocalField;
 using Isolated.Protection.String;
 using System;
 using System.IO;
 using System.Windows.Forms;
+using Isolated.Protection.LocalF;
+using Isolated.Services;
 
 namespace Isolated
 {
@@ -26,6 +27,7 @@ namespace Isolated
 
         public string DirectoryName = "";
 
+        FakeNative FFakeNative = new FakeNative();
         public Form1() => InitializeComponent();
 
         private void Button1_Click(object sender, EventArgs e)
@@ -36,41 +38,53 @@ namespace Isolated
             /*    if (checkBox2.Checked)
                 { OnlinePhase.Execute(module); }  */
                 
-            L2F.Execute(module);
-            L2FV2.Execute(module);
-            
-            Calli.Execute(module);
-            
-            FakeNative FFakeNative = new FakeNative();
-            FFakeNative.Execute(module);
+            if (checkBox13.Checked)
+            { L2F.Execute(module); }
+
+            if (checkBox15.Checked)
+            { L2FV2.Execute(module); }
+
+            if (checkBox14.Checked)
+            { Calli.Execute(module); }
+
+            if (checkBox16.Checked)
+            { FFakeNative.Execute(module); }
             
             if (checkBox3.Checked)
             { ProxyString.Execute(module); }
+
             if (checkBox5.Checked)
             { Anti_Debug.Execute(module); }
+
             if (checkBox6.Checked)
             { Anti_Tamper.Execute(module); }
+
             if (checkBox8.Checked)
             { AddIntPhase.Execute(module); }
+
             if (checkBox4.Checked)
             { ProxyINT.Execute(module); }
+
             if (checkBox12.Checked)
             { ProxyMeth.Execute(module); }
+
             if (checkBox10.Checked)
             { RenamerPhase.Execute(module); }
-            if (checkBox7.Checked)
-            { controlflow.process(module); ControlFlowTask.Execute(module); }
+
             if (checkBox11.Checked)
             { JumpCFlow.Execute(module); }
+            if (checkBox7.Checked)
+            { ControlFlowObfuscation.Execute(module); }
             if (checkBox9.Checked)
             { InvalidMDPhase.process(module.Assembly); }
+
             string text2 = Path.GetDirectoryName(textBox1.Text);
             if (!text2.EndsWith("\\"))
             { text2 += "\\"; }
             string path = text2 + Path.GetFileNameWithoutExtension(textBox1.Text) + "_protected" +
                           Path.GetExtension(textBox1.Text);
-         var opts = new ModuleWriterOptions(module) { Listener = Utils.WriterUtils.listener };
-            opts.PEHeadersOptions.NumberOfRvaAndSizes = 13;
+
+            var opts = new ModuleWriterOptions(module) { Listener = Utils.listener, PEHeadersOptions = { NumberOfRvaAndSizes = 13 } };
             opts.MetaDataOptions.TablesHeapOptions.ExtraData = 0x1337;
             opts.Logger = DummyLogger.NoThrowInstance;
             module.Write(path, opts);

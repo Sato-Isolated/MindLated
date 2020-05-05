@@ -1,6 +1,6 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
-using Isolated.Protection.CtrlFlow;
+using Isolated.Protection.Renamer;
 
 namespace Isolated.Protection.InvalidMD
 {
@@ -10,13 +10,13 @@ namespace Isolated.Protection.InvalidMD
         {
             ModuleDef manifestModule = asm.ManifestModule;
             manifestModule.Mvid = null;
-            manifestModule.Name = "";
-            asm.ManifestModule.Import(new FieldDefUser(""));
+            manifestModule.Name = RenamerPhase.GenerateString();
+            asm.ManifestModule.Import(new FieldDefUser(RenamerPhase.GenerateString()));
             foreach (TypeDef typeDef in manifestModule.Types)
             {
-                TypeDef typeDef2 = new TypeDefUser("");
+                TypeDef typeDef2 = new TypeDefUser(RenamerPhase.GenerateString());
                 typeDef2.Methods.Add(new MethodDefUser());
-                typeDef2.NestedTypes.Add(new TypeDefUser(""));
+                typeDef2.NestedTypes.Add(new TypeDefUser(RenamerPhase.GenerateString()));
                 MethodDef item = new MethodDefUser();
                 typeDef2.Methods.Add(item);
                 typeDef.NestedTypes.Add(typeDef2);
@@ -74,12 +74,12 @@ namespace Isolated.Protection.InvalidMD
                     }
                 }
             }
-            TypeDef typeDef3 = new TypeDefUser(controlflow.generate(-1));
-            FieldDef item2 = new FieldDefUser(controlflow.generate(-1), new FieldSig(manifestModule.Import(typeof(Isolated_png)).ToTypeSig()));
+            TypeDef typeDef3 = new TypeDefUser(RenamerPhase.GenerateString());
+            FieldDef item2 = new FieldDefUser(RenamerPhase.GenerateString(), new FieldSig(manifestModule.Import(typeof(Isolated_png)).ToTypeSig()));
             typeDef3.Fields.Add(item2);
             typeDef3.BaseType = manifestModule.Import(typeof(Isolated_png));
             manifestModule.Types.Add(typeDef3);
-            TypeDef typeDef4 = new TypeDefUser("");
+            TypeDef typeDef4 = new TypeDefUser(RenamerPhase.GenerateString());
             typeDef4.IsInterface = true;
             typeDef4.IsSealed = true;
             manifestModule.Types.Add(typeDef4);

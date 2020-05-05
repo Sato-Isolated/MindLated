@@ -67,16 +67,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helper\IsolatedContext.cs" />
-    <Compile Include="Protection\CtrlFlow\controlflow.cs" />
-    <Compile Include="Protection\CtrlFlow\ControlFlowTask.cs" />
-    <Compile Include="Protection\CtrlFlow\imgjpg.cs" />
-    <Compile Include="Protection\CtrlFlow\InstructionGroup.cs" />
-    <Compile Include="Protection\CtrlFlow\InstructionGroups.cs" />
+    <Compile Include="Protection\Calli\Calli.cs" />
+    <Compile Include="Protection\CtrlFlow\Block.cs" />
+    <Compile Include="Protection\CtrlFlow\BlockParser.cs" />
+    <Compile Include="Protection\CtrlFlow\ControlFlowObfuscation.cs" />
     <Compile Include="Protection\CtrlFlow\JumpCFlow.cs" />
-    <Compile Include="Protection\CtrlFlow\obfuscatorHelper.cs" />
+    <Compile Include="Protection\Fake\FakeNative.cs" />
     <Compile Include="Protection\InvalidMD\InvalidMDPhase.cs" />
     <Compile Include="Protection\InvalidMD\Isolated.png.cs" />
+    <Compile Include="Protection\LocalF\L2F.cs" />
+    <Compile Include="Protection\LocalF\L2FV2.cs" />
     <Compile Include="Protection\Other\AntiDebug.Safe.cs" />
     <Compile Include="Protection\INT\AddIntPhase.cs" />
     <Compile Include="Protection\Proxy\ProxyINT.cs" />
@@ -92,20 +92,14 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helper\InjectHelper.cs" />
+    <Compile Include="Services\InjectHelper.cs" />
     <Compile Include="Protection\String\OnlinePhase.cs" />
     <Compile Include="Protection\String\OnlineStringClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protection\String\StringEncPhase.cs" />
     <Compile Include="Protection\Proxy\ProxyString.cs" />
-    <Compile Include="Services\RenameTask.cs" />
-    <Compile Include="Services\DynamicCode.cs" />
-    <Compile Include="Services\GeneralUtils.cs" />
-    <Compile Include="Services\Mutation.cs" />
-    <Compile Include="Services\Expression.cs" />
     <Compile Include="Services\Utils.cs" />
-    <Compile Include="Services\RandomGen.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -144,5 +138,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

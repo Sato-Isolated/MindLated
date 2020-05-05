@@ -1,6 +1,6 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
-using Isolated.Helper;
+using Isolated.Services;
 using System.Collections.Generic;
 using System.Linq;
 

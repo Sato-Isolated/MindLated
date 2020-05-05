@@ -44,6 +44,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.checkBox11 = new System.Windows.Forms.CheckBox();
             this.checkBox12 = new System.Windows.Forms.CheckBox();
+            this.checkBox13 = new System.Windows.Forms.CheckBox();
+            this.checkBox14 = new System.Windows.Forms.CheckBox();
+            this.checkBox15 = new System.Windows.Forms.CheckBox();
+            this.checkBox16 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +55,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(7, 84);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(516, 27);
+            this.button1.Size = new System.Drawing.Size(643, 27);
             this.button1.TabIndex = 0;
             this.button1.Text = "Obfuscate";
             this.button1.UseVisualStyleBackColor = true;
@@ -62,7 +66,7 @@
             this.textBox1.AllowDrop = true;
             this.textBox1.Location = new System.Drawing.Point(7, 12);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(516, 20);
+            this.textBox1.Size = new System.Drawing.Size(643, 20);
             this.textBox1.TabIndex = 1;
             this.textBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox1_DragDrop);
             this.textBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox1_DragEnter);
@@ -170,7 +174,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(529, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(656, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(73, 90);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -197,11 +201,55 @@
             this.checkBox12.Text = "ProxyMeth";
             this.checkBox12.UseVisualStyleBackColor = true;
             // 
+            // checkBox13
+            // 
+            this.checkBox13.AutoSize = true;
+            this.checkBox13.Location = new System.Drawing.Point(472, 61);
+            this.checkBox13.Name = "checkBox13";
+            this.checkBox13.Size = new System.Drawing.Size(38, 17);
+            this.checkBox13.TabIndex = 15;
+            this.checkBox13.Text = "LF";
+            this.checkBox13.UseVisualStyleBackColor = true;
+            // 
+            // checkBox14
+            // 
+            this.checkBox14.AutoSize = true;
+            this.checkBox14.Location = new System.Drawing.Point(573, 61);
+            this.checkBox14.Name = "checkBox14";
+            this.checkBox14.Size = new System.Drawing.Size(45, 17);
+            this.checkBox14.TabIndex = 16;
+            this.checkBox14.Text = "Calli";
+            this.checkBox14.UseVisualStyleBackColor = true;
+            // 
+            // checkBox15
+            // 
+            this.checkBox15.AutoSize = true;
+            this.checkBox15.Location = new System.Drawing.Point(516, 61);
+            this.checkBox15.Name = "checkBox15";
+            this.checkBox15.Size = new System.Drawing.Size(51, 17);
+            this.checkBox15.TabIndex = 17;
+            this.checkBox15.Text = "LFV2";
+            this.checkBox15.UseVisualStyleBackColor = true;
+            // 
+            // checkBox16
+            // 
+            this.checkBox16.AutoSize = true;
+            this.checkBox16.Location = new System.Drawing.Point(509, 38);
+            this.checkBox16.Name = "checkBox16";
+            this.checkBox16.Size = new System.Drawing.Size(84, 17);
+            this.checkBox16.TabIndex = 18;
+            this.checkBox16.Text = "Fake Native";
+            this.checkBox16.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(614, 114);
+            this.ClientSize = new System.Drawing.Size(741, 114);
+            this.Controls.Add(this.checkBox16);
+            this.Controls.Add(this.checkBox15);
+            this.Controls.Add(this.checkBox14);
+            this.Controls.Add(this.checkBox13);
             this.Controls.Add(this.checkBox12);
             this.Controls.Add(this.checkBox11);
             this.Controls.Add(this.pictureBox1);
@@ -244,6 +292,10 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.CheckBox checkBox11;
         private System.Windows.Forms.CheckBox checkBox12;
+        private System.Windows.Forms.CheckBox checkBox13;
+        private System.Windows.Forms.CheckBox checkBox14;
+        private System.Windows.Forms.CheckBox checkBox15;
+        private System.Windows.Forms.CheckBox checkBox16;
     }
 }
 

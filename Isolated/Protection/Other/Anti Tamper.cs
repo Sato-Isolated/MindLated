@@ -1,9 +1,10 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
-using Isolated.Helper;
+using Isolated.Services;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace Isolated.Protection.Other
 {
@@ -11,7 +12,7 @@ namespace Isolated.Protection.Other
     {
         public static void Md5(string filePath)
         {
-            byte[] md5bytes = System.Security.Cryptography.MD5.Create().ComputeHash(System.IO.File.ReadAllBytes(filePath));
+            byte[] md5bytes = MD5.Create().ComputeHash(File.ReadAllBytes(filePath));
             using (var stream = new FileStream(filePath, FileMode.Append))
             {
                 stream.Write(md5bytes, 0, md5bytes.Length);

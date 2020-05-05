@@ -54,14 +54,15 @@ namespace Isolated.Services
 
             void IModuleWriterListener.OnWriterEvent(ModuleWriterBase writer, ModuleWriterEvent evt)
             {
-                OnWriterEvent?.Invoke(writer, new ModuleWriterListenerEventArgs(evt));
+                if (OnWriterEvent != null)
+                    OnWriterEvent(writer, new ModuleWriterListenerEventArgs(evt));
             }
 
             public class ModuleWriterListenerEventArgs : EventArgs
             {
                 public ModuleWriterListenerEventArgs(ModuleWriterEvent evt)
                 {
-                    WriterEvent = evt;
+                    this.WriterEvent = evt;
                 }
 
                 public ModuleWriterEvent WriterEvent { get; private set; }

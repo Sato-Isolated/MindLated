@@ -3,7 +3,7 @@ using dnlib.DotNet.Emit;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Isolated.Helper
+namespace Isolated.Services
 {
     public static class InjectHelper
     {

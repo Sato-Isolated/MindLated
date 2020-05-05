@@ -1,5 +1,5 @@
 ﻿using dnlib.DotNet;
-using Isolated.Services;
+using System;
 using System.Collections.Generic;
 
 namespace Isolated.Protection.Renamer
@@ -13,7 +13,6 @@ namespace Isolated.Protection.Renamer
         private static Dictionary<FieldDef, bool> fieldRename = new Dictionary<FieldDef, bool>();
         private static List<string> fieldNewName = new List<string>();
         public static bool IsObfuscationActive = true;
-        private static RandomGen random = new RandomGen();
 
         public static void Rename(TypeDef type, bool canRename = true)
         {
@@ -128,7 +127,9 @@ namespace Isolated.Protection.Renamer
             field.Name = randString;
         }
 
-        private static string GenerateString()
+        public static Random random = new Random();
+
+        public static string GenerateString()
         {
             string s = "";
             for (int i = 0; i < 3; i++)
