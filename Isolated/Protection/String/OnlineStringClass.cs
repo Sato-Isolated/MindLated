@@ -11,8 +11,7 @@ namespace Isolated.Protection.String
             {
                 WebClient webClient = new WebClient();
                 return webClient.DownloadString("https://communitykeyv1.000webhostapp.com/Decoder4.php?string=" + encrypted);
-                //I will add an php example for this soon maybe
-            }   //mb my english is bad
+            }   
             return "Isolated.png";
         }
     }
