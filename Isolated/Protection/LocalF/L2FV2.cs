@@ -9,7 +9,6 @@ namespace Isolated.Protection.LocalF
 {
     internal class L2FV2
     {
-        private static int Amount { get; set; }
         private static Dictionary<Local, FieldDef> convertedLocals = new Dictionary<Local, FieldDef>();
 
         public static void Execute(ModuleDef Module)
@@ -22,9 +21,6 @@ namespace Isolated.Protection.LocalF
                     Process(Module, method2);
                 }
             }
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine($"    L2FV2 Converted {Amount}.");
-            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public static void Process(ModuleDef Module, MethodDef method)
@@ -62,7 +58,6 @@ namespace Isolated.Protection.LocalF
                     }
                     instructions[i].OpCode = eq;
                     instructions[i].Operand = def;
-                    ++Amount;
                 }
             }
             convertedLocals.ToList().ForEach(x => method.Body.Variables.Remove(x.Key));

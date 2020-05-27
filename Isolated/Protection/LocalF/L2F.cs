@@ -22,9 +22,6 @@ namespace Isolated.Protection.LocalF
                     Process(Module, method2);
                 }
             }
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine($"    L2F Converted {Amount}.");
-            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public static void Process(ModuleDef Module, MethodDef method)
@@ -72,7 +69,6 @@ namespace Isolated.Protection.LocalF
                     }
                     instructions[i].OpCode = eq;
                     instructions[i].Operand = def;
-                    ++Amount;
                 }
             }
         }
