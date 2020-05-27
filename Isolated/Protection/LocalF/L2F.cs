@@ -10,7 +10,7 @@ namespace Isolated.Protection.LocalF
     internal class L2F
     {
         private static Dictionary<Local, FieldDef> convertedLocals = new Dictionary<Local, FieldDef>();
-        private static int Amount { get; set; }
+     
 
         public static void Execute(ModuleDef Module)
         {
@@ -22,9 +22,6 @@ namespace Isolated.Protection.LocalF
                     Process(Module, method2);
                 }
             }
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine($"    L2F Converted {Amount}.");
-            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public static void Process(ModuleDef Module, MethodDef method)
@@ -72,7 +69,6 @@ namespace Isolated.Protection.LocalF
                     }
                     instructions[i].OpCode = eq;
                     instructions[i].Operand = def;
-                    ++Amount;
                 }
             }
         }

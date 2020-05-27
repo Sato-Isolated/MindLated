@@ -7,8 +7,6 @@ namespace Isolated.Protection.Calli
 {
     internal class Calli
     {
-        private static int Amount { get; set; }
-
         public static void Execute(ModuleDef module)
         {
             foreach (TypeDef type in module.Types.ToArray())
@@ -36,7 +34,6 @@ namespace Isolated.Protection.Calli
                                             method.Body.Instructions[i].OpCode = OpCodes.Calli;
                                             method.Body.Instructions[i].Operand = membertocalli.MethodSig;
                                             method.Body.Instructions.Insert(i, Instruction.Create(OpCodes.Ldftn, membertocalli));
-                                            ++Amount;
                                         }
                                         catch (Exception ex)
                                         {
@@ -59,9 +56,6 @@ namespace Isolated.Protection.Calli
                     }
                 }
             }
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine($"   Calli called {Amount}.");
-            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }
