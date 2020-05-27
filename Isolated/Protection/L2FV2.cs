@@ -1,16 +1,16 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
-using Isolated.Protection.Renamer;
+using Isolator.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Isolated.Protection.LocalF
+namespace Isolator.Protection.LocalField
 {
-    internal class L2F
+    internal class L2FV2 : Randomizer
     {
-        private static Dictionary<Local, FieldDef> convertedLocals = new Dictionary<Local, FieldDef>();
         private static int Amount { get; set; }
+        private static Dictionary<Local, FieldDef> convertedLocals = new Dictionary<Local, FieldDef>();
 
         public static void Execute(ModuleDef Module)
         {
@@ -23,12 +23,13 @@ namespace Isolated.Protection.LocalF
                 }
             }
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine($"    L2F Converted {Amount}.");
+            Console.WriteLine($"    L2FV2 Converted {Amount}.");
             Console.ForegroundColor = ConsoleColor.White;
         }
 
         public static void Process(ModuleDef Module, MethodDef method)
         {
+            method.Body.SimplifyMacros(method.Parameters);
             var instructions = method.Body.Instructions;
             for (int i = 0; i < instructions.Count; i++)
             {
@@ -37,7 +38,7 @@ namespace Isolated.Protection.LocalF
                     FieldDef def = null;
                     if (!convertedLocals.ContainsKey(local))
                     {
-                        def = new FieldDefUser(RenamerPhase.GenerateString(), new FieldSig(local.Type), FieldAttributes.Public | FieldAttributes.Static);
+                        def = new FieldDefUser(GenerateRandomString(7), new FieldSig(local.Type), FieldAttributes.Public | FieldAttributes.Static);
                         Module.GlobalType.Fields.Add(def);
                         convertedLocals.Add(local, def);
                     }
@@ -48,25 +49,14 @@ namespace Isolated.Protection.LocalF
                     switch (instructions[i].OpCode.Code)
                     {
                         case Code.Ldloc:
-                        case Code.Ldloc_S:
-                        case Code.Ldloc_0:
-                        case Code.Ldloc_1:
-                        case Code.Ldloc_2:
-                        case Code.Ldloc_3:
                             eq = OpCodes.Ldsfld;
                             break;
 
                         case Code.Ldloca:
-                        case Code.Ldloca_S:
                             eq = OpCodes.Ldsflda;
                             break;
 
                         case Code.Stloc:
-                        case Code.Stloc_0:
-                        case Code.Stloc_1:
-                        case Code.Stloc_2:
-                        case Code.Stloc_3:
-                        case Code.Stloc_S:
                             eq = OpCodes.Stsfld;
                             break;
                     }
@@ -75,6 +65,8 @@ namespace Isolated.Protection.LocalF
                     ++Amount;
                 }
             }
+            convertedLocals.ToList().ForEach(x => method.Body.Variables.Remove(x.Key));
+            convertedLocals = new Dictionary<Local, FieldDef>();
         }
     }
 }

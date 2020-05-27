@@ -1,13 +1,13 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
-using Isolated.Protection.Renamer;
+using Isolator.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Isolated.Protection.LocalF
+namespace Isolator.Protection.LocalField
 {
-    internal class L2F
+    internal class L2F : Randomizer
     {
         private static Dictionary<Local, FieldDef> convertedLocals = new Dictionary<Local, FieldDef>();
         private static int Amount { get; set; }
@@ -37,7 +37,7 @@ namespace Isolated.Protection.LocalF
                     FieldDef def = null;
                     if (!convertedLocals.ContainsKey(local))
                     {
-                        def = new FieldDefUser(RenamerPhase.GenerateString(), new FieldSig(local.Type), FieldAttributes.Public | FieldAttributes.Static);
+                        def = new FieldDefUser(GenerateRandomString(6), new FieldSig(local.Type), FieldAttributes.Public | FieldAttributes.Static);
                         Module.GlobalType.Fields.Add(def);
                         convertedLocals.Add(local, def);
                     }
