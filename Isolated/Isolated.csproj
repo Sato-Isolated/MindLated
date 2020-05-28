@@ -67,6 +67,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Protection\Arithmetic\Arithmetic.cs" />
+    <Compile Include="Protection\Arithmetic\ArithmeticEmulator.cs" />
+    <Compile Include="Protection\Arithmetic\ArithmeticTypes.cs" />
+    <Compile Include="Protection\Arithmetic\ArithmeticVT.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Add.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Div.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Maths\Abs.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Maths\Ceiling.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Maths\Cos.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Maths\Floor.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Maths\Log.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Maths\Log10.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Maths\Round.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Maths\Sin.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Maths\Sqrt.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Maths\Tan.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Maths\Tanh.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Maths\Truncate.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Mul.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Sub.cs" />
+    <Compile Include="Protection\Arithmetic\Functions\Xor.cs" />
+    <Compile Include="Protection\Arithmetic\Generator\Generator.cs" />
+    <Compile Include="Protection\Arithmetic\iArithmetic.cs" />
+    <Compile Include="Protection\Arithmetic\iFunction.cs" />
+    <Compile Include="Protection\Arithmetic\Token.cs" />
+    <Compile Include="Protection\Arithmetic\Utils\ArithmeticUtils.cs" />
+    <Compile Include="Protection\Arithmetic\Value.cs" />
     <Compile Include="Protection\Calli\Calli.cs" />
     <Compile Include="Protection\CtrlFlow\Block.cs" />
     <Compile Include="Protection\CtrlFlow\BlockParser.cs" />

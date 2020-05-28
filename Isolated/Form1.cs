@@ -1,19 +1,20 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Writer;
-using Isolated.Protection.CtrlFlow;
-using Isolated.Protection.INT;
+using Isolated.Protection.Arithmetic;
 using Isolated.Protection.Calli;
+using Isolated.Protection.CtrlFlow;
 using Isolated.Protection.Fake;
+using Isolated.Protection.INT;
 using Isolated.Protection.InvalidMD;
+using Isolated.Protection.LocalF;
 using Isolated.Protection.Other;
 using Isolated.Protection.Proxy;
 using Isolated.Protection.Renamer;
 using Isolated.Protection.String;
+using Isolated.Services;
 using System;
 using System.IO;
 using System.Windows.Forms;
-using Isolated.Protection.LocalF;
-using Isolated.Services;
 
 namespace Isolated
 {
@@ -27,17 +28,20 @@ namespace Isolated
 
         public string DirectoryName = "";
 
-        FakeNative FFakeNative = new FakeNative();
+        private FakeNative FFakeNative = new FakeNative();
+
         public Form1() => InitializeComponent();
 
         private void Button1_Click(object sender, EventArgs e)
         {
             ModuleDefMD module = ModuleDefMD.Load(textBox1.Text);
+
             if (checkBox1.Checked)
             { StringEncPhase.Execute(module); }
-            /*    if (checkBox2.Checked)
-                { OnlinePhase.Execute(module); }  */
-                
+
+            if (checkBox2.Checked)
+            { OnlinePhase.Execute(module); }
+
             if (checkBox13.Checked)
             { L2F.Execute(module); }
 
@@ -47,20 +51,17 @@ namespace Isolated
             if (checkBox14.Checked)
             { Calli.Execute(module); }
 
-            if (checkBox16.Checked)
-            { FFakeNative.Execute(module); }
-            
-            if (checkBox3.Checked)
-            { ProxyString.Execute(module); }
-
-            if (checkBox5.Checked)
-            { Anti_Debug.Execute(module); }
-
-            if (checkBox6.Checked)
-            { Anti_Tamper.Execute(module); }
+            if (checkBox7.Checked)
+            { ControlFlowObfuscation.Execute(module); }
 
             if (checkBox8.Checked)
             { AddIntPhase.Execute(module); }
+
+            if (checkBox17.Checked)
+            { Arithmetic.Execute(module); }
+
+            if (checkBox3.Checked)
+            { ProxyString.Execute(module); }
 
             if (checkBox4.Checked)
             { ProxyINT.Execute(module); }
@@ -73,10 +74,18 @@ namespace Isolated
 
             if (checkBox11.Checked)
             { JumpCFlow.Execute(module); }
-            if (checkBox7.Checked)
-            { ControlFlowObfuscation.Execute(module); }
+       
+            if (checkBox5.Checked)
+            { Anti_Debug.Execute(module); }
+
+            if (checkBox6.Checked)
+            { Anti_Tamper.Execute(module); }
+
             if (checkBox9.Checked)
             { InvalidMDPhase.process(module.Assembly); }
+
+            if (checkBox16.Checked)
+            { FFakeNative.Execute(module); }
 
             string text2 = Path.GetDirectoryName(textBox1.Text);
             if (!text2.EndsWith("\\"))

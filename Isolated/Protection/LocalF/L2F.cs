@@ -1,7 +1,6 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 using Isolated.Protection.Renamer;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 

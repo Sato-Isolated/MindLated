@@ -48,12 +48,13 @@
             this.checkBox14 = new System.Windows.Forms.CheckBox();
             this.checkBox15 = new System.Windows.Forms.CheckBox();
             this.checkBox16 = new System.Windows.Forms.CheckBox();
+            this.checkBox17 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(7, 84);
+            this.button1.Location = new System.Drawing.Point(7, 105);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(643, 27);
             this.button1.TabIndex = 0;
@@ -241,11 +242,22 @@
             this.checkBox16.Text = "Fake Native";
             this.checkBox16.UseVisualStyleBackColor = true;
             // 
+            // checkBox17
+            // 
+            this.checkBox17.AutoSize = true;
+            this.checkBox17.Location = new System.Drawing.Point(7, 84);
+            this.checkBox17.Name = "checkBox17";
+            this.checkBox17.Size = new System.Drawing.Size(72, 17);
+            this.checkBox17.TabIndex = 19;
+            this.checkBox17.Text = "Arithmetic";
+            this.checkBox17.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(741, 114);
+            this.ClientSize = new System.Drawing.Size(741, 144);
+            this.Controls.Add(this.checkBox17);
             this.Controls.Add(this.checkBox16);
             this.Controls.Add(this.checkBox15);
             this.Controls.Add(this.checkBox14);
@@ -268,7 +280,7 @@
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Name = "Form1";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Text = "Isolated 120618";
+            this.Text = "Isolated 280520";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -296,6 +308,7 @@
         private System.Windows.Forms.CheckBox checkBox14;
         private System.Windows.Forms.CheckBox checkBox15;
         private System.Windows.Forms.CheckBox checkBox16;
+        private System.Windows.Forms.CheckBox checkBox17;
     }
 }
 

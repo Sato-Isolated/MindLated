@@ -7,7 +7,6 @@ namespace Isolated.Protection.Calli
 {
     internal class Calli
     {
-
         public static void Execute(ModuleDef module)
         {
             foreach (TypeDef type in module.Types.ToArray())
