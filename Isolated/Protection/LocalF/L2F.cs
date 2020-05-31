@@ -9,7 +9,6 @@ namespace Isolated.Protection.LocalF
     internal class L2F
     {
         private static Dictionary<Local, FieldDef> convertedLocals = new Dictionary<Local, FieldDef>();
-        private static int Amount { get; set; }
 
         public static void Execute(ModuleDef Module)
         {
@@ -30,7 +29,7 @@ namespace Isolated.Protection.LocalF
             {
                 if (instructions[i].Operand is Local local)
                 {
-                    FieldDef def = null;
+                    FieldDef def;
                     if (!convertedLocals.ContainsKey(local))
                     {
                         def = new FieldDefUser(RenamerPhase.GenerateString(), new FieldSig(local.Type), FieldAttributes.Public | FieldAttributes.Static);

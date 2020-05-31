@@ -11,10 +11,9 @@ namespace Isolated.Protection.Other
 
             Stream stream = new StreamReader(assemblyLocation).BaseStream;
             BinaryReader reader = new BinaryReader(stream);
-            string realMd5 = null, newMd5 = null;
-            newMd5 = BitConverter.ToString(System.Security.Cryptography.MD5.Create().ComputeHash(reader.ReadBytes(File.ReadAllBytes(assemblyLocation).Length - 16)));
+            string newMd5 = BitConverter.ToString(System.Security.Cryptography.MD5.Create().ComputeHash(reader.ReadBytes(File.ReadAllBytes(assemblyLocation).Length - 16)));
             stream.Seek(-16, SeekOrigin.End);
-            realMd5 = BitConverter.ToString(reader.ReadBytes(16));
+            string realMd5 = BitConverter.ToString(reader.ReadBytes(16));
             if (newMd5 != realMd5)
                 throw new BadImageFormatException();
         }

@@ -6,7 +6,7 @@ namespace Isolated.Protection.InvalidMD
 {
     internal class InvalidMDPhase
     {
-        public static void process(AssemblyDef asm)
+        public static void Execute(AssemblyDef asm)
         {
             ModuleDef manifestModule = asm.ManifestModule;
             manifestModule.Mvid = null;
@@ -21,8 +21,10 @@ namespace Isolated.Protection.InvalidMD
                 typeDef2.Methods.Add(item);
                 typeDef.NestedTypes.Add(typeDef2);
                 typeDef.Events.Add(new EventDefUser());
-                MethodDef methodDef = new MethodDefUser();
-                methodDef.MethodSig = new MethodSig();
+                MethodDef methodDef = new MethodDefUser
+                {
+                    MethodSig = new MethodSig()
+                };
                 foreach (MethodDef methodDef2 in typeDef.Methods)
                 {
                     if (methodDef2.Body != null)
@@ -58,16 +60,17 @@ namespace Isolated.Protection.InvalidMD
                             methodDef2.Body.Instructions.Insert(methodDef2.Body.Instructions.Count, new Instruction(OpCodes.Stloc, local2));
                             methodDef2.Body.Instructions.Insert(methodDef2.Body.Instructions.Count, new Instruction(OpCodes.Br, instruction3));
                             methodDef2.Body.Instructions.Insert(methodDef2.Body.Instructions.Count, instruction);
-                            ExceptionHandler exceptionHandler = new ExceptionHandler(ExceptionHandlerType.Finally);
-                            exceptionHandler.HandlerStart = methodDef2.Body.Instructions[10];
-                            exceptionHandler.HandlerEnd = methodDef2.Body.Instructions[11];
-                            exceptionHandler.TryEnd = methodDef2.Body.Instructions[14];
-                            exceptionHandler.TryStart = methodDef2.Body.Instructions[12];
+                            ExceptionHandler exceptionHandler = new ExceptionHandler(ExceptionHandlerType.Finally)
+                            {
+                                HandlerStart = methodDef2.Body.Instructions[10],
+                                HandlerEnd = methodDef2.Body.Instructions[11],
+                                TryEnd = methodDef2.Body.Instructions[14],
+                                TryStart = methodDef2.Body.Instructions[12]
+                            };
                             if (!methodDef2.Body.HasExceptionHandlers)
                             {
                                 methodDef2.Body.ExceptionHandlers.Add(exceptionHandler);
                             }
-                            operand = new Instruction(OpCodes.Br, instruction);
                             methodDef2.Body.OptimizeBranches();
                             methodDef2.Body.OptimizeMacros();
                         }
@@ -79,9 +82,11 @@ namespace Isolated.Protection.InvalidMD
             typeDef3.Fields.Add(item2);
             typeDef3.BaseType = manifestModule.Import(typeof(Isolated_png));
             manifestModule.Types.Add(typeDef3);
-            TypeDef typeDef4 = new TypeDefUser(RenamerPhase.GenerateString());
-            typeDef4.IsInterface = true;
-            typeDef4.IsSealed = true;
+            TypeDef typeDef4 = new TypeDefUser(RenamerPhase.GenerateString())
+            {
+                IsInterface = true,
+                IsSealed = true
+            };
             manifestModule.Types.Add(typeDef4);
             manifestModule.TablesHeaderVersion = new ushort?(257);
         }

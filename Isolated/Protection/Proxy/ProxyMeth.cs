@@ -54,8 +54,10 @@ namespace Isolated.Protection.Proxy
                 type.Add(md.CorLibTypes.Int32);
                 MethodImplAttributes methImplFlags = MethodImplAttributes.IL | MethodImplAttributes.Managed;
                 MethodAttributes methFlags = MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.ReuseSlot;
-                MethodDef meth = new MethodDefUser("ProxyMeth" + rand.Next(0, int.MaxValue), MethodSig.CreateStatic(original.MethodSig.RetType, type.ToArray()), methImplFlags, methFlags);
-                meth.Body = new CilBody();
+                MethodDef meth = new MethodDefUser("ProxyMeth" + rand.Next(0, int.MaxValue), MethodSig.CreateStatic(original.MethodSig.RetType, type.ToArray()), methImplFlags, methFlags)
+                {
+                    Body = new CilBody()
+                };
                 meth.Body.Variables.Add(new Local(md.CorLibTypes.Int32));
                 meth.Body.Variables.Add(new Local(md.CorLibTypes.Int32));
                 meth.Body.Instructions.Add(Instruction.Create(OpCodes.Ldarg_0));
@@ -171,7 +173,7 @@ namespace Isolated.Protection.Proxy
 
     public static class EnumerableHelper<E>
     {
-        private static Random r;
+        private static readonly Random r;
 
         static EnumerableHelper()
         {

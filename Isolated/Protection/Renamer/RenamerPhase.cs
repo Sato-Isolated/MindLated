@@ -6,12 +6,12 @@ namespace Isolated.Protection.Renamer
 {
     public class RenamerPhase
     {
-        private static Dictionary<TypeDef, bool> typeRename = new Dictionary<TypeDef, bool>();
-        private static List<string> typeNewName = new List<string>();
-        private static Dictionary<MethodDef, bool> methodRename = new Dictionary<MethodDef, bool>();
-        private static List<string> methodNewName = new List<string>();
-        private static Dictionary<FieldDef, bool> fieldRename = new Dictionary<FieldDef, bool>();
-        private static List<string> fieldNewName = new List<string>();
+        private static readonly Dictionary<TypeDef, bool> typeRename = new Dictionary<TypeDef, bool>();
+        private static readonly List<string> typeNewName = new List<string>();
+        private static readonly Dictionary<MethodDef, bool> methodRename = new Dictionary<MethodDef, bool>();
+        private static readonly List<string> methodNewName = new List<string>();
+        private static readonly Dictionary<FieldDef, bool> fieldRename = new Dictionary<FieldDef, bool>();
+        private static readonly List<string> fieldNewName = new List<string>();
         public static bool IsObfuscationActive = true;
 
         public static void Rename(TypeDef type, bool canRename = true)
@@ -45,8 +45,7 @@ namespace Isolated.Protection.Renamer
                 string namespaceNewName = GenerateString();
                 foreach (TypeDef type in module.Types)
                 {
-                    bool canRenameType;
-                    if (typeRename.TryGetValue(type, out canRenameType))
+                    if (typeRename.TryGetValue(type, out bool canRenameType))
                     {
                         if (canRenameType)
                             InternalRename(type);
@@ -56,8 +55,7 @@ namespace Isolated.Protection.Renamer
                     type.Namespace = namespaceNewName;
                     foreach (MethodDef method in type.Methods)
                     {
-                        bool canRenameMethod;
-                        if (methodRename.TryGetValue(method, out canRenameMethod))
+                        if (methodRename.TryGetValue(method, out bool canRenameMethod))
                         {
                             if (canRenameMethod && !method.IsConstructor && !method.IsSpecialName)
                                 InternalRename(method);
@@ -68,8 +66,7 @@ namespace Isolated.Protection.Renamer
                     methodNewName.Clear();
                     foreach (FieldDef field in type.Fields)
                     {
-                        bool canRenameField;
-                        if (fieldRename.TryGetValue(field, out canRenameField))
+                        if (fieldRename.TryGetValue(field, out bool canRenameField))
                         {
                             if (canRenameField)
                                 InternalRename(field);

@@ -28,7 +28,7 @@ namespace Isolated
 
         public string DirectoryName = "";
 
-        private FakeNative FFakeNative = new FakeNative();
+        private readonly FakeNative FFakeNative = new FakeNative();
 
         public Form1() => InitializeComponent();
 
@@ -42,15 +42,6 @@ namespace Isolated
             if (checkBox2.Checked)
             { OnlinePhase.Execute(module); }
 
-            if (checkBox13.Checked)
-            { L2F.Execute(module); }
-
-            if (checkBox15.Checked)
-            { L2FV2.Execute(module); }
-
-            if (checkBox14.Checked)
-            { Calli.Execute(module); }
-
             if (checkBox7.Checked)
             { ControlFlowObfuscation.Execute(module); }
 
@@ -59,6 +50,15 @@ namespace Isolated
 
             if (checkBox17.Checked)
             { Arithmetic.Execute(module); }
+
+            if (checkBox13.Checked)
+            { L2F.Execute(module); }
+
+            if (checkBox15.Checked)
+            { L2FV2.Execute(module); }
+
+            if (checkBox14.Checked)
+            { Calli.Execute(module); }
 
             if (checkBox3.Checked)
             { ProxyString.Execute(module); }
@@ -82,10 +82,10 @@ namespace Isolated
             { Anti_Tamper.Execute(module); }
 
             if (checkBox9.Checked)
-            { InvalidMDPhase.process(module.Assembly); }
+            { InvalidMDPhase.Execute(module.Assembly); }
 
             if (checkBox16.Checked)
-            { FFakeNative.Execute(module); }
+            { FFakeNative.Execute(); }
 
             string text2 = Path.GetDirectoryName(textBox1.Text);
             if (!text2.EndsWith("\\"))
@@ -93,15 +93,21 @@ namespace Isolated
             string path = text2 + Path.GetFileNameWithoutExtension(textBox1.Text) + "_protected" +
                           Path.GetExtension(textBox1.Text);
 
-            var opts = new ModuleWriterOptions(module) { Listener = Utils.listener, PEHeadersOptions = { NumberOfRvaAndSizes = 13 } };
+            var opts = new ModuleWriterOptions(module)
+            { 
+                Listener = Utils.listener,
+                PEHeadersOptions = { NumberOfRvaAndSizes = 13 },
+                Logger =  DummyLogger.NoThrowInstance
+            };
             opts.MetaDataOptions.TablesHeapOptions.ExtraData = 0x1337;
-            opts.Logger = DummyLogger.NoThrowInstance;
+
             module.Write(path, opts);
+
             if (checkBox6.Checked)
             { Anti_Tamper.Md5(path); }
         }
 
-        private void textBox1_DragDrop(object sender, DragEventArgs e)
+        private void TextBox1_DragDrop(object sender, DragEventArgs e)
         {
             try
             {
@@ -130,7 +136,7 @@ namespace Isolated
             catch { }
         }
 
-        private void textBox1_DragEnter(object sender, DragEventArgs e)
+        private void TextBox1_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             { e.Effect = DragDropEffects.Copy; }

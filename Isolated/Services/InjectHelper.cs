@@ -9,8 +9,10 @@ namespace Isolated.Services
     {
         private static TypeDefUser Clone(TypeDef origin)
         {
-            var ret = new TypeDefUser(origin.Namespace, origin.Name);
-            ret.Attributes = origin.Attributes;
+            var ret = new TypeDefUser(origin.Namespace, origin.Name)
+            {
+                Attributes = origin.Attributes
+            };
 
             if (origin.ClassLayout != null)
                 ret.ClassLayout = new ClassLayoutUser(origin.ClassLayout.PackingSize, origin.ClassSize);
@@ -40,8 +42,7 @@ namespace Isolated.Services
         private static TypeDef PopulateContext(TypeDef typeDef, InjectContext ctx)
         {
             TypeDef ret;
-            IDnlibDef existing;
-            if (!ctx.Map.TryGetValue(typeDef, out existing))
+            if (!ctx.Map.TryGetValue(typeDef, out IDnlibDef existing))
             {
                 ret = Clone(typeDef);
                 ctx.Map[typeDef] = ret;
@@ -103,15 +104,17 @@ namespace Isolated.Services
 
                 foreach (Instruction instr in methodDef.Body.Instructions)
                 {
-                    var newInstr = new Instruction(instr.OpCode, instr.Operand);
-                    newInstr.SequencePoint = instr.SequencePoint;
+                    var newInstr = new Instruction(instr.OpCode, instr.Operand)
+                    {
+                        SequencePoint = instr.SequencePoint
+                    };
 
-                    if (newInstr.Operand is IType)
-                        newInstr.Operand = ctx.Importer.Import((IType)newInstr.Operand);
-                    else if (newInstr.Operand is IMethod)
-                        newInstr.Operand = ctx.Importer.Import((IMethod)newInstr.Operand);
-                    else if (newInstr.Operand is IField)
-                        newInstr.Operand = ctx.Importer.Import((IField)newInstr.Operand);
+                    if (newInstr.Operand is IType type)
+                        newInstr.Operand = ctx.Importer.Import(type);
+                    else if (newInstr.Operand is IMethod method)
+                        newInstr.Operand = ctx.Importer.Import(method);
+                    else if (newInstr.Operand is IField field)
+                        newInstr.Operand = ctx.Importer.Import(field);
 
                     newMethodDef.Body.Instructions.Add(newInstr);
                     bodyMap[instr] = newInstr;
@@ -121,8 +124,8 @@ namespace Isolated.Services
                 {
                     if (instr.Operand != null && bodyMap.ContainsKey(instr.Operand))
                         instr.Operand = bodyMap[instr.Operand];
-                    else if (instr.Operand is Instruction[])
-                        instr.Operand = ((Instruction[])instr.Operand).Select(target => (Instruction)bodyMap[target]).ToArray();
+                    else if (instr.Operand is Instruction[] v)
+                        instr.Operand = v.Select(target => (Instruction)bodyMap[target]).ToArray();
                 }
 
                 foreach (ExceptionHandler eh in methodDef.Body.ExceptionHandlers)
@@ -201,8 +204,10 @@ namespace Isolated.Services
             {
                 OriginModule = module;
                 TargetModule = target;
-                importer = new Importer(target, ImporterOptions.TryToUseTypeDefs);
-                importer.Resolver = this;
+                importer = new Importer(target, ImporterOptions.TryToUseTypeDefs)
+                {
+                    Resolver = this
+                };
             }
 
             public Importer Importer

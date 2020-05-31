@@ -13,9 +13,9 @@ namespace Isolated.Protection.Fake
 {
     internal class FakeNative
     {
-        private Random R = new Random();
+        private readonly Random R = new Random();
 
-        public void Execute(ModuleDefMD module)
+        public void Execute()
         {
             Utils.listener.OnWriterEvent += OnWriterEvent;
         }
@@ -52,9 +52,9 @@ namespace Isolated.Protection.Fake
                 var writer = (ModuleWriterBase)sender;
                 uint signature = (uint)(moduleWriterBase.MetaData.TablesHeap.TypeSpecTable.Rows + 1);
                 List<uint> list = (from row in moduleWriterBase.MetaData.TablesHeap.TypeDefTable
-                                   select row.Namespace).Distinct<uint>().ToList<uint>();
+                                   select row.Namespace).Distinct().ToList();
                 List<uint> list2 = (from row in moduleWriterBase.MetaData.TablesHeap.MethodTable
-                                    select row.Name).Distinct<uint>().ToList<uint>();
+                                    select row.Name).Distinct().ToList();
                 uint num2 = Convert.ToUInt32(R.Next(15, 3546));
                 using (List<uint>.Enumerator enumerator = list.GetEnumerator())
                 {
@@ -94,11 +94,11 @@ namespace Isolated.Protection.Fake
 
         public static string EncodeString(byte[] buff, char[] charset)
         {
-            int current = (int)buff[0];
+            int current = buff[0];
             StringBuilder ret = new StringBuilder();
             for (int i = 1; i < buff.Length; i++)
             {
-                for (current = (current << 8) + (int)buff[i]; current >= charset.Length; current /= charset.Length)
+                for (current = (current << 8) + buff[i]; current >= charset.Length; current /= charset.Length)
                 {
                     ret.Append(charset[current % charset.Length]);
                 }
@@ -114,7 +114,7 @@ namespace Isolated.Protection.Fake
                                                        select (char)ord).Except(new char[]
         {
                 '.'
-        }).ToArray<char>();
+        }).ToArray();
     }
 
     internal class RawHeap : HeapBase

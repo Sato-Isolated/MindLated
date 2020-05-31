@@ -54,8 +54,7 @@ namespace Isolated.Services
 
             void IModuleWriterListener.OnWriterEvent(ModuleWriterBase writer, ModuleWriterEvent evt)
             {
-                if (OnWriterEvent != null)
-                    OnWriterEvent(writer, new ModuleWriterListenerEventArgs(evt));
+                OnWriterEvent?.Invoke(writer, new ModuleWriterListenerEventArgs(evt));
             }
 
             public class ModuleWriterListenerEventArgs : EventArgs

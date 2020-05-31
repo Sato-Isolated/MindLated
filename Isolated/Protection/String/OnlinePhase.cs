@@ -17,26 +17,19 @@ namespace Isolated.Protection.String
                 if (type.IsGlobalModuleType) continue;
                 foreach (MethodDef methodDef2 in type.Methods)
                 {
-                    bool hasBody = methodDef2.HasBody;
-                    if (hasBody)
+                    if (methodDef2.HasBody)
                     {
-                        bool hasInstructions = methodDef2.Body.HasInstructions;
-                        if (hasInstructions)
+                        if (methodDef2.Body.HasInstructions)
                         {
-                            bool flag2 = !methodDef2.Name.Contains("Decoder");
-                            if (flag2)
+                            if (!methodDef2.Name.Contains("Decoder"))
                             {
                                 for (int i = 0; i < methodDef2.Body.Instructions.Count; i++)
                                 {
-                                    bool flag3 = methodDef2.Body.Instructions[i].OpCode == OpCodes.Ldstr;
-                                    if (flag3)
+                                    if (methodDef2.Body.Instructions[i].OpCode == OpCodes.Ldstr)
                                     {
                                         string plainText = methodDef2.Body.Instructions[i].Operand.ToString();
-
                                         string operand = ConvertStringToHex(plainText);
                                         methodDef2.Body.Instructions[i].Operand = operand;
-                                        Random rnd = new Random();
-                                        int randomuint = rnd.Next(2147483647);
                                         methodDef2.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Call, Form1.init));
                                     }
                                 }
