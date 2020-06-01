@@ -24,8 +24,6 @@ namespace Isolated
 
         public static MethodDef init2;
 
-        public static Random rand = new Random();
-
         public string DirectoryName = "";
 
         private readonly FakeNative FFakeNative = new FakeNative();
@@ -34,7 +32,7 @@ namespace Isolated
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            ModuleDefMD module = ModuleDefMD.Load(textBox1.Text);
+            var module = ModuleDefMD.Load(textBox1.Text);
 
             if (checkBox1.Checked)
             { StringEncPhase.Execute(module); }
@@ -46,7 +44,10 @@ namespace Isolated
             { ControlFlowObfuscation.Execute(module); }
 
             if (checkBox8.Checked)
-            { AddIntPhase.Execute(module); }
+            { AddIntPhase.Execute(module); AddIntPhase.Execute2(module); }
+
+            if (checkBox19.Checked)
+            { StackUnfConfusion.Execute(module); }
 
             if (checkBox17.Checked)
             { Arithmetic.Execute(module); }
@@ -72,6 +73,9 @@ namespace Isolated
             if (checkBox10.Checked)
             { RenamerPhase.Execute(module); }
 
+            if (checkBox18.Checked)
+            { AntiDe4dot.Execute(module.Assembly); }
+
             if (checkBox11.Checked)
             { JumpCFlow.Execute(module); }
        
@@ -87,16 +91,16 @@ namespace Isolated
             if (checkBox16.Checked)
             { FFakeNative.Execute(); }
 
-            string text2 = Path.GetDirectoryName(textBox1.Text);
-            if (!text2.EndsWith("\\"))
+            var text2 = Path.GetDirectoryName(textBox1.Text);
+            if (text2 != null && !text2.EndsWith("\\"))
             { text2 += "\\"; }
 
-            string path = text2 + Path.GetFileNameWithoutExtension(textBox1.Text) + "_protected" +
-                          Path.GetExtension(textBox1.Text);
+            var path = text2 + Path.GetFileNameWithoutExtension(textBox1.Text) + "_protected" +
+                       Path.GetExtension(textBox1.Text);
 
             module.Write(path, new ModuleWriterOptions(module)
             {
-                Listener = Utils.listener,
+                Listener = Utils.Listener,
                 PEHeadersOptions = { NumberOfRvaAndSizes = 13 },
                 Logger = DummyLogger.NoThrowInstance
             });
@@ -109,37 +113,39 @@ namespace Isolated
         {
             try
             {
-                Array array = (Array)e.Data.GetData(DataFormats.FileDrop);
-                if (array != null)
+                var array = (Array) e.Data.GetData(DataFormats.FileDrop);
+                if (array == null)
+                    return;
+                var text = array.GetValue(0).ToString();
+                var num = text.LastIndexOf(".", StringComparison.Ordinal);
+                if (num == -1)
+                    return;
+                var text2 = text.Substring(num);
+                text2 = text2.ToLower();
+                if (text2 != ".exe" && text2 != ".dll")
+                    return;
+                Activate();
+                textBox1.Text = text;
+                var num2 = text.LastIndexOf("\\", StringComparison.Ordinal);
+                if (num2 != -1)
                 {
-                    string text = array.GetValue(0).ToString();
-                    int num = text.LastIndexOf(".", StringComparison.Ordinal);
-                    if (num != -1)
-                    {
-                        string text2 = text.Substring(num);
-                        text2 = text2.ToLower();
-                        if (text2 == ".exe" || text2 == ".dll")
-                        {
-                            Activate();
-                            textBox1.Text = text;
-                            int num2 = text.LastIndexOf("\\", StringComparison.Ordinal);
-                            if (num2 != -1)
-                            { DirectoryName = text.Remove(num2, text.Length - num2); }
-                            if (DirectoryName.Length == 2)
-                            { DirectoryName += "\\"; }
-                        }
-                    }
+                    DirectoryName = text.Remove(num2, text.Length - num2);
+                }
+
+                if (DirectoryName.Length == 2)
+                {
+                    DirectoryName += "\\";
                 }
             }
-            catch { }
+            catch
+            {
+                 /* ignored */
+            }
         }
 
         private void TextBox1_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            { e.Effect = DragDropEffects.Copy; }
-            else
-            { e.Effect = DragDropEffects.None; }
+            e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None;
         }
     }
 }

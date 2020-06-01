@@ -10,19 +10,17 @@ namespace Isolated.Protection.Other
     {
         public static void Execute(ModuleDef module)
         {
-            ModuleDefMD typeModule = ModuleDefMD.Load(typeof(AntiDebugSafe).Module);
-            MethodDef cctor = module.GlobalType.FindOrCreateStaticConstructor();
-            TypeDef typeDef = typeModule.ResolveTypeDef(MDToken.ToRID(typeof(AntiDebugSafe).MetadataToken));
-            IEnumerable<IDnlibDef> members = InjectHelper.Inject(typeDef, module.GlobalType, module);
+            var typeModule = ModuleDefMD.Load(typeof(AntiDebugSafe).Module);
+            var cctor = module.GlobalType.FindOrCreateStaticConstructor();
+            var typeDef = typeModule.ResolveTypeDef(MDToken.ToRID(typeof(AntiDebugSafe).MetadataToken));
+            var members = InjectHelper.Inject(typeDef, module.GlobalType, module);
             var init = (MethodDef)members.Single(method => method.Name == "Initialize");
             cctor.Body.Instructions.Insert(0, Instruction.Create(OpCodes.Call, init));
-            foreach (MethodDef md in module.GlobalType.Methods)
+            foreach (var md in module.GlobalType.Methods)
             {
-                if (md.Name == ".ctor")
-                {
-                    module.GlobalType.Remove(md);
-                    break;
-                }
+                if (md.Name != ".ctor") continue;
+                module.GlobalType.Remove(md);
+                break;
             }
         }
     }

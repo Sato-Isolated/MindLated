@@ -41,8 +41,8 @@ namespace Isolated.Protection.Arithmetic
 
         public double GetValue(List<ArithmeticTypes> arithmetics)
         {
-            Generator.Generator generator = new Generator.Generator();
-            ArithmeticTypes arithmetic = arithmetics[generator.Next(arithmetics.Count)];
+            var generator = new Generator.Generator();
+            var arithmetic = arithmetics[generator.Next(arithmetics.Count)];
             GetType = arithmetic;
             switch (arithmeticTypes)
             {

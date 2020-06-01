@@ -43,10 +43,10 @@ namespace Isolated.Protection.Renamer
         {
             if (IsObfuscationActive)
             {
-                string namespaceNewName = GenerateString();
-                foreach (TypeDef type in module.Types)
+                var namespaceNewName = GenerateString();
+                foreach (var type in module.Types)
                 {
-                    if (typeRename.TryGetValue(type, out bool canRenameType))
+                    if (typeRename.TryGetValue(type, out var canRenameType))
                     {
                         if (canRenameType)
                             InternalRename(type);
@@ -54,9 +54,9 @@ namespace Isolated.Protection.Renamer
                     else
                         InternalRename(type);
                     type.Namespace = namespaceNewName;
-                    foreach (MethodDef method in type.Methods)
+                    foreach (var method in type.Methods)
                     {
-                        if (methodRename.TryGetValue(method, out bool canRenameMethod))
+                        if (methodRename.TryGetValue(method, out var canRenameMethod))
                         {
                             if (canRenameMethod && !method.IsConstructor && !method.IsSpecialName)
                                 InternalRename(method);
@@ -65,9 +65,9 @@ namespace Isolated.Protection.Renamer
                             InternalRename(method);
                     }
                     methodNewName.Clear();
-                    foreach (FieldDef field in type.Fields)
+                    foreach (var field in type.Fields)
                     {
-                        if (fieldRename.TryGetValue(field, out bool canRenameField))
+                        if (fieldRename.TryGetValue(field, out var canRenameField))
                         {
                             if (canRenameField)
                                 InternalRename(field);
@@ -80,27 +80,24 @@ namespace Isolated.Protection.Renamer
             }
             else
             {
-                foreach (var typeItem in typeRename)
+                foreach (var typeItem in typeRename.Where(typeItem => typeItem.Value))
                 {
-                    if (typeItem.Value)
-                        InternalRename(typeItem.Key);
+                    InternalRename(typeItem.Key);
                 }
-                foreach (var methodItem in methodRename)
+                foreach (var methodItem in methodRename.Where(methodItem => methodItem.Value))
                 {
-                    if (methodItem.Value)
-                        InternalRename(methodItem.Key);
+                    InternalRename(methodItem.Key);
                 }
-                foreach (var fieldItem in fieldRename)
+                foreach (var fieldItem in fieldRename.Where(fieldItem => fieldItem.Value))
                 {
-                    if (fieldItem.Value)
-                        InternalRename(fieldItem.Key);
+                    InternalRename(fieldItem.Key);
                 }
             }
         }
 
         private static void InternalRename(TypeDef type)
         {
-            string randString = GenerateString();
+            var randString = GenerateString();
             while (typeNewName.Contains(randString))
                 randString = GenerateString();
             typeNewName.Add(randString);
@@ -109,7 +106,7 @@ namespace Isolated.Protection.Renamer
 
         private static void InternalRename(MethodDef method)
         {
-            string randString = GenerateString();
+            var randString = GenerateString();
             while (methodNewName.Contains(randString))
                 randString = GenerateString();
             methodNewName.Add(randString);
@@ -118,7 +115,7 @@ namespace Isolated.Protection.Renamer
 
         private static void InternalRename(FieldDef field)
         {
-            string randString = GenerateString();
+            var randString = GenerateString();
             while (fieldNewName.Contains(randString))
                 randString = GenerateString();
             fieldNewName.Add(randString);
@@ -135,7 +132,7 @@ namespace Isolated.Protection.Renamer
 
         public static string GenerateString()
         {
-            string ascii = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var ascii = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             return RandomString(random.Next(1, 7), ascii);
         }
     }

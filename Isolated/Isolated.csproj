@@ -89,7 +89,6 @@
     <Compile Include="Protection\Arithmetic\Functions\Sub.cs" />
     <Compile Include="Protection\Arithmetic\Functions\Xor.cs" />
     <Compile Include="Protection\Arithmetic\Generator\Generator.cs" />
-    <Compile Include="Protection\Arithmetic\iArithmetic.cs" />
     <Compile Include="Protection\Arithmetic\iFunction.cs" />
     <Compile Include="Protection\Arithmetic\Token.cs" />
     <Compile Include="Protection\Arithmetic\Utils\ArithmeticUtils.cs" />
@@ -104,8 +103,10 @@
     <Compile Include="Protection\InvalidMD\Isolated.png.cs" />
     <Compile Include="Protection\LocalF\L2F.cs" />
     <Compile Include="Protection\LocalF\L2FV2.cs" />
+    <Compile Include="Protection\Other\AntiDe4dot.cs" />
     <Compile Include="Protection\Other\AntiDebug.Safe.cs" />
     <Compile Include="Protection\INT\AddIntPhase.cs" />
+    <Compile Include="Protection\Other\StackUnfConfusion.cs" />
     <Compile Include="Protection\Proxy\ProxyINT.cs" />
     <Compile Include="Protection\Other\Anti Debug.cs" />
     <Compile Include="Protection\Other\Anti Tamper.cs" />

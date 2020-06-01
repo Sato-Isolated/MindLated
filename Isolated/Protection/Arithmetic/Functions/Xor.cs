@@ -10,9 +10,9 @@ namespace Isolated.Protection.Arithmetic.Functions
 
         public override ArithmeticVT Arithmetic(Instruction instruction, ModuleDef module)
         {
-            Generator.Generator generator = new Generator.Generator();
+            var generator = new Generator.Generator();
             if (!ArithmeticUtils.CheckArithmetic(instruction)) return null;
-            ArithmeticEmulator arithmeticEmulator = new ArithmeticEmulator(instruction.GetLdcI4Value(), generator.Next(), ArithmeticTypes);
+            var arithmeticEmulator = new ArithmeticEmulator(instruction.GetLdcI4Value(), generator.Next(), ArithmeticTypes);
             return (new ArithmeticVT(new Value(arithmeticEmulator.GetValue(), arithmeticEmulator.GetY()), new Token(OpCodes.Xor), ArithmeticTypes));
         }
     }

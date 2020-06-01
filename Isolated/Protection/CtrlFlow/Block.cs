@@ -13,6 +13,5 @@ namespace Isolated.Protection.CtrlFlow
         public List<Instruction> Instructions { get; set; }
 
         public int Number { get; set; }
-        public int Next { get; set; }
     }
 }

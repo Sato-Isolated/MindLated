@@ -9,51 +9,47 @@ namespace Isolated.Protection.Calli
     {
         public static void Execute(ModuleDef module)
         {
-            foreach (TypeDef type in module.Types.ToArray())
+            foreach (var type in module.Types.ToArray())
             {
-                foreach (MethodDef method in type.Methods.ToArray())
+                foreach (var method in type.Methods.ToArray())
                 {
-                    if (method.HasBody)
+                    if (!method.HasBody) continue;
+                    if (!method.Body.HasInstructions) continue;
+                    if (method.FullName.Contains("My.")) continue;
+                    if (method.FullName.Contains(".My")) continue;
+                    if (method.IsConstructor) continue;
+                    if (method.DeclaringType.IsGlobalModuleType) continue;
+                    for (var i = 0; i < method.Body.Instructions.Count - 1; i++)
                     {
-                        if (method.Body.HasInstructions)
+                        try
                         {
-                            if (method.FullName.Contains("My.")) continue;
-                            if (method.FullName.Contains(".My")) continue;
-                            if (method.IsConstructor) continue;
-                            if (method.DeclaringType.IsGlobalModuleType) continue;
-                            for (int i = 0; i < method.Body.Instructions.Count - 1; i++)
+                            if (method.Body.Instructions[i].ToString().Contains("ISupportInitialize")) continue;
+                            if (method.Body.Instructions[i].OpCode != OpCodes.Call &&
+                                method.Body.Instructions[i].OpCode != OpCodes.Callvirt &&
+                                method.Body.Instructions[i].OpCode != OpCodes.Ldloc_S) continue;
+                            try
                             {
-                                try
-                                {
-                                    if (method.Body.Instructions[i].ToString().Contains("ISupportInitialize")) continue;
-                                    if (method.Body.Instructions[i].OpCode == OpCodes.Call || method.Body.Instructions[i].OpCode == OpCodes.Callvirt || method.Body.Instructions[i].OpCode == OpCodes.Ldloc_S)
-                                    {
-                                        try
-                                        {
-                                            MemberRef membertocalli = (MemberRef)method.Body.Instructions[i].Operand;
-                                            method.Body.Instructions[i].OpCode = OpCodes.Calli;
-                                            method.Body.Instructions[i].Operand = membertocalli.MethodSig;
-                                            method.Body.Instructions.Insert(i, Instruction.Create(OpCodes.Ldftn, membertocalli));
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            string str = ex.Message;
-                                        }
-                                    }
-                                }
-                                catch { }
+                                var membertocalli = (MemberRef)method.Body.Instructions[i].Operand;
+                                method.Body.Instructions[i].OpCode = OpCodes.Calli;
+                                method.Body.Instructions[i].Operand = membertocalli.MethodSig;
+                                method.Body.Instructions.Insert(i, Instruction.Create(OpCodes.Ldftn, membertocalli));
+                            }
+                            catch (Exception)
+                            {
+                                // ignored
                             }
                         }
-                        else { }
+                        catch (Exception)
+                        {
+                            // ignored
+                        }
                     }
                 }
-                foreach (MethodDef md in module.GlobalType.Methods)
+                foreach (var md in module.GlobalType.Methods)
                 {
-                    if (md.Name == ".ctor")
-                    {
-                        module.GlobalType.Remove(md);
-                        break;
-                    }
+                    if (md.Name != ".ctor") continue;
+                    module.GlobalType.Remove(md);
+                    break;
                 }
             }
         }

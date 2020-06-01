@@ -11,7 +11,7 @@ namespace Isolated.Services
 {
     public static class Utils
     {
-        public static ModuleWriterListener listener = new ModuleWriterListener();
+        public static ModuleWriterListener Listener = new ModuleWriterListener();
 
         public static MethodDef GetMethodByName(TypeDef type, string name)
         {
@@ -61,10 +61,10 @@ namespace Isolated.Services
             {
                 public ModuleWriterListenerEventArgs(ModuleWriterEvent evt)
                 {
-                    this.WriterEvent = evt;
+                    WriterEvent = evt;
                 }
 
-                public ModuleWriterEvent WriterEvent { get; private set; }
+                public ModuleWriterEvent WriterEvent { get; }
             }
         }
     }

@@ -8,17 +8,16 @@ namespace Isolated.Protection.CtrlFlow
     {
         public static List<Block> ParseMethod(MethodDef method)
         {
-            List<Block> blocks = new List<Block>();
-            new List<Instruction>(method.Body.Instructions);
-            Block block = new Block();
-            int Id = 0;
-            int usage = 0;
+            var blocks = new List<Block>();
+            var block = new Block();
+            var Id = 0;
+            var usage = 0;
             block.Number = Id;
             block.Instructions.Add(Instruction.Create(OpCodes.Nop));
             blocks.Add(block);
             block = new Block();
-            Stack<ExceptionHandler> handlers = new Stack<ExceptionHandler>();
-            foreach (Instruction instruction in method.Body.Instructions)
+            var handlers = new Stack<ExceptionHandler>();
+            foreach (var instruction in method.Body.Instructions)
             {
                 foreach (var eh in method.Body.ExceptionHandlers)
                 {

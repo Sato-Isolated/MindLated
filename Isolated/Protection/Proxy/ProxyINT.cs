@@ -10,14 +10,14 @@ namespace Isolated.Protection.Proxy
 
         public static void Execute(ModuleDef module)
         {
-            foreach (TypeDef type in module.GetTypes())
+            foreach (var type in module.GetTypes())
             {
                 if (type.IsGlobalModuleType) continue;
-                foreach (MethodDef method in type.Methods)
+                foreach (var method in type.Methods)
                 {
                     if (!method.HasBody) continue;
                     var instr = method.Body.Instructions;
-                    for (int i = 0; i < instr.Count; i++)
+                    for (var i = 0; i < instr.Count; i++)
                     {
                         if (method.Body.Instructions[i].IsLdcI4())
                         {

@@ -35,40 +35,38 @@ namespace Isolated.Protection.Arithmetic
         public static void Execute(ModuleDef moduleDef)
         {
             moduleDef1 = moduleDef;
-            Generator.Generator generator = new Generator.Generator();
-            foreach (TypeDef tDef in moduleDef.Types)
+            var generator = new Generator.Generator();
+            foreach (var tDef in moduleDef.Types)
             {
-                foreach (MethodDef mDef in tDef.Methods)
+                foreach (var mDef in tDef.Methods)
                 {
                     if (!mDef.HasBody) continue;
                     if (mDef.DeclaringType.IsGlobalModuleType) continue;
-                    for (int i = 0; i < mDef.Body.Instructions.Count; i++)
+                    for (var i = 0; i < mDef.Body.Instructions.Count; i++)
                     {
-                        if (ArithmeticUtils.CheckArithmetic(mDef.Body.Instructions[i]))
+                        if (!ArithmeticUtils.CheckArithmetic(mDef.Body.Instructions[i])) continue;
+                        if (mDef.Body.Instructions[i].GetLdcI4Value() < 0)
                         {
-                            if (mDef.Body.Instructions[i].GetLdcI4Value() < 0)
+                            var iFunction = Tasks[generator.Next(5)];
+                            var lstInstr = GenerateBody(iFunction.Arithmetic(mDef.Body.Instructions[i], moduleDef));
+                            if (lstInstr == null) continue;
+                            mDef.Body.Instructions[i].OpCode = OpCodes.Nop;
+                            foreach (var instr in lstInstr)
                             {
-                                IFunction iFunction = Tasks[generator.Next(5)];
-                                List<Instruction> lstInstr = GenerateBody(iFunction.Arithmetic(mDef.Body.Instructions[i], moduleDef));
-                                if (lstInstr == null) continue;
-                                mDef.Body.Instructions[i].OpCode = OpCodes.Nop;
-                                foreach (Instruction instr in lstInstr)
-                                {
-                                    mDef.Body.Instructions.Insert(i + 1, instr);
-                                    i++;
-                                }
+                                mDef.Body.Instructions.Insert(i + 1, instr);
+                                i++;
                             }
-                            else
+                        }
+                        else
+                        {
+                            var iFunction = Tasks[generator.Next(Tasks.Count)];
+                            var lstInstr = GenerateBody(iFunction.Arithmetic(mDef.Body.Instructions[i], moduleDef));
+                            if (lstInstr == null) continue;
+                            mDef.Body.Instructions[i].OpCode = OpCodes.Nop;
+                            foreach (var instr in lstInstr)
                             {
-                                IFunction iFunction = Tasks[generator.Next(Tasks.Count)];
-                                List<Instruction> lstInstr = GenerateBody(iFunction.Arithmetic(mDef.Body.Instructions[i], moduleDef));
-                                if (lstInstr == null) continue;
-                                mDef.Body.Instructions[i].OpCode = OpCodes.Nop;
-                                foreach (Instruction instr in lstInstr)
-                                {
-                                    mDef.Body.Instructions.Insert(i + 1, instr);
-                                    i++;
-                                }
+                                mDef.Body.Instructions.Insert(i + 1, instr);
+                                i++;
                             }
                         }
                     }
@@ -78,7 +76,7 @@ namespace Isolated.Protection.Arithmetic
 
         private static List<Instruction> GenerateBody(ArithmeticVT arithmeticVTs)
         {
-            List<Instruction> instructions = new List<Instruction>();
+            var instructions = new List<Instruction>();
             if (IsArithmetic(arithmeticVTs.GetArithmetic()))
             {
                 instructions.Add(new Instruction(OpCodes.Ldc_R8, arithmeticVTs.GetValue().GetX()));

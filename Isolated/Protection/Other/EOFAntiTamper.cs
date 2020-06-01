@@ -7,13 +7,13 @@ namespace Isolated.Protection.Other
     {
         private static void Initializer()
         {
-            string assemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            var assemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
 
-            Stream stream = new StreamReader(assemblyLocation).BaseStream;
-            BinaryReader reader = new BinaryReader(stream);
-            string newMd5 = BitConverter.ToString(System.Security.Cryptography.MD5.Create().ComputeHash(reader.ReadBytes(File.ReadAllBytes(assemblyLocation).Length - 16)));
+            var stream = new StreamReader(assemblyLocation).BaseStream;
+            var reader = new BinaryReader(stream);
+            var newMd5 = BitConverter.ToString(System.Security.Cryptography.MD5.Create().ComputeHash(reader.ReadBytes(File.ReadAllBytes(assemblyLocation).Length - 16)));
             stream.Seek(-16, SeekOrigin.End);
-            string realMd5 = BitConverter.ToString(reader.ReadBytes(16));
+            var realMd5 = BitConverter.ToString(reader.ReadBytes(16));
             if (newMd5 != realMd5)
                 throw new BadImageFormatException();
         }

@@ -11,9 +11,7 @@ namespace Isolated.Protection.Arithmetic.Utils
                 return false;
             if (instruction.GetLdcI4Value() == 1)
                 return false;
-            if (instruction.GetLdcI4Value() == 0)
-                return false;
-            return true;
+            return instruction.GetLdcI4Value() != 0;
         }
 
         public static double GetY(double x) => (x / 2);

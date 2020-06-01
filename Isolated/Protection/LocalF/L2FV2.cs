@@ -26,38 +26,36 @@ namespace Isolated.Protection.LocalF
         {
             method.Body.SimplifyMacros(method.Parameters);
             var instructions = method.Body.Instructions;
-            for (int i = 0; i < instructions.Count; i++)
+            foreach (var t in instructions)
             {
-                if (instructions[i].Operand is Local local)
+                if (!(t.Operand is Local local)) continue;
+                FieldDef def = null;
+                if (!convertedLocals.ContainsKey(local))
                 {
-                    FieldDef def = null;
-                    if (!convertedLocals.ContainsKey(local))
-                    {
-                        def = new FieldDefUser(RenamerPhase.GenerateString(), new FieldSig(local.Type), FieldAttributes.Public | FieldAttributes.Static);
-                        Module.GlobalType.Fields.Add(def);
-                        convertedLocals.Add(local, def);
-                    }
-                    else
-                        def = convertedLocals[local];
-
-                    OpCode eq = null;
-                    switch (instructions[i].OpCode.Code)
-                    {
-                        case Code.Ldloc:
-                            eq = OpCodes.Ldsfld;
-                            break;
-
-                        case Code.Ldloca:
-                            eq = OpCodes.Ldsflda;
-                            break;
-
-                        case Code.Stloc:
-                            eq = OpCodes.Stsfld;
-                            break;
-                    }
-                    instructions[i].OpCode = eq;
-                    instructions[i].Operand = def;
+                    def = new FieldDefUser(RenamerPhase.GenerateString(), new FieldSig(local.Type), FieldAttributes.Public | FieldAttributes.Static);
+                    Module.GlobalType.Fields.Add(def);
+                    convertedLocals.Add(local, def);
                 }
+                else
+                    def = convertedLocals[local];
+
+                OpCode eq = null;
+                switch (t.OpCode.Code)
+                {
+                    case Code.Ldloc:
+                        eq = OpCodes.Ldsfld;
+                        break;
+
+                    case Code.Ldloca:
+                        eq = OpCodes.Ldsflda;
+                        break;
+
+                    case Code.Stloc:
+                        eq = OpCodes.Stsfld;
+                        break;
+                }
+                t.OpCode = eq;
+                t.Operand = def;
             }
             convertedLocals.ToList().ForEach(x => method.Body.Variables.Remove(x.Key));
             convertedLocals = new Dictionary<Local, FieldDef>();

@@ -49,12 +49,14 @@
             this.checkBox15 = new System.Windows.Forms.CheckBox();
             this.checkBox16 = new System.Windows.Forms.CheckBox();
             this.checkBox17 = new System.Windows.Forms.CheckBox();
+            this.checkBox18 = new System.Windows.Forms.CheckBox();
+            this.checkBox19 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(7, 84);
+            this.button1.Location = new System.Drawing.Point(7, 106);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(643, 27);
             this.button1.TabIndex = 0;
@@ -252,11 +254,33 @@
             this.checkBox17.Text = "Arithmetic";
             this.checkBox17.UseVisualStyleBackColor = true;
             // 
+            // checkBox18
+            // 
+            this.checkBox18.AutoSize = true;
+            this.checkBox18.Location = new System.Drawing.Point(7, 83);
+            this.checkBox18.Name = "checkBox18";
+            this.checkBox18.Size = new System.Drawing.Size(77, 17);
+            this.checkBox18.TabIndex = 20;
+            this.checkBox18.Text = "Antide4dot";
+            this.checkBox18.UseVisualStyleBackColor = true;
+            // 
+            // checkBox19
+            // 
+            this.checkBox19.AutoSize = true;
+            this.checkBox19.Location = new System.Drawing.Point(85, 83);
+            this.checkBox19.Name = "checkBox19";
+            this.checkBox19.Size = new System.Drawing.Size(118, 17);
+            this.checkBox19.TabIndex = 21;
+            this.checkBox19.Text = "StackUnfConfusion";
+            this.checkBox19.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(748, 117);
+            this.ClientSize = new System.Drawing.Size(748, 136);
+            this.Controls.Add(this.checkBox19);
+            this.Controls.Add(this.checkBox18);
             this.Controls.Add(this.checkBox17);
             this.Controls.Add(this.checkBox16);
             this.Controls.Add(this.checkBox15);
@@ -309,6 +333,8 @@
         private System.Windows.Forms.CheckBox checkBox15;
         private System.Windows.Forms.CheckBox checkBox16;
         private System.Windows.Forms.CheckBox checkBox17;
+        private System.Windows.Forms.CheckBox checkBox18;
+        private System.Windows.Forms.CheckBox checkBox19;
     }
 }
 

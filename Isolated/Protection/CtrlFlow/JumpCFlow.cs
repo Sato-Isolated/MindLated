@@ -1,6 +1,6 @@
-﻿using dnlib.DotNet;
+﻿using System.Linq;
+using dnlib.DotNet;
 using dnlib.DotNet.Emit;
-using System.Linq;
 
 namespace Isolated.Protection.CtrlFlow
 {
@@ -8,15 +8,11 @@ namespace Isolated.Protection.CtrlFlow
     {
         public static bool Checking(MethodDef method)
         {
-            for (int i = 1; i < method.Body.Instructions.Count - 1; i++)
+            for (var i = 1; i < method.Body.Instructions.Count - 1; i++)
             {
                 if (method.Body.Instructions[i].IsLdcI4() && !method.Body.Instructions[i - 1].IsBr())
                 {
                     return true;
-                }
-                else
-                {
-                    continue;
                 }
             }
             return false;
@@ -24,19 +20,17 @@ namespace Isolated.Protection.CtrlFlow
 
         public static void Execute(ModuleDefMD module)
         {
-            foreach (TypeDef type in module.Types)
+            foreach (var type in module.Types)
             {
-                foreach (MethodDef method in type.Methods.ToArray())
+                foreach (var method in type.Methods.ToArray())
                 {
-                    if (method.HasBody && method.Body.HasInstructions && !method.Body.HasExceptionHandlers)
+                    if (!method.HasBody || !method.Body.HasInstructions || method.Body.HasExceptionHandlers) continue;
+                    for (var i = 0; i < method.Body.Instructions.Count - 2; i++)
                     {
-                        for (int i = 0; i < method.Body.Instructions.Count - 2; i++)
-                        {
-                            Instruction inst = method.Body.Instructions[i + 1];
-                            method.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Ldstr, "Isolated.jpg"));
-                            method.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Br_S, inst));
-                            i += 2;
-                        }
+                        var inst = method.Body.Instructions[i + 1];
+                        method.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Ldstr, "Isolated.jpg"));
+                        method.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Br_S, inst));
+                        i += 2;
                     }
                 }
             }

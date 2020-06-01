@@ -14,28 +14,25 @@ namespace Isolated.Protection.Proxy
         //Scan de toutes les MemberRef
         public static void ScanMemberRef(ModuleDef module)
         {
-            foreach (TypeDef type in module.Types)
+            foreach (var type in module.Types)
             {
-                foreach (MethodDef method in type.Methods)
+                foreach (var method in type.Methods)
                 {
-                    if (method.HasBody && method.Body.HasInstructions)
+                    if (!method.HasBody || !method.Body.HasInstructions) continue;
+                    for (var i = 0; i < method.Body.Instructions.Count - 1; i++)
                     {
-                        for (int i = 0; i < method.Body.Instructions.Count - 1; i++)
+                        if (method.Body.Instructions[i].OpCode != OpCodes.Call) continue;
+                        try
                         {
-                            if (method.Body.Instructions[i].OpCode == OpCodes.Call)
+                            var original = (MemberRef)method.Body.Instructions[i].Operand;
+                            if (!original.HasThis)
                             {
-                                try
-                                {
-                                    MemberRef original = (MemberRef)method.Body.Instructions[i].Operand;
-                                    if (!original.HasThis)
-                                    {
-                                        MemberRefList.Add(original);
-                                    }
-                                }
-                                catch
-                                {
-                                }
+                                MemberRefList.Add(original);
                             }
+                        }
+                        catch
+                        {
+                            // ignored
                         }
                     }
                 }
@@ -46,14 +43,10 @@ namespace Isolated.Protection.Proxy
         {
             try
             {
-                List<TypeSig> type = new List<TypeSig>();
-                foreach (TypeSig sig in original.MethodSig.Params)
-                {
-                    type.Add(sig);
-                }
+                var type = original.MethodSig.Params.ToList();
                 type.Add(md.CorLibTypes.Int32);
-                MethodImplAttributes methImplFlags = MethodImplAttributes.IL | MethodImplAttributes.Managed;
-                MethodAttributes methFlags = MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.ReuseSlot;
+                var methImplFlags = MethodImplAttributes.IL | MethodImplAttributes.Managed;
+                var methFlags = MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.ReuseSlot;
                 MethodDef meth = new MethodDefUser("ProxyMeth" + rand.Next(0, int.MaxValue), MethodSig.CreateStatic(original.MethodSig.RetType, type.ToArray()), methImplFlags, methFlags)
                 {
                     Body = new CilBody()
@@ -61,14 +54,14 @@ namespace Isolated.Protection.Proxy
                 meth.Body.Variables.Add(new Local(md.CorLibTypes.Int32));
                 meth.Body.Variables.Add(new Local(md.CorLibTypes.Int32));
                 meth.Body.Instructions.Add(Instruction.Create(OpCodes.Ldarg_0));
-                List<Instruction> lst = new List<Instruction>();
+                var lst = new List<Instruction>();
                 var switchs = new Instruction(OpCodes.Switch);
                 meth.Body.Instructions.Add(switchs);
                 var br_s = new Instruction(OpCodes.Br_S);
                 meth.Body.Instructions.Add(br_s);
-                for (int i = 0; i < 5; i++)
+                for (var i = 0; i < 5; i++)
                 {
-                    for (int ia = 0; ia <= original.MethodSig.Params.Count - 1; ia++)
+                    for (var ia = 0; ia <= original.MethodSig.Params.Count - 1; ia++)
                     {
                         meth.Body.Instructions.Add(Instruction.Create(OpCodes.Ldarg, meth.Parameters[ia]));
                         if (ia == 0)
@@ -96,54 +89,53 @@ namespace Isolated.Protection.Proxy
 
         public static IEnumerable<T> Randomize<T>(IEnumerable<T> source)
         {
-            Random rnd = new Random();
+            var rnd = new Random();
             return source.OrderBy<T, int>((item) => rnd.Next());
         }
 
         public static void Execute(ModuleDef module)
         {
             ScanMemberRef(module);
-            foreach (TypeDef type in module.GetTypes())
+            foreach (var type in module.GetTypes())
             {
                 if (type.IsGlobalModuleType) continue;
-                foreach (MethodDef method in type.Methods.ToArray())
+                foreach (var method in type.Methods.ToArray())
                 {
                     if (!method.HasBody || method.Name.Contains("Proxy")) continue;
                     var instr = method.Body.Instructions;
-                    for (int i = 0; i < instr.Count; i++)
+                    for (var i = 0; i < instr.Count; i++)
                     {
-                        if (method.Body.Instructions[i].OpCode == OpCodes.Call)
+                        if (method.Body.Instructions[i].OpCode != OpCodes.Call) continue;
+                        try
                         {
-                            try
+                            var original = (MemberRef)method.Body.Instructions[i].Operand;
+                            if (!original.HasThis)
                             {
-                                MemberRef original = (MemberRef)method.Body.Instructions[i].Operand;
-                                if (!original.HasThis)
+                                var proxy = GenerateSwitch(original, module);
+                                method.DeclaringType.Methods.Add(proxy);
+                                instr[i].OpCode = OpCodes.Call;
+                                instr[i].Operand = proxy;
+                                var random = rand.Next(0, 5);
+                                for (var b = 0; b < proxy.Body.Instructions.Count - 1; b++)
                                 {
-                                    MethodDef proxy = GenerateSwitch(original, module);
-                                    method.DeclaringType.Methods.Add(proxy);
-                                    instr[i].OpCode = OpCodes.Call;
-                                    instr[i].Operand = proxy;
-                                    int random = rand.Next(0, 5);
-                                    for (int b = 0; b < proxy.Body.Instructions.Count - 1; b++)
+                                    if (proxy.Body.Instructions[b].OpCode == OpCodes.Ldc_I4)
                                     {
-                                        if (proxy.Body.Instructions[b].OpCode == OpCodes.Ldc_I4)
+                                        if (proxy.Body.Instructions[b].Operand.ToString() == random.ToString())
                                         {
-                                            if (proxy.Body.Instructions[b].Operand.ToString() == random.ToString())
-                                            {
-                                                proxy.Body.Instructions[b].OpCode = OpCodes.Call;
-                                                proxy.Body.Instructions[b].Operand = original;
-                                            }
-                                            else
-                                            {
-                                                proxy.Body.Instructions[b].OpCode = OpCodes.Call;
-                                                proxy.Body.Instructions[b].Operand = MemberRefList.Where(m => m.MethodSig.Params.Count == original.MethodSig.Params.Count).ToList().Random();
-                                            }
+                                            proxy.Body.Instructions[b].OpCode = OpCodes.Call;
+                                            proxy.Body.Instructions[b].Operand = original;
+                                        }
+                                        else
+                                        {
+                                            proxy.Body.Instructions[b].OpCode = OpCodes.Call;
+                                            proxy.Body.Instructions[b].Operand = MemberRefList.Where(m => m.MethodSig.Params.Count == original.MethodSig.Params.Count).ToList().Random();
                                         }
                                     }
+                                }
 
-                                    method.Body.Instructions.Insert(i, Instruction.CreateLdcI4(random));
+                                method.Body.Instructions.Insert(i, Instruction.CreateLdcI4(random));
 
-                                    /*        MethodSig originalsignature = original.MethodSig;
+                                /*        MethodSig originalsignature = original.MethodSig;
                                             var methImplFlags = MethodImplAttributes.IL | MethodImplAttributes.Managed;
                                             var methFlags = MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.ReuseSlot;
                                             var meth1 = new MethodDefUser("ProxyMeth" + rand.Next(0, int.MaxValue).ToString(),
@@ -159,11 +151,11 @@ namespace Isolated.Protection.Proxy
                                             meth1.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
                                             instr[i].OpCode = OpCodes.Call;
                                             instr[i].Operand = meth1;*/
-                                }
                             }
-                            catch
-                            {
-                            }
+                        }
+                        catch
+                        {
+                            // ignored
                         }
                     }
                 }
@@ -171,7 +163,7 @@ namespace Isolated.Protection.Proxy
         }
     }
 
-    public static class EnumerableHelper<E>
+    public static class EnumerableHelper<T>
     {
         private static readonly Random r;
 
@@ -182,7 +174,8 @@ namespace Isolated.Protection.Proxy
 
         public static T Random<T>(IEnumerable<T> input)
         {
-            return input.ElementAt(r.Next(input.Count()));
+            var enumerable = input as T[] ?? input.ToArray();
+            return enumerable.ElementAt(r.Next(enumerable.Count()));
         }
     }
 

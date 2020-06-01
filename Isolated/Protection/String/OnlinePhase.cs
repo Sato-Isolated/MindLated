@@ -12,10 +12,10 @@ namespace Isolated.Protection.String
         public static void Execute(ModuleDef module)
         {
             InjectClass1(module);
-            foreach (TypeDef type in module.GetTypes())
+            foreach (var type in module.GetTypes())
             {
                 if (type.IsGlobalModuleType) continue;
-                foreach (MethodDef methodDef2 in type.Methods)
+                foreach (var methodDef2 in type.Methods)
                 {
                     if (methodDef2.HasBody)
                     {
@@ -23,12 +23,12 @@ namespace Isolated.Protection.String
                         {
                             if (!methodDef2.Name.Contains("Decoder"))
                             {
-                                for (int i = 0; i < methodDef2.Body.Instructions.Count; i++)
+                                for (var i = 0; i < methodDef2.Body.Instructions.Count; i++)
                                 {
                                     if (methodDef2.Body.Instructions[i].OpCode == OpCodes.Ldstr)
                                     {
-                                        string plainText = methodDef2.Body.Instructions[i].Operand.ToString();
-                                        string operand = ConvertStringToHex(plainText);
+                                        var plainText = methodDef2.Body.Instructions[i].Operand.ToString();
+                                        var operand = ConvertStringToHex(plainText);
                                         methodDef2.Body.Instructions[i].Operand = operand;
                                         methodDef2.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Call, Form1.init));
                                     }
@@ -43,28 +43,26 @@ namespace Isolated.Protection.String
 
         public static string ConvertStringToHex(string asciiString)
         {
-            string hex = "";
-            foreach (char c in asciiString)
+            var hex = "";
+            foreach (var c in asciiString)
             {
                 int tmp = c;
-                hex += string.Format("{0:x2}", Convert.ToUInt32(tmp.ToString()));
+                hex += $"{Convert.ToUInt32(tmp.ToString()):x2}";
             }
             return hex;
         }
 
         public static void InjectClass1(ModuleDef module)
         {
-            ModuleDefMD typeModule = ModuleDefMD.Load(typeof(OnlineString).Module);
-            TypeDef typeDef = typeModule.ResolveTypeDef(MDToken.ToRID(typeof(OnlineString).MetadataToken));
-            IEnumerable<IDnlibDef> members = InjectHelper.Inject(typeDef, module.GlobalType, module);
+            var typeModule = ModuleDefMD.Load(typeof(OnlineString).Module);
+            var typeDef = typeModule.ResolveTypeDef(MDToken.ToRID(typeof(OnlineString).MetadataToken));
+            var members = InjectHelper.Inject(typeDef, module.GlobalType, module);
             Form1.init = (MethodDef)members.Single(method => method.Name == "Decoder");
-            foreach (MethodDef md in module.GlobalType.Methods)
+            foreach (var md in module.GlobalType.Methods)
             {
-                if (md.Name == ".ctor")
-                {
-                    module.GlobalType.Remove(md);
-                    break;
-                }
+                if (md.Name != ".ctor") continue;
+                module.GlobalType.Remove(md);
+                break;
             }
         }
     }
