@@ -82,6 +82,9 @@ namespace Isolated
             if (checkBox5.Checked)
             { Anti_Debug.Execute(module); }
 
+            if (checkBox20.Checked)
+            { AntiDump.Execute(module); }
+
             if (checkBox6.Checked)
             { Anti_Tamper.Execute(module); }
 

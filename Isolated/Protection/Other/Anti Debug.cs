@@ -1,7 +1,6 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 using Isolated.Services;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Isolated.Protection.Other

@@ -51,6 +51,7 @@
             this.checkBox17 = new System.Windows.Forms.CheckBox();
             this.checkBox18 = new System.Windows.Forms.CheckBox();
             this.checkBox19 = new System.Windows.Forms.CheckBox();
+            this.checkBox20 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -274,11 +275,22 @@
             this.checkBox19.Text = "StackUnfConfusion";
             this.checkBox19.UseVisualStyleBackColor = true;
             // 
+            // checkBox20
+            // 
+            this.checkBox20.AutoSize = true;
+            this.checkBox20.Location = new System.Drawing.Point(209, 83);
+            this.checkBox20.Name = "checkBox20";
+            this.checkBox20.Size = new System.Drawing.Size(75, 17);
+            this.checkBox20.TabIndex = 22;
+            this.checkBox20.Text = "Anti Dump";
+            this.checkBox20.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(748, 136);
+            this.Controls.Add(this.checkBox20);
             this.Controls.Add(this.checkBox19);
             this.Controls.Add(this.checkBox18);
             this.Controls.Add(this.checkBox17);
@@ -304,7 +316,7 @@
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Name = "Form1";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Text = "Isolated 280520";
+            this.Text = "Isolated 010620";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -335,6 +347,7 @@
         private System.Windows.Forms.CheckBox checkBox17;
         private System.Windows.Forms.CheckBox checkBox18;
         private System.Windows.Forms.CheckBox checkBox19;
+        private System.Windows.Forms.CheckBox checkBox20;
     }
 }
 
