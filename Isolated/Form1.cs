@@ -90,18 +90,16 @@ namespace Isolated
             string text2 = Path.GetDirectoryName(textBox1.Text);
             if (!text2.EndsWith("\\"))
             { text2 += "\\"; }
+
             string path = text2 + Path.GetFileNameWithoutExtension(textBox1.Text) + "_protected" +
                           Path.GetExtension(textBox1.Text);
 
-            var opts = new ModuleWriterOptions(module)
-            { 
+            module.Write(path, new ModuleWriterOptions(module)
+            {
                 Listener = Utils.listener,
                 PEHeadersOptions = { NumberOfRvaAndSizes = 13 },
-                Logger =  DummyLogger.NoThrowInstance
-            };
-            opts.MetaDataOptions.TablesHeapOptions.ExtraData = 0x1337;
-
-            module.Write(path, opts);
+                Logger = DummyLogger.NoThrowInstance
+            });
 
             if (checkBox6.Checked)
             { Anti_Tamper.Md5(path); }
