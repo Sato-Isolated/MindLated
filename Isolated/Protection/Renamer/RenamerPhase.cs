@@ -1,6 +1,7 @@
 ﻿using dnlib.DotNet;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Isolated.Protection.Renamer
 {
@@ -126,12 +127,16 @@ namespace Isolated.Protection.Renamer
 
         public static Random random = new Random();
 
+        private static string RandomString(int length, string chars)
+        {
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         public static string GenerateString()
         {
-            string s = "";
-            for (int i = 0; i < 3; i++)
-                s += (char)random.Next(8000, 8500);
-            return s;
+            string ascii = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            return RandomString(random.Next(1, 7), ascii);
         }
     }
 }
