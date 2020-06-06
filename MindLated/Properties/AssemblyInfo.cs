@@ -6,7 +6,7 @@ using System.Windows;
 // l'ensemble d'attributs suivant. Pour modifier les informations
 // associées à un assembly.
 [assembly: AssemblyTitle("MindLated")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("https://github.com/Sato-Isolated/MindLated")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MindLated")]
