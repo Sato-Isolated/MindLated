@@ -31,11 +31,11 @@ namespace MindLated.Protection.Fake
             {
                 case ModuleWriterEvent.MDEndCreateTables:
                     {
-                        var pESection = new PESection("Isolated", 1073741888);
+                        var pESection = new PESection("MindLated", 1073741888);
                         moduleWriterBase.Sections.Add(pESection);
                         pESection.Add(new ByteArrayChunk(new byte[123]), 4);
                         pESection.Add(new ByteArrayChunk(new byte[10]), 4);
-                        var text = ".Isolated";
+                        var text = ".MindLated";
                         string s = null;
                         for (var i = 0; i < 80; i++)
                         {
@@ -47,7 +47,7 @@ namespace MindLated.Protection.Fake
                             s = EncodeString(bytes, asciiCharset);
                         }
                         var bytes2 = Encoding.ASCII.GetBytes(s);
-                        moduleWriterBase.TheOptions.MetaDataOptions.OtherHeapsEnd.Add(new RawHeap("#Isolator", bytes2));
+                        moduleWriterBase.TheOptions.MetaDataOptions.OtherHeapsEnd.Add(new RawHeap("#MindLated", bytes2));
                         pESection.Add(new ByteArrayChunk(bytes2), 4);
 
                         var signature = (uint)(moduleWriterBase.MetaData.TablesHeap.TypeSpecTable.Rows + 1);

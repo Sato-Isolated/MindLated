@@ -14,7 +14,7 @@ namespace MindLated.Protection.String
 
         public static string Decrypt(string encryptedText)
         {
-            if (Assembly.GetExecutingAssembly() != Assembly.GetCallingAssembly()) return "Isolated.png";
+            if (Assembly.GetExecutingAssembly() != Assembly.GetCallingAssembly()) return "MindLated.png";
             var cipherTextBytes = Convert.FromBase64String(encryptedText);
             var keyBytes = new Rfc2898DeriveBytes(PasswordHash, Encoding.ASCII.GetBytes(SaltKey)).GetBytes(256 / 8);
             var symmetricKey = new RijndaelManaged() { Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7 };

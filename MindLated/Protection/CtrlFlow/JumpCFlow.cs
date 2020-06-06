@@ -28,7 +28,7 @@ namespace MindLated.Protection.CtrlFlow
                     for (var i = 0; i < method.Body.Instructions.Count - 2; i++)
                     {
                         var inst = method.Body.Instructions[i + 1];
-                        method.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Ldstr, "Isolated.jpg"));
+                        method.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Ldstr, "MindLated.jpg"));
                         method.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Br_S, inst));
                         i += 2;
                     }

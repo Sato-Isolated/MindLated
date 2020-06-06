@@ -42,7 +42,7 @@ namespace MindLated
 
         private void LaunchGitHubSite(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://github.com/Sato-Isolated/Isolated");
+            Process.Start("https://github.com/Sato-Isolated/MindLated");
         }
 
     

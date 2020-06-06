@@ -71,9 +71,9 @@ namespace MindLated.Protection.InvalidMD
                 }
             }
             TypeDef typeDef3 = new TypeDefUser(RenamerPhase.GenerateString());
-            FieldDef item2 = new FieldDefUser(RenamerPhase.GenerateString(), new FieldSig(manifestModule.Import(typeof(Isolated_png)).ToTypeSig()));
+            FieldDef item2 = new FieldDefUser(RenamerPhase.GenerateString(), new FieldSig(manifestModule.Import(typeof(MindLated_png)).ToTypeSig()));
             typeDef3.Fields.Add(item2);
-            typeDef3.BaseType = manifestModule.Import(typeof(Isolated_png));
+            typeDef3.BaseType = manifestModule.Import(typeof(MindLated_png));
             manifestModule.Types.Add(typeDef3);
             TypeDef typeDef4 = new TypeDefUser(RenamerPhase.GenerateString())
             {
