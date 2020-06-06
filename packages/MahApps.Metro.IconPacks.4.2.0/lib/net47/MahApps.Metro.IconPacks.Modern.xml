@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MahApps.Metro.IconPacks.Modern</name>
+    </assembly>
+    <members>
+        <member name="M:MahApps.Metro.IconPacks.Converter.PackIconModernKindToImageConverter.GetPathData(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:MahApps.Metro.IconPacks.PackIconModern">
+            <summary>
+            All icons sourced from Modern UI Icons Font - <see><cref>http://modernuiicons.com</cref></see> - in accordance of
+            <see><cref>https://github.com/Templarian/WindowsIcons/blob/master/WindowsPhone/license.txt</cref></see>.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.IconPacks.PackIconModern.Kind">
+            <summary>
+            Gets or sets the icon to display.
+            </summary>
+        </member>
+        <member name="T:MahApps.Metro.IconPacks.PackIconModernDataFactory">
+            ******************************************
+            This code is auto generated. Do not amend.
+            ******************************************
+        </member>
+        <member name="M:MahApps.Metro.IconPacks.ModernImageExtension.GetPathData(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:MahApps.Metro.IconPacks.PackIconModernKind">
+            ******************************************
+            This code is auto generated. Do not amend.
+            ******************************************
+            <summary>
+            List of available icons for use with <see cref="T:MahApps.Metro.IconPacks.PackIconModern" />.
+            </summary>
+            <remarks>
+            All icons sourced from Modern UI Icons Font - <see><cref>http://modernuiicons.com</cref></see> - in accordance of
+            <see><cref>https://github.com/Templarian/WindowsIcons/blob/master/WindowsPhone/license.txt</cref></see>.
+            </remarks>
+        </member>
+    </members>
+</doc>
