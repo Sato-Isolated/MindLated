@@ -49,9 +49,9 @@
       <HintPath>..\packages\ControlzEx.4.3.0\lib\net462\ControlzEx.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
-    <Reference Include="dnlib">
-      <HintPath>..\..\..\..\Documents\GitHub\Isolated\Isolated\bin\Debug\dnlib.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
+    <Reference Include="dnlib, Version=1.5.0.1500, Culture=neutral, PublicKeyToken=50e96378b6e77999, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Isolator\Isolator\bin\Debug\dnlib.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.2.0.1\lib\net47\MahApps.Metro.dll</HintPath>
@@ -102,8 +102,6 @@
     <Compile Include="Protection\String\OnlineStringClass.cs" />
     <Compile Include="Protection\String\StringEncPhase.cs" />
     <Compile Include="Services\InjectHelper.cs" />
-    <Compile Include="Services\Utils.cs" />
-    <Compile Include="Services\WriterUtils.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -143,7 +141,6 @@
     <Compile Include="Protection\CtrlFlow\BlockParser.cs" />
     <Compile Include="Protection\CtrlFlow\ControlFlowObfuscation.cs" />
     <Compile Include="Protection\CtrlFlow\JumpCFlow.cs" />
-    <Compile Include="Protection\Fake\FakeNative.cs" />
     <Compile Include="Protection\INT\AddIntPhase.cs" />
     <Compile Include="Protection\InvalidMD\InvalidMDPhase.cs" />
     <Compile Include="Protection\InvalidMD\MindLated.png.cs" />

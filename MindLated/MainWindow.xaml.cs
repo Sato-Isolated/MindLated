@@ -3,7 +3,6 @@ using dnlib.DotNet;
 using dnlib.DotNet.Writer;
 using MindLated.Protection.Arithmetic;
 using MindLated.Protection.CtrlFlow;
-using MindLated.Protection.Fake;
 using MindLated.Protection.INT;
 using MindLated.Protection.InvalidMD;
 using MindLated.Protection.LocalF;
@@ -16,7 +15,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
-using Utils = MindLated.Services.Utils;
 
 namespace MindLated
 {
@@ -29,7 +27,6 @@ namespace MindLated
 
         public string DirectoryName = "";
 
-        private readonly FakeNative FFakeNative = new FakeNative();
 
         public MainWindow()
         {
@@ -163,12 +160,6 @@ namespace MindLated
                 ConsoleLog.AppendText(time + " Processing Invalid MetaData" + Environment.NewLine);
             }
 
-            if (FakeNative.IsChecked == true)
-            {
-                FFakeNative.Execute();
-                ConsoleLog.AppendText(time + " Processing Fake Native" + Environment.NewLine);
-            }
-
             var text2 = Path.GetDirectoryName(LoadBox.Text);
             if (text2 != null && !text2.EndsWith("\\"))
             { text2 += "\\"; }
@@ -178,7 +169,7 @@ namespace MindLated
 
             module.Write(path, new ModuleWriterOptions(module)
             {
-                Listener = Utils.Listener,
+               
                 PEHeadersOptions = { NumberOfRvaAndSizes = 13 },
                 Logger = DummyLogger.NoThrowInstance
             });

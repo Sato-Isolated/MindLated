@@ -84,8 +84,6 @@ C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\MahApps.Metro.Icon
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\Microsoft.Xaml.Behaviors.dll
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\ControlzEx.pdb
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\ControlzEx.xml
-C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\dnlib.pdb
-C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\dnlib.xml
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\MahApps.Metro.pdb
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\MahApps.Metro.xml
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\MahApps.Metro.IconPacks.Core.pdb
@@ -100,3 +98,4 @@ C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\obj\Debug\MindLated.Properti
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\obj\Debug\MindLated.csproj.GenerateResource.cache
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\obj\Debug\MindLated.csproj.CoreCompileInputs.cache
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\obj\Debug\MindLated.csproj.CopyComplete
+C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\dnlib.dll
