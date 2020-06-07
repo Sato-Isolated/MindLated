@@ -102,7 +102,6 @@
     <Compile Include="Protection\String\OnlineStringClass.cs" />
     <Compile Include="Protection\String\StringEncPhase.cs" />
     <Compile Include="Services\InjectHelper.cs" />
-    <Compile Include="Services\Randomizer.cs" />
     <Compile Include="Services\Utils.cs" />
     <Compile Include="Services\WriterUtils.cs" />
     <Page Include="MainWindow.xaml">

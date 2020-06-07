@@ -1,5 +1,6 @@
 ﻿using dnlib.DotNet.MD;
 using dnlib.DotNet.Writer;
+using MindLated.Protection.Renamer;
 using MindLated.Services;
 using System;
 using System.IO;
@@ -39,7 +40,7 @@ namespace MindLated.Protection.Fake
                         string s = null;
                         for (var i = 0; i < 80; i++)
                         {
-                            text += GetRandomString();
+                            text += RenamerPhase.GenerateString(RenamerPhase.RenameMode.Normal);
                         }
                         for (var j = 0; j < 80; j++)
                         {

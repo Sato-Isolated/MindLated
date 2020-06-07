@@ -32,7 +32,7 @@ namespace MindLated.Protection.LocalF
                 FieldDef def = null;
                 if (!convertedLocals.ContainsKey(local))
                 {
-                    def = new FieldDefUser(RenamerPhase.GenerateString(), new FieldSig(local.Type), FieldAttributes.Public | FieldAttributes.Static);
+                    def = new FieldDefUser(RenamerPhase.GenerateString(RenamerPhase.RenameMode.Normal), new FieldSig(local.Type), FieldAttributes.Public | FieldAttributes.Static);
                     Module.GlobalType.Fields.Add(def);
                     convertedLocals.Add(local, def);
                 }

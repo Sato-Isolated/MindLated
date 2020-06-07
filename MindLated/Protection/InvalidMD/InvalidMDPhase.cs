@@ -10,13 +10,13 @@ namespace MindLated.Protection.InvalidMD
         {
             var manifestModule = asm.ManifestModule;
             manifestModule.Mvid = null;
-            manifestModule.Name = RenamerPhase.GenerateString();
-            asm.ManifestModule.Import(new FieldDefUser(RenamerPhase.GenerateString()));
+            manifestModule.Name = RenamerPhase.GenerateString(RenamerPhase.RenameMode.Normal);
+            asm.ManifestModule.Import(new FieldDefUser(RenamerPhase.GenerateString(RenamerPhase.RenameMode.Normal)));
             foreach (var typeDef in manifestModule.Types)
             {
-                TypeDef typeDef2 = new TypeDefUser(RenamerPhase.GenerateString());
+                TypeDef typeDef2 = new TypeDefUser(RenamerPhase.GenerateString(RenamerPhase.RenameMode.Normal));
                 typeDef2.Methods.Add(new MethodDefUser());
-                typeDef2.NestedTypes.Add(new TypeDefUser(RenamerPhase.GenerateString()));
+                typeDef2.NestedTypes.Add(new TypeDefUser(RenamerPhase.GenerateString(RenamerPhase.RenameMode.Normal)));
                 MethodDef item = new MethodDefUser();
                 typeDef2.Methods.Add(item);
                 typeDef.NestedTypes.Add(typeDef2);
@@ -70,12 +70,12 @@ namespace MindLated.Protection.InvalidMD
                     methodDef2.Body.OptimizeMacros();
                 }
             }
-            TypeDef typeDef3 = new TypeDefUser(RenamerPhase.GenerateString());
-            FieldDef item2 = new FieldDefUser(RenamerPhase.GenerateString(), new FieldSig(manifestModule.Import(typeof(MindLated_png)).ToTypeSig()));
+            TypeDef typeDef3 = new TypeDefUser(RenamerPhase.GenerateString(RenamerPhase.RenameMode.Normal));
+            FieldDef item2 = new FieldDefUser(RenamerPhase.GenerateString(RenamerPhase.RenameMode.Normal), new FieldSig(manifestModule.Import(typeof(MindLated_png)).ToTypeSig()));
             typeDef3.Fields.Add(item2);
             typeDef3.BaseType = manifestModule.Import(typeof(MindLated_png));
             manifestModule.Types.Add(typeDef3);
-            TypeDef typeDef4 = new TypeDefUser(RenamerPhase.GenerateString())
+            TypeDef typeDef4 = new TypeDefUser(RenamerPhase.GenerateString(RenamerPhase.RenameMode.Normal))
             {
                 IsInterface = true,
                 IsSealed = true

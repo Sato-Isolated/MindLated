@@ -15,8 +15,8 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using Utils = MindLated.Services.Utils;
 using System.Windows.Media;
+using Utils = MindLated.Services.Utils;
 
 namespace MindLated
 {
@@ -26,8 +26,6 @@ namespace MindLated
     public partial class MainWindow
     {
         public static MethodDef init;
-
-        public static MethodDef init2;
 
         public string DirectoryName = "";
 
@@ -44,8 +42,6 @@ namespace MindLated
         {
             Process.Start("https://github.com/Sato-Isolated/MindLated");
         }
-
-    
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -179,8 +175,6 @@ namespace MindLated
 
             var path = text2 + Path.GetFileNameWithoutExtension(LoadBox.Text) + "_protected" +
                        Path.GetExtension(LoadBox.Text);
-
-         
 
             module.Write(path, new ModuleWriterOptions(module)
             {

@@ -22,7 +22,7 @@ namespace MindLated.Protection.Proxy
                         if (t.OpCode != OpCodes.Ldstr) continue;
                         var methImplFlags = MethodImplAttributes.IL | MethodImplAttributes.Managed;
                         var methFlags = MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.ReuseSlot;
-                        var meth1 = new MethodDefUser("ProxyMeth" + rand.Next(0, int.MaxValue).ToString(),
+                        var meth1 = new MethodDefUser("ProxyMeth" + rand.Next(0, int.MaxValue),
                             MethodSig.CreateStatic(module.CorLibTypes.String),
                             methImplFlags, methFlags);
                         module.GlobalType.Methods.Add(meth1);

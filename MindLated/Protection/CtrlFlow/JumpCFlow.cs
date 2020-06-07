@@ -6,18 +6,6 @@ namespace MindLated.Protection.CtrlFlow
 {
     public static class JumpCFlow
     {
-        public static bool Checking(MethodDef method)
-        {
-            for (var i = 1; i < method.Body.Instructions.Count - 1; i++)
-            {
-                if (method.Body.Instructions[i].IsLdcI4() && !method.Body.Instructions[i - 1].IsBr())
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public static void Execute(ModuleDefMD module)
         {
             foreach (var type in module.Types)

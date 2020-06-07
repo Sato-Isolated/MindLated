@@ -72,7 +72,6 @@ C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\obj\Debug\MainWindow.baml
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\obj\Debug\MainWindow.g.cs
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\obj\Debug\App.g.cs
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\obj\Debug\MindLated_MarkupCompile.cache
-C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\obj\Debug\MindLated_MarkupCompile.lref
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\obj\Debug\MindLated.exe
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\obj\Debug\MindLated.pdb
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\MindLated.exe.config
