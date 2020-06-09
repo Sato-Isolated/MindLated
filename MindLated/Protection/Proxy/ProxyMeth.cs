@@ -163,7 +163,7 @@ namespace MindLated.Protection.Proxy
         }
     }
 
-    public static class EnumerableHelper<T>
+    public static class EnumerableHelper
     {
         private static readonly Random r;
 
@@ -172,10 +172,10 @@ namespace MindLated.Protection.Proxy
             r = new Random();
         }
 
-        public static T Random<T>(IEnumerable<T> input)
+        public static E Random<E>(IEnumerable<E> input)
         {
-            var enumerable = input as T[] ?? input.ToArray();
-            return enumerable.ElementAt(r.Next(enumerable.Count()));
+            var enumerable = input as E[] ?? input.ToArray();
+            return enumerable.ElementAt(r.Next(enumerable.Length));
         }
     }
 
@@ -183,7 +183,7 @@ namespace MindLated.Protection.Proxy
     {
         public static T Random<T>(this IEnumerable<T> input)
         {
-            return EnumerableHelper<T>.Random(input);
+            return EnumerableHelper.Random(input);
         }
     }
 }

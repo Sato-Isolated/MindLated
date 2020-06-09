@@ -27,7 +27,6 @@ namespace MindLated
 
         public string DirectoryName = "";
 
-
         public MainWindow()
         {
             InitializeComponent();
@@ -169,7 +168,6 @@ namespace MindLated
 
             module.Write(path, new ModuleWriterOptions(module)
             {
-               
                 PEHeadersOptions = { NumberOfRvaAndSizes = 13 },
                 Logger = DummyLogger.NoThrowInstance
             });

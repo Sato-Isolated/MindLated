@@ -202,11 +202,11 @@ namespace MindLated.Services
         {
             public readonly Dictionary<IDnlibDef, IDnlibDef> map = new Dictionary<IDnlibDef, IDnlibDef>();
 
-            private readonly ModuleDef OriginModule;
+            public readonly ModuleDef OriginModule;
 
             public readonly ModuleDef TargetModule;
 
-            private readonly Importer importer;
+            public readonly Importer importer;
 
             public InjectContext(ModuleDef module, ModuleDef target)
             {
