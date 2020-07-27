@@ -83,15 +83,10 @@ C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\MahApps.Metro.Icon
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\MahApps.Metro.IconPacks.Modern.dll
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\Microsoft.Xaml.Behaviors.dll
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\ControlzEx.pdb
-C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\ControlzEx.xml
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\MahApps.Metro.pdb
-C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\MahApps.Metro.xml
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\MahApps.Metro.IconPacks.Core.pdb
-C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\MahApps.Metro.IconPacks.Core.xml
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\MahApps.Metro.IconPacks.Modern.pdb
-C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\MahApps.Metro.IconPacks.Modern.xml
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\Microsoft.Xaml.Behaviors.pdb
-C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\bin\Debug\Microsoft.Xaml.Behaviors.xml
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\obj\Debug\App.baml
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\obj\Debug\MindLated.g.resources
 C:\Users\Edenl\Documents\GitHub\MindLated\MindLated\obj\Debug\MindLated.Properties.Resources.resources
