@@ -12,7 +12,7 @@ namespace MindLated.Protection.Other
             {
                 foreach (var dnlibDef in type.Methods)
                 {
-                    var def = (MethodDef)dnlibDef;
+                    var def = dnlibDef;
                     if (def != null && !def.HasBody)
                     {
                         break;

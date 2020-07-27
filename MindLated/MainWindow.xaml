@@ -47,6 +47,7 @@
                     <CheckBox x:Name="InvalidMD" Content="Invalid MetaData" ToolTip="This protection adds invalid metadata to modules to prevent disassembler/decompiler from opening them." HorizontalAlignment="Left" Margin="428,91,0,0" VerticalAlignment="Top" Width="120" />
                     <CheckBox x:Name="Anti_De4dot" Content="Anti De4dot" ToolTip="This protection will prevents usage of De4Dot." HorizontalAlignment="Left" Margin="428,114,0,0" VerticalAlignment="Top" Width="120" />
                     <CheckBox x:Name="SUC" Content="StackUnfConfusion" ToolTip="This confusion will add a piece of code in the front of the methods." HorizontalAlignment="Left" Margin="428,137,0,0" VerticalAlignment="Top" Width="133" />
+                    <CheckBox x:Name="RES" Content="Resource Protection" ToolTip="This protection will encrypt all resources in the application ." HorizontalAlignment="Left" Margin="428,160,0,0" VerticalAlignment="Top" Width="133" />
                 </Grid>
             </mah:MetroTabItem>
             <mah:MetroTabItem Header="Build" Margin="13,0,-13,0">

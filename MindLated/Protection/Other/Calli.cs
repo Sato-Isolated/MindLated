@@ -23,10 +23,9 @@ namespace MindLated.Protection.Other
                     {
                         try
                         {
-                            if (method.Body.Instructions[i].ToString().Contains("ISupportInitialize")) continue;
-                            if (method.Body.Instructions[i].OpCode != OpCodes.Call &&
+                            if (method.Body.Instructions[i].ToString().Contains("ISupportInitialize") || (method.Body.Instructions[i].OpCode != OpCodes.Call &&
                                 method.Body.Instructions[i].OpCode != OpCodes.Callvirt &&
-                                method.Body.Instructions[i].OpCode != OpCodes.Ldloc_S) continue;
+                                method.Body.Instructions[i].OpCode != OpCodes.Ldloc_S)) continue;
                             try
                             {
                                 var membertocalli = (MemberRef)method.Body.Instructions[i].Operand;

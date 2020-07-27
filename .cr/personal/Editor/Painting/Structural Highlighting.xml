@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root Type="DevExpress.CodeRush.VisualizePlugins.StructuralHighlighting.Options.StructuralHighlightingOptions">
+  <Options Language="Neutral">
+    <Enabled>True</Enabled>
+  </Options>
+</Root>

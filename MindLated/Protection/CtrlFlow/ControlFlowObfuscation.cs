@@ -8,8 +8,6 @@ namespace MindLated.Protection.CtrlFlow
 {
     internal class ControlFlowObfuscation
     {
-        public static ModuleDef Module { get; set; }
-
         public static void Execute(ModuleDefMD md)
         {
             foreach (var tDef in md.Types)

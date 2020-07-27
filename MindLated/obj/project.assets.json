@@ -1,0 +1,456 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.8": {
+      "ControlzEx/4.3.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.19"
+        },
+        "frameworkAssemblies": [
+          "System.Web",
+          "System.Web.Extensions"
+        ],
+        "compile": {
+          "lib/net462/ControlzEx.dll": {}
+        },
+        "runtime": {
+          "lib/net462/ControlzEx.dll": {}
+        }
+      },
+      "MahApps.Metro/2.1.1": {
+        "type": "package",
+        "dependencies": {
+          "ControlzEx": "4.3.1"
+        },
+        "frameworkAssemblies": [
+          "System.ComponentModel.DataAnnotations",
+          "System.Configuration"
+        ],
+        "compile": {
+          "lib/net47/MahApps.Metro.dll": {}
+        },
+        "runtime": {
+          "lib/net47/MahApps.Metro.dll": {}
+        }
+      },
+      "MahApps.Metro.IconPacks.Modern/4.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/net47/MahApps.Metro.IconPacks.Core.dll": {},
+          "lib/net47/MahApps.Metro.IconPacks.Modern.dll": {}
+        },
+        "runtime": {
+          "lib/net47/MahApps.Metro.IconPacks.Core.dll": {},
+          "lib/net47/MahApps.Metro.IconPacks.Modern.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Wpf/1.1.19": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "PresentationCore",
+          "PresentationFramework",
+          "System",
+          "System.Core",
+          "System.XML",
+          "System.Xaml",
+          "WindowsBase"
+        ],
+        "compile": {
+          "lib/net45/Microsoft.Xaml.Behaviors.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Xaml.Behaviors.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.8/win": {
+      "ControlzEx/4.3.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.19"
+        },
+        "frameworkAssemblies": [
+          "System.Web",
+          "System.Web.Extensions"
+        ],
+        "compile": {
+          "lib/net462/ControlzEx.dll": {}
+        },
+        "runtime": {
+          "lib/net462/ControlzEx.dll": {}
+        }
+      },
+      "MahApps.Metro/2.1.1": {
+        "type": "package",
+        "dependencies": {
+          "ControlzEx": "4.3.1"
+        },
+        "frameworkAssemblies": [
+          "System.ComponentModel.DataAnnotations",
+          "System.Configuration"
+        ],
+        "compile": {
+          "lib/net47/MahApps.Metro.dll": {}
+        },
+        "runtime": {
+          "lib/net47/MahApps.Metro.dll": {}
+        }
+      },
+      "MahApps.Metro.IconPacks.Modern/4.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/net47/MahApps.Metro.IconPacks.Core.dll": {},
+          "lib/net47/MahApps.Metro.IconPacks.Modern.dll": {}
+        },
+        "runtime": {
+          "lib/net47/MahApps.Metro.IconPacks.Core.dll": {},
+          "lib/net47/MahApps.Metro.IconPacks.Modern.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Wpf/1.1.19": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "PresentationCore",
+          "PresentationFramework",
+          "System",
+          "System.Core",
+          "System.XML",
+          "System.Xaml",
+          "WindowsBase"
+        ],
+        "compile": {
+          "lib/net45/Microsoft.Xaml.Behaviors.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Xaml.Behaviors.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.8/win-x64": {
+      "ControlzEx/4.3.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.19"
+        },
+        "frameworkAssemblies": [
+          "System.Web",
+          "System.Web.Extensions"
+        ],
+        "compile": {
+          "lib/net462/ControlzEx.dll": {}
+        },
+        "runtime": {
+          "lib/net462/ControlzEx.dll": {}
+        }
+      },
+      "MahApps.Metro/2.1.1": {
+        "type": "package",
+        "dependencies": {
+          "ControlzEx": "4.3.1"
+        },
+        "frameworkAssemblies": [
+          "System.ComponentModel.DataAnnotations",
+          "System.Configuration"
+        ],
+        "compile": {
+          "lib/net47/MahApps.Metro.dll": {}
+        },
+        "runtime": {
+          "lib/net47/MahApps.Metro.dll": {}
+        }
+      },
+      "MahApps.Metro.IconPacks.Modern/4.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/net47/MahApps.Metro.IconPacks.Core.dll": {},
+          "lib/net47/MahApps.Metro.IconPacks.Modern.dll": {}
+        },
+        "runtime": {
+          "lib/net47/MahApps.Metro.IconPacks.Core.dll": {},
+          "lib/net47/MahApps.Metro.IconPacks.Modern.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Wpf/1.1.19": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "PresentationCore",
+          "PresentationFramework",
+          "System",
+          "System.Core",
+          "System.XML",
+          "System.Xaml",
+          "WindowsBase"
+        ],
+        "compile": {
+          "lib/net45/Microsoft.Xaml.Behaviors.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Xaml.Behaviors.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.8/win-x86": {
+      "ControlzEx/4.3.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.19"
+        },
+        "frameworkAssemblies": [
+          "System.Web",
+          "System.Web.Extensions"
+        ],
+        "compile": {
+          "lib/net462/ControlzEx.dll": {}
+        },
+        "runtime": {
+          "lib/net462/ControlzEx.dll": {}
+        }
+      },
+      "MahApps.Metro/2.1.1": {
+        "type": "package",
+        "dependencies": {
+          "ControlzEx": "4.3.1"
+        },
+        "frameworkAssemblies": [
+          "System.ComponentModel.DataAnnotations",
+          "System.Configuration"
+        ],
+        "compile": {
+          "lib/net47/MahApps.Metro.dll": {}
+        },
+        "runtime": {
+          "lib/net47/MahApps.Metro.dll": {}
+        }
+      },
+      "MahApps.Metro.IconPacks.Modern/4.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/net47/MahApps.Metro.IconPacks.Core.dll": {},
+          "lib/net47/MahApps.Metro.IconPacks.Modern.dll": {}
+        },
+        "runtime": {
+          "lib/net47/MahApps.Metro.IconPacks.Core.dll": {},
+          "lib/net47/MahApps.Metro.IconPacks.Modern.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Wpf/1.1.19": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "PresentationCore",
+          "PresentationFramework",
+          "System",
+          "System.Core",
+          "System.XML",
+          "System.Xaml",
+          "WindowsBase"
+        ],
+        "compile": {
+          "lib/net45/Microsoft.Xaml.Behaviors.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Xaml.Behaviors.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ControlzEx/4.3.1": {
+      "sha512": "s5fpe39KFfiJTDTAyXOE6pCs7OgyVbf7IE2UhlmX8ZheypULAKRVJp6PFpg9P1qLsYszO+nqmuWd6R9BvBabug==",
+      "type": "package",
+      "path": "controlzex/4.3.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "controlzex.4.3.1.nupkg.sha512",
+        "controlzex.nuspec",
+        "lib/net45/ControlzEx.dll",
+        "lib/net45/ControlzEx.pdb",
+        "lib/net45/ControlzEx.xml",
+        "lib/net462/ControlzEx.dll",
+        "lib/net462/ControlzEx.pdb",
+        "lib/net462/ControlzEx.xml",
+        "lib/netcoreapp3.0/ControlzEx.dll",
+        "lib/netcoreapp3.0/ControlzEx.pdb",
+        "lib/netcoreapp3.0/ControlzEx.xml",
+        "lib/netcoreapp3.1/ControlzEx.dll",
+        "lib/netcoreapp3.1/ControlzEx.pdb",
+        "lib/netcoreapp3.1/ControlzEx.xml",
+        "logo-mini.png"
+      ]
+    },
+    "MahApps.Metro/2.1.1": {
+      "sha512": "VVmeIEjiXnGoPEdZPcs8TENo+haU9ga84JtJcCtrpVkO/wB15Ns/5al9q+S8RZNT8JPyq3yWI9sEpytKo7TvzQ==",
+      "type": "package",
+      "path": "mahapps.metro/2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net452/MahApps.Metro.dll",
+        "lib/net452/MahApps.Metro.pdb",
+        "lib/net452/MahApps.Metro.xml",
+        "lib/net46/MahApps.Metro.dll",
+        "lib/net46/MahApps.Metro.pdb",
+        "lib/net46/MahApps.Metro.xml",
+        "lib/net47/MahApps.Metro.dll",
+        "lib/net47/MahApps.Metro.pdb",
+        "lib/net47/MahApps.Metro.xml",
+        "lib/netcoreapp3.0/MahApps.Metro.dll",
+        "lib/netcoreapp3.0/MahApps.Metro.pdb",
+        "lib/netcoreapp3.0/MahApps.Metro.xml",
+        "lib/netcoreapp3.1/MahApps.Metro.dll",
+        "lib/netcoreapp3.1/MahApps.Metro.pdb",
+        "lib/netcoreapp3.1/MahApps.Metro.xml",
+        "mahapps.metro.2.1.1.nupkg.sha512",
+        "mahapps.metro.logo.png",
+        "mahapps.metro.nuspec"
+      ]
+    },
+    "MahApps.Metro.IconPacks.Modern/4.3.0": {
+      "sha512": "OEDNNggZNIe7ip8OW8PLzTJ6OLnK4f3RnW0RKVzzdTvZVRYmWMHPjzk0X8hJyn4x1f83pb7i1EyKQ+aO1Q3vUw==",
+      "type": "package",
+      "path": "mahapps.metro.iconpacks.modern/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/MahApps.Metro.IconPacks.Core.dll",
+        "lib/net45/MahApps.Metro.IconPacks.Core.pdb",
+        "lib/net45/MahApps.Metro.IconPacks.Core.xml",
+        "lib/net45/MahApps.Metro.IconPacks.Modern.dll",
+        "lib/net45/MahApps.Metro.IconPacks.Modern.pdb",
+        "lib/net45/MahApps.Metro.IconPacks.Modern.xml",
+        "lib/net46/MahApps.Metro.IconPacks.Core.dll",
+        "lib/net46/MahApps.Metro.IconPacks.Core.pdb",
+        "lib/net46/MahApps.Metro.IconPacks.Core.xml",
+        "lib/net46/MahApps.Metro.IconPacks.Modern.dll",
+        "lib/net46/MahApps.Metro.IconPacks.Modern.pdb",
+        "lib/net46/MahApps.Metro.IconPacks.Modern.xml",
+        "lib/net47/MahApps.Metro.IconPacks.Core.dll",
+        "lib/net47/MahApps.Metro.IconPacks.Core.pdb",
+        "lib/net47/MahApps.Metro.IconPacks.Core.xml",
+        "lib/net47/MahApps.Metro.IconPacks.Modern.dll",
+        "lib/net47/MahApps.Metro.IconPacks.Modern.pdb",
+        "lib/net47/MahApps.Metro.IconPacks.Modern.xml",
+        "lib/netcoreapp3.0/MahApps.Metro.IconPacks.Core.dll",
+        "lib/netcoreapp3.0/MahApps.Metro.IconPacks.Core.pdb",
+        "lib/netcoreapp3.0/MahApps.Metro.IconPacks.Core.xml",
+        "lib/netcoreapp3.0/MahApps.Metro.IconPacks.Modern.dll",
+        "lib/netcoreapp3.0/MahApps.Metro.IconPacks.Modern.pdb",
+        "lib/netcoreapp3.0/MahApps.Metro.IconPacks.Modern.xml",
+        "lib/netcoreapp3.1/MahApps.Metro.IconPacks.Core.dll",
+        "lib/netcoreapp3.1/MahApps.Metro.IconPacks.Core.pdb",
+        "lib/netcoreapp3.1/MahApps.Metro.IconPacks.Core.xml",
+        "lib/netcoreapp3.1/MahApps.Metro.IconPacks.Modern.dll",
+        "lib/netcoreapp3.1/MahApps.Metro.IconPacks.Modern.pdb",
+        "lib/netcoreapp3.1/MahApps.Metro.IconPacks.Modern.xml",
+        "lib/uap10.0.16299/MahApps.Metro.IconPacks.Core.dll",
+        "lib/uap10.0.16299/MahApps.Metro.IconPacks.Core.pdb",
+        "lib/uap10.0.16299/MahApps.Metro.IconPacks.Core.pri",
+        "lib/uap10.0.16299/MahApps.Metro.IconPacks.Core.xml",
+        "lib/uap10.0.16299/MahApps.Metro.IconPacks.Modern.dll",
+        "lib/uap10.0.16299/MahApps.Metro.IconPacks.Modern.pdb",
+        "lib/uap10.0.16299/MahApps.Metro.IconPacks.Modern.pri",
+        "lib/uap10.0.16299/MahApps.Metro.IconPacks.Modern.xml",
+        "lib/uap10.0.16299/MahApps.Metro.IconPacks.Modern/MahApps.Metro.IconPacks.Modern.xr.xml",
+        "lib/uap10.0.16299/MahApps.Metro.IconPacks.Modern/Themes/Generic.xaml",
+        "lib/uap10.0.16299/MahApps.Metro.IconPacks.Modern/Themes/PackIconModern.xaml",
+        "logo_small.png",
+        "mahapps.metro.iconpacks.modern.4.3.0.nupkg.sha512",
+        "mahapps.metro.iconpacks.modern.nuspec"
+      ]
+    },
+    "Microsoft.Xaml.Behaviors.Wpf/1.1.19": {
+      "sha512": "5sPWkbqImc2t1aQwIfJcKsUo7tOg1Tr8+6xVzZJB56Nzt4u9NlpcLofgdX/aRYpPKdWDA3U23Akw1KQzU5e82g==",
+      "type": "package",
+      "path": "microsoft.xaml.behaviors.wpf/1.1.19",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/Design/Microsoft.Xaml.Behaviors.Design.dll",
+        "lib/net45/Microsoft.Xaml.Behaviors.dll",
+        "lib/net45/Microsoft.Xaml.Behaviors.pdb",
+        "lib/net45/Microsoft.Xaml.Behaviors.xml",
+        "lib/netcoreapp3.0/Design/Microsoft.Xaml.Behaviors.DesignTools.dll",
+        "lib/netcoreapp3.0/Microsoft.Xaml.Behaviors.dll",
+        "lib/netcoreapp3.0/Microsoft.Xaml.Behaviors.pdb",
+        "lib/netcoreapp3.0/Microsoft.Xaml.Behaviors.xml",
+        "microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512",
+        "microsoft.xaml.behaviors.wpf.nuspec",
+        "tools/Install.ps1"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.8": [
+      "ControlzEx >= 4.3.1",
+      "MahApps.Metro >= 2.1.1",
+      "MahApps.Metro.IconPacks.Modern >= 4.3.0",
+      "Microsoft.Xaml.Behaviors.Wpf >= 1.1.19"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Edenl\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\MindLated.csproj",
+      "projectName": "MindLated",
+      "projectPath": "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\MindLated.csproj",
+      "packagesPath": "C:\\Users\\Edenl\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\obj\\",
+      "projectStyle": "PackageReference",
+      "skipContentFileWrite": true,
+      "configFilePaths": [
+        "C:\\Users\\Edenl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net48"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net48": {
+          "projectReferences": {}
+        }
+      }
+    },
+    "frameworks": {
+      "net48": {
+        "dependencies": {
+          "ControlzEx": {
+            "target": "Package",
+            "version": "[4.3.1, )"
+          },
+          "MahApps.Metro": {
+            "target": "Package",
+            "version": "[2.1.1, )"
+          },
+          "MahApps.Metro.IconPacks.Modern": {
+            "target": "Package",
+            "version": "[4.3.0, )"
+          },
+          "Microsoft.Xaml.Behaviors.Wpf": {
+            "target": "Package",
+            "version": "[1.1.19, )"
+          }
+        }
+      }
+    },
+    "runtimes": {
+      "win": {
+        "#import": []
+      },
+      "win-x64": {
+        "#import": []
+      },
+      "win-x86": {
+        "#import": []
+      }
+    }
+  }
+}

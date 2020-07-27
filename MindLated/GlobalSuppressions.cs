@@ -5,5 +5,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Style", "IDE0060:Supprimer le paramètre inutilisé", Justification = "<En attente>", Scope = "member", Target = "~M:MindLated.Protection.Other.AntiDumpRun.InitBlock(System.Void*,System.Byte,System.UInt32)")]
-[assembly: SuppressMessage("Style", "IDE0060:Supprimer le paramètre inutilisé", Justification = "<En attente>", Scope = "member", Target = "~M:MindLated.Protection.Other.AntiDumpRun.CopyBlock(System.Void*,System.Void*,System.UInt32)")]
+[assembly: SuppressMessage("Style", "IDE0060:Supprimer le paramètre inutilisé", Justification = "<En attente>", Scope = "member", Target = "~M:MindLated.Protection.Anti.Runtime.AntiDumpRun.InitBlock(System.Void*,System.Byte,System.UInt32)")]
+[assembly: SuppressMessage("Style", "IDE0060:Supprimer le paramètre inutilisé", Justification = "<En attente>", Scope = "member", Target = "~M:MindLated.Protection.Anti.Runtime.AntiDumpRun.CopyBlock(System.Void*,System.Void*,System.UInt32)")]
+[assembly: SuppressMessage("CodeQuality", "IDE0051:Supprimer les membres privés non utilisés", Justification = "<En attente>", Scope = "member", Target = "~M:MindLated.Protection.Anti.Runtime.AntiDebugSafe.Initialize")]
+[assembly: SuppressMessage("CodeQuality", "IDE0051:Supprimer les membres privés non utilisés", Justification = "<En attente>", Scope = "member", Target = "~M:MindLated.Protection.Anti.Runtime.EOFAntitamp.Initializer")]

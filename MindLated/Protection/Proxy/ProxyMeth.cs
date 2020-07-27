@@ -47,7 +47,7 @@ namespace MindLated.Protection.Proxy
                 type.Add(md.CorLibTypes.Int32);
                 var methImplFlags = MethodImplAttributes.IL | MethodImplAttributes.Managed;
                 var methFlags = MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.ReuseSlot;
-                MethodDef meth = new MethodDefUser("ProxyMeth" + rand.Next(0, int.MaxValue), MethodSig.CreateStatic(original.MethodSig.RetType, type.ToArray()), methImplFlags, methFlags)
+                MethodDef meth = new MethodDefUser($"ProxyMeth{(rand.Next(0, int.MaxValue))}", MethodSig.CreateStatic(original.MethodSig.RetType, type.ToArray()), methImplFlags, methFlags)
                 {
                     Body = new CilBody()
                 };
@@ -120,15 +120,15 @@ namespace MindLated.Protection.Proxy
                                 {
                                     if (proxy.Body.Instructions[b].OpCode == OpCodes.Ldc_I4)
                                     {
-                                        if (proxy.Body.Instructions[b].Operand.ToString() == random.ToString())
+                                        if (proxy.Body.Instructions[b].Operand.ToString() != random.ToString())
                                         {
                                             proxy.Body.Instructions[b].OpCode = OpCodes.Call;
-                                            proxy.Body.Instructions[b].Operand = original;
+                                            proxy.Body.Instructions[b].Operand = MemberRefList.Where(m => m.MethodSig.Params.Count == original.MethodSig.Params.Count).ToList().Random();
                                         }
                                         else
                                         {
                                             proxy.Body.Instructions[b].OpCode = OpCodes.Call;
-                                            proxy.Body.Instructions[b].Operand = MemberRefList.Where(m => m.MethodSig.Params.Count == original.MethodSig.Params.Count).ToList().Random();
+                                            proxy.Body.Instructions[b].Operand = original;
                                         }
                                     }
                                 }

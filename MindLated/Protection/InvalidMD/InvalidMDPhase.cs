@@ -1,6 +1,7 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 using MindLated.Protection.Renamer;
+using System;
 
 namespace MindLated.Protection.InvalidMD
 {
@@ -25,7 +26,7 @@ namespace MindLated.Protection.InvalidMD
                 {
                     if (methodDef2.Body == null) continue;
                     methodDef2.Body.SimplifyBranches();
-                    if (methodDef2.ReturnType.FullName != "System.Void" || !methodDef2.HasBody ||
+                    if (string.Compare(methodDef2.ReturnType.FullName, "System.Void", StringComparison.Ordinal) != 0 || !methodDef2.HasBody ||
                         methodDef2.Body.Instructions.Count == 0) continue;
                     var typeSig = asm.ManifestModule.Import(typeof(int)).ToTypeSig();
                     var local = new Local(typeSig);

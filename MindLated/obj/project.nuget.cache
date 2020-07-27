@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "sNml7nPxpze3htJX3ALZz766D9GW9FeExdI9BeNtKAXxa4m01oMaE16sE1hxARB5p8EVKjOB98J68javNnYAEw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\MindLated.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Edenl\\.nuget\\packages\\controlzex\\4.3.1\\controlzex.4.3.1.nupkg.sha512",
+    "C:\\Users\\Edenl\\.nuget\\packages\\mahapps.metro\\2.1.1\\mahapps.metro.2.1.1.nupkg.sha512",
+    "C:\\Users\\Edenl\\.nuget\\packages\\mahapps.metro.iconpacks.modern\\4.3.0\\mahapps.metro.iconpacks.modern.4.3.0.nupkg.sha512",
+    "C:\\Users\\Edenl\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.19\\microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512"
+  ],
+  "logs": []
+}
