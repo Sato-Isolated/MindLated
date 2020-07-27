@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Root Type="DevExpress.CodeRush.Foundation.SmartSemicolon.Options.SmartSemicolonOptions">
-  <Options Language="C#">
-    <Enabled>True</Enabled>
-  </Options>
-  <Options Language="JavaScript" />
-</Root>
