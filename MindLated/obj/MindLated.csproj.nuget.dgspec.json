@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\MindLated.csproj": {}
+    "D:\\MindLated no github\\MindLated\\MindLated.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\MindLated.csproj": {
+    "D:\\MindLated no github\\MindLated\\MindLated.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\MindLated.csproj",
+        "projectUniqueName": "D:\\MindLated no github\\MindLated\\MindLated.csproj",
         "projectName": "MindLated",
-        "projectPath": "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\MindLated.csproj",
+        "projectPath": "D:\\MindLated no github\\MindLated\\MindLated.csproj",
         "packagesPath": "C:\\Users\\Edenl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\obj\\",
+        "outputPath": "D:\\MindLated no github\\MindLated\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "configFilePaths": [

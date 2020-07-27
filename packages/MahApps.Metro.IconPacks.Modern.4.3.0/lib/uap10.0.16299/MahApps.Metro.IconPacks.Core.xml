@@ -1,0 +1,239 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MahApps.Metro.IconPacks.Core</name>
+    </assembly>
+    <members>
+        <member name="T:MahApps.Metro.IconPacks.DescriptionAttribute">
+            <summary>
+            Specifies a description for a property or event.
+            CA1813: Avoid unsealed attributes
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.IconPacks.DescriptionAttribute.Description">
+            <summary>
+            Gets the description stored in this attribute.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.IconPacks.DescriptionAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the DescriptionAttribute class with a description.
+            </summary>
+            <param name="description">The description text.</param>
+        </member>
+        <member name="T:MahApps.Metro.IconPacks.Converter.FlipToScaleXValueConverter">
+            <summary>
+            ValueConverter which converts the PackIconFlipOrientation enumeration value to ScaleX value of a ScaleTransformation.
+            </summary>
+        </member>
+        <member name="T:MahApps.Metro.IconPacks.Converter.FlipToScaleYValueConverter">
+            <summary>
+            ValueConverter which converts the PackIconFlipOrientation enumeration value to ScaleY value of a ScaleTransformation.
+            </summary>
+        </member>
+        <member name="T:MahApps.Metro.IconPacks.Converter.MarkupConverter">
+            <summary>
+            MarkupConverter is a MarkupExtension which can be used for IValueConverter.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.IconPacks.Converter.MarkupConverter.ProvideValue">
+            <inheritdoc />
+        </member>
+        <member name="M:MahApps.Metro.IconPacks.Converter.MarkupConverter.Convert(System.Object,System.Type,System.Object,System.String)">
+            <summary>
+            Converts a value.
+            </summary>
+            <param name="value">The value produced by the binding source.</param>
+            <param name="targetType">The type of the binding target property.</param>
+            <param name="parameter">The converter parameter to use.</param>
+            <param name="language">The culture language to use in the converter.</param>
+            <returns>A converted value. If the method returns null, the valid null value is used.</returns>
+        </member>
+        <member name="M:MahApps.Metro.IconPacks.Converter.MarkupConverter.ConvertBack(System.Object,System.Type,System.Object,System.String)">
+            <summary>
+            Converts a value.
+            </summary>
+            <param name="value">The value that is produced by the binding target.</param>
+            <param name="targetType">The type to convert to.</param>
+            <param name="parameter">The converter parameter to use.</param>
+            <param name="language">The culture language to use in the converter.</param>
+            <returns>A converted value. If the method returns null, the valid null value is used.</returns>
+        </member>
+        <member name="M:MahApps.Metro.IconPacks.Converter.MarkupConverter.Windows#UI#Xaml#Data#IValueConverter#Convert(System.Object,System.Type,System.Object,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:MahApps.Metro.IconPacks.Converter.MarkupConverter.Windows#UI#Xaml#Data#IValueConverter#ConvertBack(System.Object,System.Type,System.Object,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:MahApps.Metro.IconPacks.PackIconControlBase">
+            <summary>
+            Class PackIconControlBase which is the base class for any PackIcon control.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.IconPacks.PackIconControlBase.Data">
+            <summary>
+            Gets the path data for the current icon kind.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.IconPacks.PackIconControlBase.FlipProperty">
+            <summary>
+            Identifies the Flip dependency property.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.IconPacks.PackIconControlBase.Flip">
+            <summary>
+            Gets or sets the flip orientation.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.IconPacks.PackIconControlBase.RotationAngleProperty">
+            <summary>
+            Identifies the RotationAngle dependency property.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.IconPacks.PackIconControlBase.RotationAngle">
+            <summary>
+            Gets or sets the rotation (angle).
+            </summary>
+            <value>The rotation.</value>
+        </member>
+        <member name="F:MahApps.Metro.IconPacks.PackIconControlBase.SpinProperty">
+            <summary>
+            Identifies the Spin dependency property.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.IconPacks.PackIconControlBase.Spin">
+            <summary>
+            Gets or sets a value indicating whether the inner icon is spinning.
+            </summary>
+            <value><c>true</c> if spin; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="F:MahApps.Metro.IconPacks.PackIconControlBase.SpinDurationProperty">
+            <summary>
+            Identifies the SpinDuration dependency property.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.IconPacks.PackIconControlBase.SpinDuration">
+            <summary>
+            Gets or sets the duration of the spinning animation (in seconds). This will also restart the spin animation.
+            </summary>
+            <value>The duration of the spin in seconds.</value>
+        </member>
+        <member name="F:MahApps.Metro.IconPacks.PackIconControlBase.SpinEasingFunctionProperty">
+            <summary>
+            Identifies the SpinEasingFunction dependency property.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.IconPacks.PackIconControlBase.SpinEasingFunction">
+            <summary>
+            Gets or sets the EasingFunction of the spinning animation. This will also restart the spin animation.
+            </summary>
+            <value>The spin easing function.</value>
+        </member>
+        <member name="F:MahApps.Metro.IconPacks.PackIconControlBase.SpinAutoReverseProperty">
+            <summary>
+            Identifies the SpinAutoReverse dependency property.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.IconPacks.PackIconControlBase.SpinAutoReverse">
+            <summary>
+            Gets or sets the AutoReverse of the spinning animation. This will also restart the spin animation.
+            </summary>
+            <value><c>true</c> if [spin automatic reverse]; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="T:MahApps.Metro.IconPacks.PackIconFlipOrientation">
+            <summary>
+            Enum PackIconFlipOrientation for the Flip property of any PackIcon control.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.IconPacks.PackIconFlipOrientation.Normal">
+            <summary>
+            No flip
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.IconPacks.PackIconFlipOrientation.Horizontal">
+            <summary>
+            Flip the icon horizontal
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.IconPacks.PackIconFlipOrientation.Vertical">
+            <summary>
+            Flip the icon vertical
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.IconPacks.PackIconFlipOrientation.Both">
+            <summary>
+            Flip the icon vertical and horizontal
+            </summary>
+        </member>
+        <member name="T:MahApps.Metro.IconPacks.PathIconControlBase">
+            <summary>
+            Class PathIconControlBase which is the base class for any PathIcon control.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.IconPacks.PathIconControlBase.FlipProperty">
+            <summary>
+            Identifies the Flip dependency property.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.IconPacks.PathIconControlBase.Flip">
+            <summary>
+            Gets or sets the flip orientation.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.IconPacks.PathIconControlBase.RotationAngleProperty">
+            <summary>
+            Identifies the RotationAngle dependency property.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.IconPacks.PathIconControlBase.RotationAngle">
+            <summary>
+            Gets or sets the rotation (angle).
+            </summary>
+            <value>The rotation.</value>
+        </member>
+        <member name="F:MahApps.Metro.IconPacks.PathIconControlBase.SpinProperty">
+            <summary>
+            Identifies the Spin dependency property.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.IconPacks.PathIconControlBase.Spin">
+            <summary>
+            Gets or sets a value indicating whether the inner icon is spinning.
+            </summary>
+            <value><c>true</c> if spin; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="F:MahApps.Metro.IconPacks.PathIconControlBase.SpinDurationProperty">
+            <summary>
+            Identifies the SpinDuration dependency property.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.IconPacks.PathIconControlBase.SpinDuration">
+            <summary>
+            Gets or sets the duration of the spinning animation (in seconds). This will also restart the spin animation.
+            </summary>
+            <value>The duration of the spin in seconds.</value>
+        </member>
+        <member name="F:MahApps.Metro.IconPacks.PathIconControlBase.SpinEasingFunctionProperty">
+            <summary>
+            Identifies the SpinEasingFunction dependency property.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.IconPacks.PathIconControlBase.SpinEasingFunction">
+            <summary>
+            Gets or sets the EasingFunction of the spinning animation. This will also restart the spin animation.
+            </summary>
+            <value>The spin easing function.</value>
+        </member>
+        <member name="F:MahApps.Metro.IconPacks.PathIconControlBase.SpinAutoReverseProperty">
+            <summary>
+            Identifies the SpinAutoReverse dependency property.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.IconPacks.PathIconControlBase.SpinAutoReverse">
+            <summary>
+            Gets or sets the AutoReverse of the spinning animation. This will also restart the spin animation.
+            </summary>
+            <value><c>true</c> if [spin automatic reverse]; otherwise, <c>false</c>.</value>
+        </member>
+    </members>
+</doc>
