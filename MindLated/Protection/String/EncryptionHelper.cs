@@ -18,7 +18,7 @@ namespace MindLated.Protection.String
         private static List<string> _list = new List<string>();
         public static void Generate()
         {
-            using (var manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MindLated.bin"))
+            using (var manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MindLated.zero"))
             {
                 using (var streamReader = new StreamReader(new MemoryStream(UnHush(Read(manifestResourceStream)))))
                 {
