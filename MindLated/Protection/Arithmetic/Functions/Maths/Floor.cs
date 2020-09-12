@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MindLated.Protection.Arithmetic.Functions.Maths
 {
-    public class Floor : IFunction
+    public class Floor : iFunction
     {
         public override ArithmeticTypes ArithmeticTypes => ArithmeticTypes.Floor;
 

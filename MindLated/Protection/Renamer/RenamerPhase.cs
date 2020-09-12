@@ -18,7 +18,7 @@ namespace MindLated.Protection.Renamer
         {
             if (IsObfuscationActive)
             {
-                var namespaceNewName = GenerateString(RenameMode.Normal);
+//                var namespaceNewName = GenerateString(RenameMode.Normal);
                 foreach (var type in module.Types)
                 {
                     if (TypeRename.TryGetValue(type, out var canRenameType))
@@ -35,7 +35,7 @@ namespace MindLated.Protection.Renamer
                             if (canRenameMethod && !method.IsConstructor && !method.IsSpecialName)
                                 InternalRename(method);
                         }
-                        else 
+                        else
                             InternalRename(method);
                     }
                     MethodNewName.Clear();

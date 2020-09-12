@@ -4,7 +4,7 @@ using MindLated.Protection.Arithmetic.Utils;
 
 namespace MindLated.Protection.Arithmetic.Functions
 {
-    public class Sub : IFunction
+    public class Sub : iFunction
     {
         public override ArithmeticTypes ArithmeticTypes => ArithmeticTypes.Sub;
 

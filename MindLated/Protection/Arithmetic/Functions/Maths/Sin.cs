@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MindLated.Protection.Arithmetic.Functions.Maths
 {
-    public class Sin : IFunction
+    public class Sin : iFunction
     {
         public override ArithmeticTypes ArithmeticTypes => ArithmeticTypes.Sin;
 

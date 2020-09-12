@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MindLated.Protection.Arithmetic.Functions.Maths
 {
-    public class Round : IFunction
+    public class Round : iFunction
     {
         public override ArithmeticTypes ArithmeticTypes => ArithmeticTypes.Round;
 

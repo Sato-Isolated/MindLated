@@ -11,7 +11,7 @@ namespace MindLated.Protection.Arithmetic
     {
         public static ModuleDef moduleDef1;
 
-        public static List<IFunction> Tasks = new List<IFunction>()
+        public static List<iFunction> Tasks = new List<iFunction>()
         {
             new Add(),
             new Sub(),

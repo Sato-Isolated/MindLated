@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MindLated.Protection.Arithmetic.Functions.Maths
 {
-    public class Sqrt : IFunction
+    public class Sqrt : iFunction
     {
         public override ArithmeticTypes ArithmeticTypes => ArithmeticTypes.Sqrt;
 

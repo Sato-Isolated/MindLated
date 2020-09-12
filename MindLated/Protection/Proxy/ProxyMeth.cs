@@ -120,7 +120,7 @@ namespace MindLated.Protection.Proxy
                                 {
                                     if (proxy.Body.Instructions[b].OpCode == OpCodes.Ldc_I4)
                                     {
-                                        if (proxy.Body.Instructions[b].Operand.ToString() != random.ToString())
+                                        if (string.Compare(proxy.Body.Instructions[b].Operand.ToString(), random.ToString(), StringComparison.Ordinal) != 0)
                                         {
                                             proxy.Body.Instructions[b].OpCode = OpCodes.Call;
                                             proxy.Body.Instructions[b].Operand = MemberRefList.Where(m => m.MethodSig.Params.Count == original.MethodSig.Params.Count).ToList().Random();

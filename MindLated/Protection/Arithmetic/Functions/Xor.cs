@@ -4,7 +4,7 @@ using MindLated.Protection.Arithmetic.Utils;
 
 namespace MindLated.Protection.Arithmetic.Functions
 {
-    public class Xor : IFunction
+    public class Xor : iFunction
     {
         public override ArithmeticTypes ArithmeticTypes => ArithmeticTypes.Xor;
 

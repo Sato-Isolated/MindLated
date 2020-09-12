@@ -3,7 +3,7 @@ using dnlib.DotNet.Emit;
 
 namespace MindLated.Protection.Arithmetic
 {
-    public abstract class IFunction
+    public abstract class iFunction
     {
         public abstract ArithmeticTypes ArithmeticTypes { get; }
 

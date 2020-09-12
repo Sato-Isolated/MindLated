@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MindLated.Protection.Arithmetic.Functions.Maths
 {
-    public class Truncate : IFunction
+    public class Truncate : iFunction
     {
         public override ArithmeticTypes ArithmeticTypes => ArithmeticTypes.Truncate;
 

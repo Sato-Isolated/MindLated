@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 
 namespace MindLated.Protection.Anti.Runtime
 {
-    internal class EOFAntitamp
+    internal class EOFAntiTamper
     {
         private static void Initializer()
         {

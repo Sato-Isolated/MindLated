@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MindLated.Protection.Arithmetic.Functions.Maths
 {
-    public class Cos : IFunction
+    public class Cos : iFunction
     {
         public override ArithmeticTypes ArithmeticTypes => ArithmeticTypes.Cos;
 

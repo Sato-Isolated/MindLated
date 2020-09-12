@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Os8yYGewWYopjsukWbFIixnAxuvdbSERhS+lDxsL9dlgNBCiSESlqA8owZy6hYU0Kocsekh6fX39aN0IZFeCBA==",
+  "dgSpecHash": "OHdJ3F8fPdBGSLWnOj8gMyFgLdH/dZjbH4i0FX23IKxI7kDyM1+ENRle7bctpn8F2K8wzt+ynT+HOF/gjDkQAA==",
   "success": true,
-  "projectFilePath": "D:\\MindLated no github\\MindLated\\MindLated.csproj",
+  "projectFilePath": "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\MindLated.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Edenl\\.nuget\\packages\\controlzex\\4.3.1\\controlzex.4.3.1.nupkg.sha512",
-    "C:\\Users\\Edenl\\.nuget\\packages\\mahapps.metro\\2.1.1\\mahapps.metro.2.1.1.nupkg.sha512",
-    "C:\\Users\\Edenl\\.nuget\\packages\\mahapps.metro.iconpacks.modern\\4.3.0\\mahapps.metro.iconpacks.modern.4.3.0.nupkg.sha512",
+    "C:\\Users\\Edenl\\.nuget\\packages\\controlzex\\4.3.2\\controlzex.4.3.2.nupkg.sha512",
+    "C:\\Users\\Edenl\\.nuget\\packages\\dnlib\\3.3.2\\dnlib.3.3.2.nupkg.sha512",
+    "C:\\Users\\Edenl\\.nuget\\packages\\mahapps.metro\\2.2.0\\mahapps.metro.2.2.0.nupkg.sha512",
+    "C:\\Users\\Edenl\\.nuget\\packages\\mahapps.metro.iconpacks.modern\\4.4.0\\mahapps.metro.iconpacks.modern.4.4.0.nupkg.sha512",
     "C:\\Users\\Edenl\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.19\\microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512"
   ],
   "logs": []
