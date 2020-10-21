@@ -3,6 +3,8 @@
 
 I add things when I feel like it. 
 
+work only for crack me (not sure at 100%)
+
 ![alt text](https://i.imgur.com/IUfJIPd.png)
 
 ![alt text](https://i.imgur.com/2BFm1S3.png)
