@@ -9,7 +9,7 @@ namespace MindLated.Protection.StringOnline
         {
             if (Assembly.GetExecutingAssembly() != Assembly.GetCallingAssembly()) return "MindLated.png";
             var webClient = new WebClient();
-            return webClient.DownloadString($"https://communitykeyv1.000webhostapp.com/Decoder4.php?string={encrypted}");
+            return webClient.DownloadString($"https://communitykeyv1.000webhostapp.com/Decoder4.php?string={encrypted}"); //this host don't work anymore you need to have your proper host
         }
     }
 }
