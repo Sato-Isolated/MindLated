@@ -36,15 +36,15 @@
           "dependencies": {
             "ControlzEx": {
               "target": "Package",
-              "version": "[4.3.2, )"
+              "version": "[4.4.0, )"
             },
             "MahApps.Metro": {
               "target": "Package",
-              "version": "[2.2.0, )"
+              "version": "[2.3.4, )"
             },
             "MahApps.Metro.IconPacks.Modern": {
               "target": "Package",
-              "version": "[4.4.0, )"
+              "version": "[4.8.0, )"
             },
             "Microsoft.Xaml.Behaviors.Wpf": {
               "target": "Package",

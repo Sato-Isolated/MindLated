@@ -6,7 +6,7 @@ namespace MindLated.Protection.INT
 {
     public static class AddIntPhase
     {
-        public static void Execute(ModuleDef module)
+        /*public static void Execute(ModuleDef module)
         {
             foreach (var type in module.GetTypes())
             {
@@ -35,7 +35,7 @@ namespace MindLated.Protection.INT
                     }
                 }
             }
-        }
+        }*/
 
         public static void Execute2(ModuleDef md)
         {

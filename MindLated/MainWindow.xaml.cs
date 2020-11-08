@@ -1,4 +1,5 @@
-﻿using dnlib.DotNet;
+﻿using ControlzEx.Theming;
+using dnlib.DotNet;
 using dnlib.DotNet.Writer;
 using MindLated.Protection.Anti;
 using MindLated.Protection.Arithmetic;
@@ -29,7 +30,12 @@ namespace MindLated
 
         public string DirectoryName = string.Empty;
 
-        public MainWindow() { InitializeComponent(); }
+        public MainWindow() 
+        {
+            InitializeComponent();
+            ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithAppMode;
+            ThemeManager.Current.SyncTheme();
+        }
 
         private void LaunchGitHubSite(object sender, RoutedEventArgs e)
         { Process.Start("https://github.com/Sato-Isolated/MindLated"); }
@@ -38,7 +44,8 @@ namespace MindLated
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var time = DateTime.Now.ToString("hh:mm:ss");
-            var module = ModuleDefMD.Load(LoadBox.Text);
+            ModuleContext modCtx = ModuleDef.CreateModuleContext();
+            var module = ModuleDefMD.Load(LoadBox.Text, modCtx);
 
             if (StringEnc.IsChecked == true)
             {
@@ -61,7 +68,6 @@ namespace MindLated
 
             if (IntConf.IsChecked == true)
             {
-                AddIntPhase.Execute(module);
                 AddIntPhase.Execute2(module);
                 ConsoleLog.AppendText($"{time} Processing Int Confusion{Environment.NewLine}");
             }
