@@ -37,6 +37,7 @@ namespace MindLated.Protection.String
         }
 
         public static List<string> Str = new List<string>();
+
         public static void Execute(ModuleDef module)
         {
             InjectClass(module);
@@ -59,7 +60,6 @@ namespace MindLated.Protection.String
                             instr.Insert(i + 2, Instruction.Create(OpCodes.Call, MainWindow.Init2));
                             instr.Insert(i + 3, Instruction.Create(OpCodes.Call, MainWindow.Init));
                             instr.RemoveAt(i);
-
                         }
                     }
                     method.Body.SimplifyBranches();
