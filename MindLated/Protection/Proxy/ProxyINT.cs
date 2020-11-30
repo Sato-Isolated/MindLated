@@ -23,7 +23,7 @@ namespace MindLated.Protection.Proxy
                         {
                             var methImplFlags = MethodImplAttributes.IL | MethodImplAttributes.Managed;
                             var methFlags = MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.ReuseSlot;
-                            var meth1 = new MethodDefUser($"ProxyMeth{(rand.Next(0, int.MaxValue))}",
+                            var meth1 = new MethodDefUser(Renamer.RenamerPhase.GenerateString(Renamer.RenamerPhase.RenameMode.Normal),
                                         MethodSig.CreateStatic(module.CorLibTypes.Int32),
                                         methImplFlags, methFlags);
                             module.GlobalType.Methods.Add(meth1);
@@ -38,7 +38,7 @@ namespace MindLated.Protection.Proxy
                         {
                             var methImplFlags = MethodImplAttributes.IL | MethodImplAttributes.Managed;
                             var methFlags = MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.ReuseSlot;
-                            var meth1 = new MethodDefUser($"ProxyMeth{(rand.Next(0, int.MaxValue))}",
+                            var meth1 = new MethodDefUser(Renamer.RenamerPhase.GenerateString(Renamer.RenamerPhase.RenameMode.Normal),
                                         MethodSig.CreateStatic(module.CorLibTypes.Double),
                                         methImplFlags, methFlags);
                             module.GlobalType.Methods.Add(meth1);
