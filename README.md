@@ -5,7 +5,7 @@ I add things when I feel like it. (i'm learning)
 
 work only for crack me (not sure at 100%) 
 
-if you want to help me by improving the obfuscator
+if you want to help me by improving the obfuscator you can check the project
 
 ![alt text](https://i.imgur.com/IUfJIPd.png)
 
