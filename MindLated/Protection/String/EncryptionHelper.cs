@@ -10,12 +10,12 @@ namespace MindLated.Protection.String
 {
     internal class EncryptionHelper
     {
-
         private const string PasswordHash = "p7K95451qB88sZ7J";
         private const string SaltKey = "2GM23j301t60Z96T";
         private const string VIKey = "IzTdhG6S8uwg141S";
 
         private static List<string> _list = new List<string>();
+
         public static void Generate()
         {
             using (var manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MindLated.zero"))

@@ -30,7 +30,7 @@ namespace MindLated
 
         public string DirectoryName = string.Empty;
 
-        public MainWindow() 
+        public MainWindow()
         {
             InitializeComponent();
             ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithAppMode;
@@ -39,6 +39,7 @@ namespace MindLated
 
         private void LaunchGitHubSite(object sender, RoutedEventArgs e)
         { Process.Start("https://github.com/Sato-Isolated/MindLated"); }
+
         public byte MaxValue = byte.MaxValue;
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -222,6 +223,9 @@ namespace MindLated
             }
         }
 
-        private void LoadBox_PreviewDragOver(object sender, DragEventArgs e) { e.Handled = true; }
+        private void LoadBox_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }
