@@ -5,9 +5,9 @@ I add things when I feel like it. (i'm learning)
 
 work only for crack me (not sure at 100%) 
 
-if you want to help me by improving the obfuscator you can check the project
+if you want to help me by improving the obfuscator you can check the project or u can donate if u want 
 
-Donate
+
 [ETH] : 0xFd12E59acea890f9B6A5cf252Bdf7D81237E74Ca
 
 [BTC] : 15G6geANqzPxbAmzGsKUp4w53fRpBXao6d
