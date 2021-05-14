@@ -45,8 +45,7 @@ namespace MindLated
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var time = DateTime.Now.ToString("hh:mm:ss");
-            ModuleContext modCtx = ModuleDef.CreateModuleContext();
-            var module = ModuleDefMD.Load(LoadBox.Text, modCtx);
+            var module = ModuleDefMD.Load(LoadBox.Text);
 
             if (StringEnc.IsChecked == true)
             {

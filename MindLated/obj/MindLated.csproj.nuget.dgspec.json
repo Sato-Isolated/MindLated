@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\MindLated.csproj": {}
+    "Z:\\Github\\MindLated\\MindLated\\MindLated.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\MindLated.csproj": {
+    "Z:\\Github\\MindLated\\MindLated\\MindLated.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\MindLated.csproj",
+        "projectUniqueName": "Z:\\Github\\MindLated\\MindLated\\MindLated.csproj",
         "projectName": "MindLated",
-        "projectPath": "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\MindLated.csproj",
+        "projectPath": "Z:\\Github\\MindLated\\MindLated\\MindLated.csproj",
         "packagesPath": "C:\\Users\\Edenl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\obj\\",
+        "outputPath": "Z:\\Github\\MindLated\\MindLated\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "configFilePaths": [
@@ -36,11 +36,11 @@
           "dependencies": {
             "ControlzEx": {
               "target": "Package",
-              "version": "[4.4.0, )"
+              "version": "[5.0.0, )"
             },
             "MahApps.Metro": {
               "target": "Package",
-              "version": "[2.4.3, )"
+              "version": "[2.4.5, )"
             },
             "MahApps.Metro.IconPacks.Modern": {
               "target": "Package",
@@ -48,7 +48,7 @@
             },
             "Microsoft.Xaml.Behaviors.Wpf": {
               "target": "Package",
-              "version": "[1.1.19, )"
+              "version": "[1.1.31, )"
             },
             "dnlib": {
               "target": "Package",

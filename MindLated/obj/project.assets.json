@@ -2,10 +2,10 @@
   "version": 3,
   "targets": {
     ".NETFramework,Version=v4.8": {
-      "ControlzEx/4.4.0": {
+      "ControlzEx/5.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Xaml.Behaviors.Wpf": "1.1.19"
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.31"
         },
         "frameworkAssemblies": [
           "System.Web",
@@ -27,7 +27,7 @@
           "lib/net45/dnlib.dll": {}
         }
       },
-      "MahApps.Metro/2.4.3": {
+      "MahApps.Metro/2.4.5": {
         "type": "package",
         "dependencies": {
           "ControlzEx": "4.4.0"
@@ -59,7 +59,7 @@
           "lib/net47/MahApps.Metro.IconPacks.Modern.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Wpf/1.1.19": {
+      "Microsoft.Xaml.Behaviors.Wpf/1.1.31": {
         "type": "package",
         "frameworkAssemblies": [
           "PresentationCore",
@@ -79,10 +79,10 @@
       }
     },
     ".NETFramework,Version=v4.8/win": {
-      "ControlzEx/4.4.0": {
+      "ControlzEx/5.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Xaml.Behaviors.Wpf": "1.1.19"
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.31"
         },
         "frameworkAssemblies": [
           "System.Web",
@@ -104,7 +104,7 @@
           "lib/net45/dnlib.dll": {}
         }
       },
-      "MahApps.Metro/2.4.3": {
+      "MahApps.Metro/2.4.5": {
         "type": "package",
         "dependencies": {
           "ControlzEx": "4.4.0"
@@ -136,7 +136,7 @@
           "lib/net47/MahApps.Metro.IconPacks.Modern.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Wpf/1.1.19": {
+      "Microsoft.Xaml.Behaviors.Wpf/1.1.31": {
         "type": "package",
         "frameworkAssemblies": [
           "PresentationCore",
@@ -156,10 +156,10 @@
       }
     },
     ".NETFramework,Version=v4.8/win-x64": {
-      "ControlzEx/4.4.0": {
+      "ControlzEx/5.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Xaml.Behaviors.Wpf": "1.1.19"
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.31"
         },
         "frameworkAssemblies": [
           "System.Web",
@@ -181,7 +181,7 @@
           "lib/net45/dnlib.dll": {}
         }
       },
-      "MahApps.Metro/2.4.3": {
+      "MahApps.Metro/2.4.5": {
         "type": "package",
         "dependencies": {
           "ControlzEx": "4.4.0"
@@ -213,7 +213,7 @@
           "lib/net47/MahApps.Metro.IconPacks.Modern.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Wpf/1.1.19": {
+      "Microsoft.Xaml.Behaviors.Wpf/1.1.31": {
         "type": "package",
         "frameworkAssemblies": [
           "PresentationCore",
@@ -233,10 +233,10 @@
       }
     },
     ".NETFramework,Version=v4.8/win-x86": {
-      "ControlzEx/4.4.0": {
+      "ControlzEx/5.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Xaml.Behaviors.Wpf": "1.1.19"
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.31"
         },
         "frameworkAssemblies": [
           "System.Web",
@@ -258,7 +258,7 @@
           "lib/net45/dnlib.dll": {}
         }
       },
-      "MahApps.Metro/2.4.3": {
+      "MahApps.Metro/2.4.5": {
         "type": "package",
         "dependencies": {
           "ControlzEx": "4.4.0"
@@ -290,7 +290,7 @@
           "lib/net47/MahApps.Metro.IconPacks.Modern.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Wpf/1.1.19": {
+      "Microsoft.Xaml.Behaviors.Wpf/1.1.31": {
         "type": "package",
         "frameworkAssemblies": [
           "PresentationCore",
@@ -311,24 +311,24 @@
     }
   },
   "libraries": {
-    "ControlzEx/4.4.0": {
-      "sha512": "pZ5z4hYWwE4R13UMCVs6vII//nL7hz+Nwn4oJlnsZJRGqJNy6Z9KnJiTZfly6lKFu0pMc1aWBZpx+VqFTQKP1Q==",
+    "ControlzEx/5.0.0": {
+      "sha512": "7lNnS3OSrnWylwZTdu5/edOq3ZqtJsW/QP6Itj8Idt7TYG5MHD38d7ejUf3jLehnsOfuUHaBdxnkziJQuUmDzg==",
       "type": "package",
-      "path": "controlzex/4.4.0",
+      "path": "controlzex/5.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "controlzex.4.4.0.nupkg.sha512",
+        "controlzex.5.0.0.nupkg.sha512",
         "controlzex.nuspec",
-        "lib/net45/ControlzEx.dll",
-        "lib/net45/ControlzEx.pdb",
-        "lib/net45/ControlzEx.xml",
+        "lib/net452/ControlzEx.dll",
+        "lib/net452/ControlzEx.pdb",
+        "lib/net452/ControlzEx.xml",
         "lib/net462/ControlzEx.dll",
         "lib/net462/ControlzEx.pdb",
         "lib/net462/ControlzEx.xml",
-        "lib/netcoreapp3.0/ControlzEx.dll",
-        "lib/netcoreapp3.0/ControlzEx.pdb",
-        "lib/netcoreapp3.0/ControlzEx.xml",
+        "lib/net5.0-windows7.0/ControlzEx.dll",
+        "lib/net5.0-windows7.0/ControlzEx.pdb",
+        "lib/net5.0-windows7.0/ControlzEx.xml",
         "lib/netcoreapp3.1/ControlzEx.dll",
         "lib/netcoreapp3.1/ControlzEx.pdb",
         "lib/netcoreapp3.1/ControlzEx.xml",
@@ -353,10 +353,10 @@
         "lib/netstandard2.0/dnlib.xml"
       ]
     },
-    "MahApps.Metro/2.4.3": {
-      "sha512": "PZ4KcTZt18nWZmdjjYTZl/Lb8Larj7ObTsJSdMcvufp2hPzHp1SvLKK5cd+HYalXkuEgchJJ1u6yOF2ei117lQ==",
+    "MahApps.Metro/2.4.5": {
+      "sha512": "fUmU2yQgHqUTDDZT494+WcMBrg6G/960et7eqIvKGRRwH0I/d6cA6AuvRIJEQezxCFewweRbIkFvIOS62tjqug==",
       "type": "package",
-      "path": "mahapps.metro/2.4.3",
+      "path": "mahapps.metro/2.4.5",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -381,7 +381,7 @@
         "lib/netcoreapp3.1/MahApps.Metro.pdb",
         "lib/netcoreapp3.1/MahApps.Metro.xml",
         "lib/netcoreapp3.1/de/MahApps.Metro.resources.dll",
-        "mahapps.metro.2.4.3.nupkg.sha512",
+        "mahapps.metro.2.4.5.nupkg.sha512",
         "mahapps.metro.logo.png",
         "mahapps.metro.nuspec",
         "tools/VisualStudioToolsManifest.xml"
@@ -438,10 +438,10 @@
         "mahapps.metro.iconpacks.modern.nuspec"
       ]
     },
-    "Microsoft.Xaml.Behaviors.Wpf/1.1.19": {
-      "sha512": "5sPWkbqImc2t1aQwIfJcKsUo7tOg1Tr8+6xVzZJB56Nzt4u9NlpcLofgdX/aRYpPKdWDA3U23Akw1KQzU5e82g==",
+    "Microsoft.Xaml.Behaviors.Wpf/1.1.31": {
+      "sha512": "LZpuf82ACZWldmfMuv3CTUMDh3o0xo0uHUaybR5HgqVLDBJJ9RZLykplQ/bTJd0/VDt3EhD4iDgUgbdIUAM+Kg==",
       "type": "package",
-      "path": "microsoft.xaml.behaviors.wpf/1.1.19",
+      "path": "microsoft.xaml.behaviors.wpf/1.1.31",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -450,11 +450,15 @@
         "lib/net45/Microsoft.Xaml.Behaviors.dll",
         "lib/net45/Microsoft.Xaml.Behaviors.pdb",
         "lib/net45/Microsoft.Xaml.Behaviors.xml",
-        "lib/netcoreapp3.0/Design/Microsoft.Xaml.Behaviors.DesignTools.dll",
-        "lib/netcoreapp3.0/Microsoft.Xaml.Behaviors.dll",
-        "lib/netcoreapp3.0/Microsoft.Xaml.Behaviors.pdb",
-        "lib/netcoreapp3.0/Microsoft.Xaml.Behaviors.xml",
-        "microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512",
+        "lib/net5.0-windows7.0/Design/Microsoft.Xaml.Behaviors.DesignTools.dll",
+        "lib/net5.0-windows7.0/Microsoft.Xaml.Behaviors.dll",
+        "lib/net5.0-windows7.0/Microsoft.Xaml.Behaviors.pdb",
+        "lib/net5.0-windows7.0/Microsoft.Xaml.Behaviors.xml",
+        "lib/netcoreapp3.1/Design/Microsoft.Xaml.Behaviors.DesignTools.dll",
+        "lib/netcoreapp3.1/Microsoft.Xaml.Behaviors.dll",
+        "lib/netcoreapp3.1/Microsoft.Xaml.Behaviors.pdb",
+        "lib/netcoreapp3.1/Microsoft.Xaml.Behaviors.xml",
+        "microsoft.xaml.behaviors.wpf.1.1.31.nupkg.sha512",
         "microsoft.xaml.behaviors.wpf.nuspec",
         "tools/Install.ps1"
       ]
@@ -462,10 +466,10 @@
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.8": [
-      "ControlzEx >= 4.4.0",
-      "MahApps.Metro >= 2.4.3",
+      "ControlzEx >= 5.0.0",
+      "MahApps.Metro >= 2.4.5",
       "MahApps.Metro.IconPacks.Modern >= 4.8.0",
-      "Microsoft.Xaml.Behaviors.Wpf >= 1.1.19",
+      "Microsoft.Xaml.Behaviors.Wpf >= 1.1.31",
       "dnlib >= 3.3.2"
     ]
   },
@@ -475,11 +479,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\MindLated.csproj",
+      "projectUniqueName": "Z:\\Github\\MindLated\\MindLated\\MindLated.csproj",
       "projectName": "MindLated",
-      "projectPath": "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\MindLated.csproj",
+      "projectPath": "Z:\\Github\\MindLated\\MindLated\\MindLated.csproj",
       "packagesPath": "C:\\Users\\Edenl\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Edenl\\Documents\\GitHub\\MindLated\\MindLated\\obj\\",
+      "outputPath": "Z:\\Github\\MindLated\\MindLated\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
@@ -504,11 +508,11 @@
         "dependencies": {
           "ControlzEx": {
             "target": "Package",
-            "version": "[4.4.0, )"
+            "version": "[5.0.0, )"
           },
           "MahApps.Metro": {
             "target": "Package",
-            "version": "[2.4.3, )"
+            "version": "[2.4.5, )"
           },
           "MahApps.Metro.IconPacks.Modern": {
             "target": "Package",
@@ -516,7 +520,7 @@
           },
           "Microsoft.Xaml.Behaviors.Wpf": {
             "target": "Package",
-            "version": "[1.1.19, )"
+            "version": "[1.1.31, )"
           },
           "dnlib": {
             "target": "Package",
