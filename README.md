@@ -3,7 +3,7 @@
 
 I add things when I feel like it. (i'm learning)
 
-work only for crack me (not sure at 100%) 
+work only for crack me (not sure at 100% completely unstable and not optimized) 
 
 if you want to help me by improving the obfuscator you can check the project
 
