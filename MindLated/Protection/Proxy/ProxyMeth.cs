@@ -47,7 +47,7 @@ namespace MindLated.Protection.Proxy
                 type.Add(md.CorLibTypes.Int32);
                 var methImplFlags = MethodImplAttributes.IL | MethodImplAttributes.Managed;
                 var methFlags = MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.ReuseSlot;
-                MethodDef meth = new MethodDefUser($"ProxyMeth{(rand.Next(0, int.MaxValue))}", MethodSig.CreateStatic(original.MethodSig.RetType, type.ToArray()), methImplFlags, methFlags)
+                MethodDef meth = new MethodDefUser($"ProxyMeth{rand.Next(0, int.MaxValue)}", MethodSig.CreateStatic(original.MethodSig.RetType, type.ToArray()), methImplFlags, methFlags)
                 {
                     Body = new CilBody()
                 };
@@ -90,7 +90,7 @@ namespace MindLated.Protection.Proxy
         public static IEnumerable<T> Randomize<T>(IEnumerable<T> source)
         {
             var rnd = new Random();
-            return source.OrderBy<T, int>((item) => rnd.Next());
+            return source.OrderBy((item) => rnd.Next());
         }
 
         public static void Execute(ModuleDef module)
@@ -101,7 +101,7 @@ namespace MindLated.Protection.Proxy
                 if (type.IsGlobalModuleType) continue;
                 foreach (var method in type.Methods.ToArray())
                 {
-                    if (!method.HasBody || method.Name.Contains("Proxy")) continue;
+                    if (!method.HasBody || method.Name.Contains("ProxyMeth")) continue;
                     var instr = method.Body.Instructions;
                     for (var i = 0; i < instr.Count; i++)
                     {
@@ -135,22 +135,22 @@ namespace MindLated.Protection.Proxy
 
                                 method.Body.Instructions.Insert(i, Instruction.CreateLdcI4(random));
 
-                                /*        MethodSig originalsignature = original.MethodSig;
-                                            var methImplFlags = MethodImplAttributes.IL | MethodImplAttributes.Managed;
-                                            var methFlags = MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.ReuseSlot;
-                                            var meth1 = new MethodDefUser("ProxyMeth" + rand.Next(0, int.MaxValue).ToString(),
-                                                       originalsignature,
-                                                        methImplFlags, methFlags);
-                                            module.GlobalType.Methods.Add(meth1);
-                                            meth1.Body = new CilBody();
-                                            for (int ia = 0; ia <= originalsignature.Params.Count - 1; ia++)
-                                            {
-                                                meth1.Body.Instructions.Add(Instruction.Create(OpCodes.Ldarg, meth1.Parameters[ia]));
-                                            }
-                                            meth1.Body.Instructions.Add(Instruction.Create(OpCodes.Call, original));
-                                            meth1.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
-                                            instr[i].OpCode = OpCodes.Call;
-                                            instr[i].Operand = meth1;*/
+                                /*   MethodSig originalsignature = original.MethodSig;
+                                   var methImplFlags = MethodImplAttributes.IL | MethodImplAttributes.Managed;
+                                   var methFlags = MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.ReuseSlot;
+                                   var meth1 = new MethodDefUser("ProxyMeth" + rand.Next(0, int.MaxValue).ToString(),
+                                              originalsignature,
+                                               methImplFlags, methFlags);
+                                   module.GlobalType.Methods.Add(meth1);
+                                   meth1.Body = new CilBody();
+                                   for (int ia = 0; ia <= originalsignature.Params.Count - 1; ia++)
+                                   {
+                                       meth1.Body.Instructions.Add(Instruction.Create(OpCodes.Ldarg, meth1.Parameters[ia]));
+                                   }
+                                   meth1.Body.Instructions.Add(Instruction.Create(OpCodes.Call, original));
+                                   meth1.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
+                                   instr[i].OpCode = OpCodes.Call;
+                                   instr[i].Operand = meth1;*/
                             }
                         }
                         catch

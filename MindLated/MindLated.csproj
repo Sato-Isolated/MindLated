@@ -78,6 +78,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Protection\Anti\Antimanything.cs" />
+    <Compile Include="Protection\Anti\Runtime\SelfDeleteClass.cs" />
+    <Compile Include="Protection\Other\watermark.cs" />
     <Compile Include="Protection\Proxy\ProxyINT.cs" />
     <Compile Include="Protection\Proxy\ProxyMeth.cs" />
     <Compile Include="Protection\Proxy\ProxyString.cs" />
@@ -174,9 +177,7 @@
   <ItemGroup>
     <Resource Include="12450341.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Protection\Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>

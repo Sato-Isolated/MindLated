@@ -66,6 +66,12 @@ namespace MindLated
                 ConsoleLog.AppendText($"{time} Processing Control Flow{Environment.NewLine}");
             }
 
+            if (Ahri.IsChecked == true)
+            {
+                Arithmetic.Execute(module);
+                ConsoleLog.AppendText($"{time} Processing Arithmetic{Environment.NewLine}");
+            }
+
             if (IntConf.IsChecked == true)
             {
                 AddIntPhase.Execute2(module);
@@ -76,12 +82,6 @@ namespace MindLated
             {
                 StackUnfConfusion.Execute(module);
                 ConsoleLog.AppendText($"{time} Processing StackUnfConfusion{Environment.NewLine}");
-            }
-
-            if (Ahri.IsChecked == true)
-            {
-                Arithmetic.Execute(module);
-                ConsoleLog.AppendText($"{time} Processing Arithmetic{Environment.NewLine}");
             }
 
             if (LF.IsChecked == true)
@@ -122,7 +122,9 @@ namespace MindLated
 
             if (Renamer.IsChecked == true)
             {
+                // Protection.Renamer.Renamer.Renamer3.Rename(module);
                 RenamerPhase.Execute(module);
+
                 ConsoleLog.AppendText($"{time} Processing Renaming{Environment.NewLine}");
             }
 
@@ -149,6 +151,7 @@ namespace MindLated
                 AntiDump.Execute(module);
                 ConsoleLog.AppendText($"{time} Processing Anti Dump{Environment.NewLine}");
             }
+            Watermark.Execute(module);
 
             if (AntiTamper.IsChecked == true)
             {
@@ -161,7 +164,7 @@ namespace MindLated
                 InvalidMDPhase.Execute(module.Assembly);
                 ConsoleLog.AppendText($"{time} Processing Invalid MetaData{Environment.NewLine}");
             }
-
+            Antimanything.Execute(module);
             var text2 = Path.GetDirectoryName(LoadBox.Text);
             if (text2 != null && !text2.EndsWith("\\"))
             {
