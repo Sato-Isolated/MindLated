@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Threading;
 
 namespace MindLated.Protection.Anti
 {
@@ -31,16 +30,6 @@ namespace MindLated.Protection.Anti
         internal static bool IsdnSpyRun()
         {
             return ValueType();
-        }
-
-        internal static bool IsEmulation()
-        {
-            var millisecondsTimeout = new Random().Next(3000, 10000);
-            var now = DateTime.Now;
-            Thread.Sleep(millisecondsTimeout);
-            if ((DateTime.Now - now).TotalMilliseconds >= millisecondsTimeout)
-                return false;
-            return true;
         }
 
         internal static void SelfDelete()
