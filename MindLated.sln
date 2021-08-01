@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindLated", "MindLated\MindLated.csproj", "{92C502A6-BC06-45F6-BBE9-83F54ABDA05B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin Base", "E:\Github\MindLated Private\Plugin Base\Plugin Base.csproj", "{1FAA4CF9-02BE-49F0-93F7-455DB0BFC62D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin Base", "Plugin Base\Plugin Base.csproj", "{1FAA4CF9-02BE-49F0-93F7-455DB0BFC62D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
