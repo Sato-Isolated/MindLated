@@ -68,7 +68,7 @@ namespace MindLated.Protection.CtrlFlow
                 method.Body.Instructions.Add(lastBlock);
         }
 
-        public static Random rnd = new Random();
+        public static Random rnd = new();
 
         public static List<Block> Randomize(List<Block> input)
         {

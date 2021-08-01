@@ -14,17 +14,18 @@ namespace MindLated.Protection.String
     {
         private const string PasswordHash = "p7K95451qB88sZ7J";
         private const string SaltKey = "2GM23j301t60Z96T";
-        private const string VIKey = "IzTdhG6S8uwg141S";
+        private const string ViKey = "IzTdhG6S8uwg141S";
 
-        public static void InjectClass(ModuleDef module)
+        private static void InjectClass(ModuleDef module)
         {
             var typeModule = ModuleDefMD.Load(typeof(EncryptionHelper).Module);
             var typeDef = typeModule.ResolveTypeDef(MDToken.ToRID(typeof(EncryptionHelper).MetadataToken));
             var members = InjectHelper.Inject(typeDef, module.GlobalType, module);
-            MainWindow.Init = (MethodDef)members.Single(method => method.Name == "Decrypt");
+            var dnlibDefs = members as IDnlibDef[] ?? members.ToArray();
+            MainWindow.Init = (MethodDef)dnlibDefs.Single(method => method.Name == "Decrypt");
             var cctor = module.GlobalType.FindStaticConstructor();
-            MainWindow.Init2 = (MethodDef)members.Single(method => method.Name == "Search");
-            var init = (MethodDef)members.Single(method => method.Name == "Generate");
+            MainWindow.Init2 = (MethodDef)dnlibDefs.Single(method => method.Name == "Search");
+            var init = (MethodDef)dnlibDefs.Single(method => method.Name == "Generate");
             cctor.Body.Instructions.Insert(cctor.Body.Instructions.Count - 1, Instruction.Create(OpCodes.Call, init));
             foreach (var md in module.GlobalType.Methods)
             {
@@ -36,7 +37,7 @@ namespace MindLated.Protection.String
             }
         }
 
-        public static List<string> Str = new List<string>();
+        private static readonly List<string> Str = new();
 
         public static void Execute(ModuleDef module)
         {
@@ -71,7 +72,7 @@ namespace MindLated.Protection.String
             File.Delete($"{Path.GetTempPath()}List.txt");
         }
 
-        public static byte[] Hush(byte[] text)
+        private static byte[] Hush(byte[] text)
         {
             var key = new Rfc2898DeriveBytes(PasswordHash, Encoding.ASCII.GetBytes(SaltKey)).GetBytes(256 / 8);
             var xor = new byte[text.Length];
@@ -82,24 +83,22 @@ namespace MindLated.Protection.String
             return xor;
         }
 
-        public static string Encrypt(string plainText)
+        private static string Encrypt(string plainText)
         {
             var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
             var keyBytes = new Rfc2898DeriveBytes(PasswordHash, Encoding.ASCII.GetBytes(SaltKey)).GetBytes(256 / 8);
             var symmetricKey = new RijndaelManaged { Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7 };
-            var encryptor = symmetricKey.CreateEncryptor(keyBytes, Encoding.ASCII.GetBytes(VIKey));
+            var encryptor = symmetricKey.CreateEncryptor(keyBytes, Encoding.ASCII.GetBytes(ViKey));
             byte[] cipherTextBytes;
-            using (var memoryStream = new MemoryStream())
+            using var memoryStream = new MemoryStream();
+            using (var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
             {
-                using (var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
-                {
-                    cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
-                    cryptoStream.FlushFinalBlock();
-                    cipherTextBytes = memoryStream.ToArray();
-                    cryptoStream.Close();
-                }
-                memoryStream.Close();
+                cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
+                cryptoStream.FlushFinalBlock();
+                cipherTextBytes = memoryStream.ToArray();
+                cryptoStream.Close();
             }
+            memoryStream.Close();
             return Convert.ToBase64String(cipherTextBytes);
         }
     }

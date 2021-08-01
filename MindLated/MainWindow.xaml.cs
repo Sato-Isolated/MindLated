@@ -13,8 +13,11 @@ using MindLated.Protection.Renamer;
 using MindLated.Protection.String;
 using MindLated.Protection.StringOnline;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Windows;
 using Brushes = System.Windows.Media.Brushes;
 
@@ -28,7 +31,7 @@ namespace MindLated
         public static MethodDef Init;
         public static MethodDef Init2;
 
-        public string DirectoryName = string.Empty;
+        private string _directoryName = string.Empty;
 
         public MainWindow()
         {
@@ -46,6 +49,18 @@ namespace MindLated
         {
             var time = DateTime.Now.ToString("hh:mm:ss");
             var module = ModuleDefMD.Load(LoadBox.Text);
+            LoadPlugin();
+            var assemblyResolver = new AssemblyResolver();
+            var moduleContext = new ModuleContext(assemblyResolver);
+            assemblyResolver.DefaultModuleContext = moduleContext;
+            assemblyResolver.EnableTypeDefCache = true;
+            assemblyResolver.DefaultModuleContext = new ModuleContext(assemblyResolver);
+            assemblyResolver.PostSearchPaths.Insert(0, LoadBox.Text);
+            foreach (var assemblyRef in module.GetAssemblyRefs())
+            {
+                assemblyResolver.ResolveThrow(assemblyRef, module);
+                ConsoleLog.AppendText($@"Resolved {assemblyRef.Name}{Environment.NewLine}");
+            }
 
             if (StringEnc.IsChecked == true)
             {
@@ -110,7 +125,7 @@ namespace MindLated
 
             if (ProxyConstants.IsChecked == true)
             {
-                ProxyINT.Execute(module);
+                ProxyInt.Execute(module);
                 ConsoleLog.AppendText($"{time} Processing Proxy Constants{Environment.NewLine}");
             }
 
@@ -142,9 +157,15 @@ namespace MindLated
 
             if (AntiDebug.IsChecked == true)
             {
-                Anti_Debug.Execute(module);
+                Protection.Anti.AntiDebug.Execute(module);
                 ConsoleLog.AppendText($"{time} Processing Anti Debug{Environment.NewLine}");
             }
+
+            // if (ListPlugin.Count != 0)
+            // {
+            //     foreach (var meth in ListPlugin)
+            //         meth.Invoke(null, new object[] { module });
+            // }
 
             if (Anti_Dump.IsChecked == true)
             {
@@ -185,6 +206,23 @@ namespace MindLated
             }
         }
 
+        private static readonly List<MethodInfo> ListPlugin = new();
+
+        private static void LoadPlugin()
+        {
+            var allAssemblies = new List<Assembly>();
+            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            foreach (var dll in Directory.GetFiles(path ?? throw new InvalidOperationException(), "*.dll"))
+            {
+                if (dll.Contains("Plugin"))
+                    allAssemblies.Add(Assembly.LoadFile(dll));
+            }
+            if (allAssemblies.Count != 0)
+                foreach (var meth in from asm in allAssemblies from type in asm.GetTypes() where type.Name == "MindPlug" select type.GetMethod("Execute"))
+                    ListPlugin.Add(meth);
+        }
+
         private void LoadBox_DragEnter(object sender, DragEventArgs e)
         { e.Effects = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None; }
 
@@ -211,12 +249,12 @@ namespace MindLated
                 var num2 = text.LastIndexOf("\\", StringComparison.Ordinal);
                 if (num2 != -1)
                 {
-                    DirectoryName = text.Remove(num2, text.Length - num2);
+                    _directoryName = text.Remove(num2, text.Length - num2);
                 }
 
-                if (DirectoryName.Length == 2)
+                if (_directoryName.Length == 2)
                 {
-                    DirectoryName += "\\";
+                    _directoryName += "\\";
                 }
             }
             catch

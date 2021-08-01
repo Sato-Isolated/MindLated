@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
-namespace MindLated.Protection.Anti
+namespace MindLated.Protection.Anti.Runtime
 {
     internal class SelfDeleteClass
     {
@@ -17,28 +17,28 @@ namespace MindLated.Protection.Anti
                 SelfDelete();
         }
 
-        internal static bool IsSandboxie()
+        private static bool IsSandboxie()
         {
             return IsDetected();
         }
 
-        internal static bool IsDebugger()
+        private static bool IsDebugger()
         {
             return Run();
         }
 
-        internal static bool IsdnSpyRun()
+        private static bool IsdnSpyRun()
         {
             return ValueType();
         }
 
-        internal static void SelfDelete()
+        private static void SelfDelete()
         {
             Process.Start(new ProcessStartInfo("cmd.exe", "/C ping 1.1.1.1 -n 1 -w 3000 > Nul & Del \"" + Assembly.GetExecutingAssembly().Location + "\"") { WindowStyle = ProcessWindowStyle.Hidden })?.Dispose();
             Process.GetCurrentProcess().Kill();
         }
 
-        internal static bool ValueType()
+        private static bool ValueType()
         {
             return File.Exists(Environment.ExpandEnvironmentVariables("%appdata%") + "\\dnSpy\\dnSpy.xml");
         }
@@ -51,12 +51,12 @@ namespace MindLated.Protection.Anti
             return IntPtr.Zero;
         }
 
-        internal static bool IsDetected()
+        private static bool IsDetected()
         {
             return GetModuleHandle("SbieDll.dll") != IntPtr.Zero;
         }
 
-        internal static bool Run()
+        private static bool Run()
         {
             var returnvalue = false;
             if (Debugger.IsAttached || Debugger.IsLogging())
@@ -65,7 +65,7 @@ namespace MindLated.Protection.Anti
             }
             else
             {
-                var strArray = new string[41] { "codecracker", "x32dbg", "x64dbg", "ollydbg", "ida", "charles", "dnspy", "simpleassembly", "peek", "httpanalyzer", "httpdebug", "fiddler", "wireshark", "dbx", "mdbg", "gdb", "windbg", "dbgclr", "kdb", "kgdb", "mdb", "processhacker", "scylla_x86", "scylla_x64", "scylla", "idau64", "idau", "idaq", "idaq64", "idaw", "idaw64", "idag", "idag64", "ida64", "ida", "ImportREC", "IMMUNITYDEBUGGER", "MegaDumper", "CodeBrowser", "reshacker", "cheat engine" };
+                var strArray = new[] { "codecracker", "x32dbg", "x64dbg", "ollydbg", "ida", "charles", "dnspy", "simpleassembly", "peek", "httpanalyzer", "httpdebug", "fiddler", "wireshark", "dbx", "mdbg", "gdb", "windbg", "dbgclr", "kdb", "kgdb", "mdb", "processhacker", "scylla_x86", "scylla_x64", "scylla", "idau64", "idau", "idaq", "idaq64", "idaw", "idaw64", "idag", "idag64", "ida64", "ida", "ImportREC", "IMMUNITYDEBUGGER", "MegaDumper", "CodeBrowser", "reshacker", "cheat engine" };
                 foreach (var process in Process.GetProcesses())
                     if (process != Process.GetCurrentProcess())
                         for (var index = 0; index < strArray.Length; ++index)

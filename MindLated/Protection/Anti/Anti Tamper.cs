@@ -21,9 +21,9 @@ namespace MindLated.Protection.Anti
 
         public static void Execute(ModuleDef module)
         {
-            var typeModule = ModuleDefMD.Load(typeof(EOFAntiTamper).Module);
+            var typeModule = ModuleDefMD.Load(typeof(EofAntiTamper).Module);
             var cctor = module.GlobalType.FindOrCreateStaticConstructor();
-            var typeDef = typeModule.ResolveTypeDef(MDToken.ToRID(typeof(EOFAntiTamper).MetadataToken));
+            var typeDef = typeModule.ResolveTypeDef(MDToken.ToRID(typeof(EofAntiTamper).MetadataToken));
             var members = InjectHelper.Inject(typeDef, module.GlobalType, module);
             var init = (MethodDef)members.Single(method => method.Name == "Initializer");
             cctor.Body.Instructions.Insert(0, Instruction.Create(OpCodes.Call, init));

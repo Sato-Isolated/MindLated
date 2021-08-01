@@ -3,7 +3,7 @@ using System;
 
 namespace MindLated.Protection.Arithmetic.Utils
 {
-    public class ArithmeticUtils
+    public static class ArithmeticUtils
     {
         public static bool CheckArithmetic(Instruction instruction)
         {
@@ -14,62 +14,36 @@ namespace MindLated.Protection.Arithmetic.Utils
             return instruction.GetLdcI4Value() != 0;
         }
 
-        public static double GetY(double x) => (x / 2);
+        public static double GetY(double x) => x / 2;
 
         public static System.Reflection.MethodInfo GetMethod(ArithmeticTypes mathType)
         {
-            switch (mathType)
+            return mathType switch
             {
-                case ArithmeticTypes.Abs:
-                    return ((typeof(Math).GetMethod("Abs", new Type[] { typeof(double) })));
-
-                case ArithmeticTypes.Round:
-                    return ((typeof(Math).GetMethod("Round", new Type[] { typeof(double) })));
-
-                case ArithmeticTypes.Sin:
-                    return ((typeof(Math).GetMethod("Sin", new Type[] { typeof(double) })));
-
-                case ArithmeticTypes.Cos:
-                    return ((typeof(Math).GetMethod("Cos", new Type[] { typeof(double) })));
-
-                case ArithmeticTypes.Log:
-                    return ((typeof(Math).GetMethod("Log", new Type[] { typeof(double) })));
-
-                case ArithmeticTypes.Log10:
-                    return ((typeof(Math).GetMethod("Log10", new Type[] { typeof(double) })));
-
-                case ArithmeticTypes.Sqrt:
-                    return ((typeof(Math).GetMethod("Sqrt", new Type[] { typeof(double) })));
-
-                case ArithmeticTypes.Ceiling:
-                    return ((typeof(Math).GetMethod("Ceiling", new Type[] { typeof(double) })));
-
-                case ArithmeticTypes.Floor:
-                    return ((typeof(Math).GetMethod("Floor", new Type[] { typeof(double) })));
-
-                case ArithmeticTypes.Tan:
-                    return ((typeof(Math).GetMethod("Tan", new Type[] { typeof(double) })));
-
-                case ArithmeticTypes.Tanh:
-                    return ((typeof(Math).GetMethod("Tanh", new Type[] { typeof(double) })));
-
-                case ArithmeticTypes.Truncate:
-                    return ((typeof(Math).GetMethod("Truncate", new Type[] { typeof(double) })));
-            }
-            return null;
+                ArithmeticTypes.Abs => typeof(Math).GetMethod("Abs", new[] { typeof(double) }),
+                ArithmeticTypes.Round => typeof(Math).GetMethod("Round", new[] { typeof(double) }),
+                ArithmeticTypes.Sin => typeof(Math).GetMethod("Sin", new[] { typeof(double) }),
+                ArithmeticTypes.Cos => typeof(Math).GetMethod("Cos", new[] { typeof(double) }),
+                ArithmeticTypes.Log => typeof(Math).GetMethod("Log", new[] { typeof(double) }),
+                ArithmeticTypes.Log10 => typeof(Math).GetMethod("Log10", new[] { typeof(double) }),
+                ArithmeticTypes.Sqrt => typeof(Math).GetMethod("Sqrt", new[] { typeof(double) }),
+                ArithmeticTypes.Ceiling => typeof(Math).GetMethod("Ceiling", new[] { typeof(double) }),
+                ArithmeticTypes.Floor => typeof(Math).GetMethod("Floor", new[] { typeof(double) }),
+                ArithmeticTypes.Tan => typeof(Math).GetMethod("Tan", new[] { typeof(double) }),
+                ArithmeticTypes.Tanh => typeof(Math).GetMethod("Tanh", new[] { typeof(double) }),
+                ArithmeticTypes.Truncate => typeof(Math).GetMethod("Truncate", new[] { typeof(double) }),
+                _ => null
+            };
         }
 
         public static OpCode GetOpCode(ArithmeticTypes arithmetic)
         {
-            switch (arithmetic)
+            return arithmetic switch
             {
-                case ArithmeticTypes.Add:
-                    return OpCodes.Add;
-
-                case ArithmeticTypes.Sub:
-                    return OpCodes.Sub;
-            }
-            return null;
+                ArithmeticTypes.Add => OpCodes.Add,
+                ArithmeticTypes.Sub => OpCodes.Sub,
+                _ => null
+            };
         }
     }
 }

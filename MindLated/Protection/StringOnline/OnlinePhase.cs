@@ -31,7 +31,7 @@ namespace MindLated.Protection.StringOnline
             }
         }
 
-        public static string ConvertStringToHex(string asciiString)
+        private static string ConvertStringToHex(string asciiString)
         {
             var hex = string.Empty;
             foreach (var c in asciiString)
@@ -42,7 +42,7 @@ namespace MindLated.Protection.StringOnline
             return hex;
         }
 
-        public static void InjectClass1(ModuleDef module)
+        private static void InjectClass1(ModuleDef module)
         {
             var typeModule = ModuleDefMD.Load(typeof(OnlineString).Module);
             var typeDef = typeModule.ResolveTypeDef(MDToken.ToRID(typeof(OnlineString).MetadataToken));

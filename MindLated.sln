@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindLated", "MindLated\MindLated.csproj", "{92C502A6-BC06-45F6-BBE9-83F54ABDA05B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin Base", "E:\Github\MindLated Private\Plugin Base\Plugin Base.csproj", "{1FAA4CF9-02BE-49F0-93F7-455DB0BFC62D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,18 @@ Global
 		{92C502A6-BC06-45F6-BBE9-83F54ABDA05B}.Release|x64.Build.0 = Release|Any CPU
 		{92C502A6-BC06-45F6-BBE9-83F54ABDA05B}.Release|x86.ActiveCfg = Release|Any CPU
 		{92C502A6-BC06-45F6-BBE9-83F54ABDA05B}.Release|x86.Build.0 = Release|Any CPU
+		{1FAA4CF9-02BE-49F0-93F7-455DB0BFC62D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FAA4CF9-02BE-49F0-93F7-455DB0BFC62D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FAA4CF9-02BE-49F0-93F7-455DB0BFC62D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1FAA4CF9-02BE-49F0-93F7-455DB0BFC62D}.Debug|x64.Build.0 = Debug|Any CPU
+		{1FAA4CF9-02BE-49F0-93F7-455DB0BFC62D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1FAA4CF9-02BE-49F0-93F7-455DB0BFC62D}.Debug|x86.Build.0 = Debug|Any CPU
+		{1FAA4CF9-02BE-49F0-93F7-455DB0BFC62D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FAA4CF9-02BE-49F0-93F7-455DB0BFC62D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FAA4CF9-02BE-49F0-93F7-455DB0BFC62D}.Release|x64.ActiveCfg = Release|Any CPU
+		{1FAA4CF9-02BE-49F0-93F7-455DB0BFC62D}.Release|x64.Build.0 = Release|Any CPU
+		{1FAA4CF9-02BE-49F0-93F7-455DB0BFC62D}.Release|x86.ActiveCfg = Release|Any CPU
+		{1FAA4CF9-02BE-49F0-93F7-455DB0BFC62D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

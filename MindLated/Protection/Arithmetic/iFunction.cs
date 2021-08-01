@@ -3,10 +3,8 @@ using dnlib.DotNet.Emit;
 
 namespace MindLated.Protection.Arithmetic
 {
-    public abstract class iFunction
+    public abstract class Function
     {
-        public abstract ArithmeticTypes ArithmeticTypes { get; }
-
-        public abstract ArithmeticVT Arithmetic(Instruction instruction, ModuleDef module);
+        public abstract ArithmeticVt Arithmetic(Instruction instruction, ModuleDef module);
     }
 }

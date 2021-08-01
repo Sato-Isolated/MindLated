@@ -7,11 +7,11 @@ using System.Collections.Generic;
 
 namespace MindLated.Protection.Arithmetic
 {
-    public class Arithmetic
+    public static class Arithmetic
     {
-        public static ModuleDef moduleDef1;
+        private static ModuleDef _moduleDef1;
 
-        public static List<iFunction> Tasks = new List<iFunction>()
+        private static readonly List<Function> Tasks = new()
         {
             new Add(),
             new Sub(),
@@ -34,7 +34,7 @@ namespace MindLated.Protection.Arithmetic
 
         public static void Execute(ModuleDef moduleDef)
         {
-            moduleDef1 = moduleDef;
+            _moduleDef1 = moduleDef;
             var generator = new Generator.Generator();
             foreach (var tDef in moduleDef.Types)
             {
@@ -74,7 +74,7 @@ namespace MindLated.Protection.Arithmetic
             }
         }
 
-        private static List<Instruction> GenerateBody(ArithmeticVT arithmeticVTs)
+        private static List<Instruction> GenerateBody(ArithmeticVt arithmeticVTs)
         {
             var instructions = new List<Instruction>();
             if (IsArithmetic(arithmeticVTs.GetArithmetic()))
@@ -87,7 +87,7 @@ namespace MindLated.Protection.Arithmetic
                     instructions.Add(new Instruction(OpCodes.Call, arithmeticVTs.GetToken().GetOperand()));
                 }
                 instructions.Add(new Instruction(arithmeticVTs.GetToken().GetOpCode()));
-                instructions.Add(new Instruction(OpCodes.Call, moduleDef1.Import(typeof(Convert).GetMethod("ToInt32", new Type[] { typeof(double) }))));
+                instructions.Add(new Instruction(OpCodes.Call, _moduleDef1.Import(typeof(Convert).GetMethod("ToInt32", new[] { typeof(double) }))));
                 //instructions.Add(new Instruction(OpCodes.Conv_I4));
             }
             else if (IsXor(arithmeticVTs.GetArithmetic()))
@@ -102,10 +102,23 @@ namespace MindLated.Protection.Arithmetic
 
         private static bool IsArithmetic(ArithmeticTypes arithmetic)
         {
-            return arithmetic == ArithmeticTypes.Add || arithmetic == ArithmeticTypes.Sub || arithmetic == ArithmeticTypes.Div || arithmetic == ArithmeticTypes.Mul ||
-                arithmetic == ArithmeticTypes.Abs || arithmetic == ArithmeticTypes.Log || arithmetic == ArithmeticTypes.Log10 || arithmetic == ArithmeticTypes.Truncate ||
-                arithmetic == ArithmeticTypes.Sin || arithmetic == ArithmeticTypes.Cos || arithmetic == ArithmeticTypes.Floor || arithmetic == ArithmeticTypes.Round ||
-                arithmetic == ArithmeticTypes.Tan || arithmetic == ArithmeticTypes.Tanh || arithmetic == ArithmeticTypes.Sqrt || arithmetic == ArithmeticTypes.Ceiling;
+            return arithmetic is
+                ArithmeticTypes.Add or
+                ArithmeticTypes.Sub or
+                ArithmeticTypes.Div or
+                ArithmeticTypes.Mul or
+                ArithmeticTypes.Abs or
+                ArithmeticTypes.Log or
+                ArithmeticTypes.Log10 or
+                ArithmeticTypes.Truncate or
+                ArithmeticTypes.Sin or
+                ArithmeticTypes.Cos or
+                ArithmeticTypes.Floor or
+                ArithmeticTypes.Round or
+                ArithmeticTypes.Tan or
+                ArithmeticTypes.Tanh or
+                ArithmeticTypes.Sqrt or
+                ArithmeticTypes.Ceiling;
         }
 
         private static bool IsXor(ArithmeticTypes arithmetic)

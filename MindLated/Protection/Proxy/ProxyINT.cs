@@ -1,13 +1,10 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
-using System;
 
 namespace MindLated.Protection.Proxy
 {
-    public static class ProxyINT
+    public static class ProxyInt
     {
-        public static Random rand = new Random();
-
         public static void Execute(ModuleDef module)
         {
             foreach (var type in module.GetTypes())

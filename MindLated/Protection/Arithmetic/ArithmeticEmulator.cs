@@ -5,38 +5,29 @@ namespace MindLated.Protection.Arithmetic
 {
     public class ArithmeticEmulator
     {
-        private readonly double x;
-        private readonly double y;
-        private readonly ArithmeticTypes arithmeticTypes;
+        private readonly double _x;
+        private readonly double _y;
+        private readonly ArithmeticTypes _arithmeticTypes;
         public new ArithmeticTypes GetType { get; private set; }
 
         public ArithmeticEmulator(double x, double y, ArithmeticTypes arithmeticTypes)
         {
-            this.x = x;
-            this.y = y;
-            this.arithmeticTypes = arithmeticTypes;
+            _x = x;
+            _y = y;
+            _arithmeticTypes = arithmeticTypes;
         }
 
         public double GetValue()
         {
-            switch (arithmeticTypes)
+            return _arithmeticTypes switch
             {
-                case ArithmeticTypes.Add:
-                    return x - y;
-
-                case ArithmeticTypes.Sub:
-                    return x + y;
-
-                case ArithmeticTypes.Div:
-                    return x * y;
-
-                case ArithmeticTypes.Mul:
-                    return x / y;
-
-                case ArithmeticTypes.Xor:
-                    return ((int)x ^ (int)y);
-            }
-            return -1;
+                ArithmeticTypes.Add => _x - _y,
+                ArithmeticTypes.Sub => _x + _y,
+                ArithmeticTypes.Div => _x * _y,
+                ArithmeticTypes.Mul => _x / _y,
+                ArithmeticTypes.Xor => (int)_x ^ (int)_y,
+                _ => -1
+            };
         }
 
         public double GetValue(List<ArithmeticTypes> arithmetics)
@@ -44,143 +35,107 @@ namespace MindLated.Protection.Arithmetic
             var generator = new Generator.Generator();
             var arithmetic = arithmetics[generator.Next(arithmetics.Count)];
             GetType = arithmetic;
-            switch (arithmeticTypes)
+            switch (_arithmeticTypes)
             {
                 case ArithmeticTypes.Abs:
-                    switch (arithmetic)
+                    return arithmetic switch
                     {
-                        case ArithmeticTypes.Add:
-                            return x + (Math.Abs(y) * -1);
-
-                        case ArithmeticTypes.Sub:
-                            return x - (Math.Abs(y) * -1);
-                    }
-                    return -1;
+                        ArithmeticTypes.Add => _x + Math.Abs(_y) * -1,
+                        ArithmeticTypes.Sub => _x - Math.Abs(_y) * -1,
+                        _ => -1
+                    };
 
                 case ArithmeticTypes.Log:
-                    switch (arithmetic)
+                    return arithmetic switch
                     {
-                        case ArithmeticTypes.Add:
-                            return x - (Math.Log(y));
-
-                        case ArithmeticTypes.Sub:
-                            return x + (Math.Log(y));
-                    }
-                    return -1;
+                        ArithmeticTypes.Add => _x - Math.Log(_y),
+                        ArithmeticTypes.Sub => _x + Math.Log(_y),
+                        _ => -1
+                    };
 
                 case ArithmeticTypes.Log10:
-                    switch (arithmetic)
+                    return arithmetic switch
                     {
-                        case ArithmeticTypes.Add:
-                            return x - (Math.Log10(y));
-
-                        case ArithmeticTypes.Sub:
-                            return x + (Math.Log10(y));
-                    }
-                    return -1;
+                        ArithmeticTypes.Add => _x - Math.Log10(_y),
+                        ArithmeticTypes.Sub => _x + Math.Log10(_y),
+                        _ => -1
+                    };
 
                 case ArithmeticTypes.Sin:
-                    switch (arithmetic)
+                    return arithmetic switch
                     {
-                        case ArithmeticTypes.Add:
-                            return x - (Math.Sin(y));
-
-                        case ArithmeticTypes.Sub:
-                            return x + (Math.Sin(y));
-                    }
-                    return -1;
+                        ArithmeticTypes.Add => _x - Math.Sin(_y),
+                        ArithmeticTypes.Sub => _x + Math.Sin(_y),
+                        _ => -1
+                    };
 
                 case ArithmeticTypes.Cos:
-                    switch (arithmetic)
+                    return arithmetic switch
                     {
-                        case ArithmeticTypes.Add:
-                            return x - (Math.Cos(y));
-
-                        case ArithmeticTypes.Sub:
-                            return x + (Math.Cos(y));
-                    }
-                    return -1;
+                        ArithmeticTypes.Add => _x - Math.Cos(_y),
+                        ArithmeticTypes.Sub => _x + Math.Cos(_y),
+                        _ => -1
+                    };
 
                 case ArithmeticTypes.Floor:
-                    switch (arithmetic)
+                    return arithmetic switch
                     {
-                        case ArithmeticTypes.Add:
-                            return x - (Math.Floor(y));
-
-                        case ArithmeticTypes.Sub:
-                            return x + (Math.Floor(y));
-                    }
-                    return -1;
+                        ArithmeticTypes.Add => _x - Math.Floor(_y),
+                        ArithmeticTypes.Sub => _x + Math.Floor(_y),
+                        _ => -1
+                    };
 
                 case ArithmeticTypes.Round:
-                    switch (arithmetic)
+                    return arithmetic switch
                     {
-                        case ArithmeticTypes.Add:
-                            return x - (Math.Round(y));
-
-                        case ArithmeticTypes.Sub:
-                            return x + (Math.Round(y));
-                    }
-                    return -1;
+                        ArithmeticTypes.Add => _x - Math.Round(_y),
+                        ArithmeticTypes.Sub => _x + Math.Round(_y),
+                        _ => -1
+                    };
 
                 case ArithmeticTypes.Tan:
-                    switch (arithmetic)
+                    return arithmetic switch
                     {
-                        case ArithmeticTypes.Add:
-                            return x - (Math.Tan(y));
-
-                        case ArithmeticTypes.Sub:
-                            return x + (Math.Tan(y));
-                    }
-                    return -1;
+                        ArithmeticTypes.Add => _x - Math.Tan(_y),
+                        ArithmeticTypes.Sub => _x + Math.Tan(_y),
+                        _ => -1
+                    };
 
                 case ArithmeticTypes.Tanh:
-                    switch (arithmetic)
+                    return arithmetic switch
                     {
-                        case ArithmeticTypes.Add:
-                            return x - (Math.Tanh(y));
-
-                        case ArithmeticTypes.Sub:
-                            return x + (Math.Tanh(y));
-                    }
-                    return -1;
+                        ArithmeticTypes.Add => _x - Math.Tanh(_y),
+                        ArithmeticTypes.Sub => _x + Math.Tanh(_y),
+                        _ => -1
+                    };
 
                 case ArithmeticTypes.Sqrt:
-                    switch (arithmetic)
+                    return arithmetic switch
                     {
-                        case ArithmeticTypes.Add:
-                            return x - (Math.Sqrt(y));
-
-                        case ArithmeticTypes.Sub:
-                            return x + (Math.Sqrt(y));
-                    }
-                    return -1;
+                        ArithmeticTypes.Add => _x - Math.Sqrt(_y),
+                        ArithmeticTypes.Sub => _x + Math.Sqrt(_y),
+                        _ => -1
+                    };
 
                 case ArithmeticTypes.Ceiling:
-                    switch (arithmetic)
+                    return arithmetic switch
                     {
-                        case ArithmeticTypes.Add:
-                            return x - (Math.Ceiling(y));
-
-                        case ArithmeticTypes.Sub:
-                            return x + (Math.Ceiling(y));
-                    }
-                    return -1;
+                        ArithmeticTypes.Add => _x - Math.Ceiling(_y),
+                        ArithmeticTypes.Sub => _x + Math.Ceiling(_y),
+                        _ => -1
+                    };
 
                 case ArithmeticTypes.Truncate:
-                    switch (arithmetic)
+                    return arithmetic switch
                     {
-                        case ArithmeticTypes.Add:
-                            return x - (Math.Truncate(y));
-
-                        case ArithmeticTypes.Sub:
-                            return x + (Math.Truncate(y));
-                    }
-                    return -1;
+                        ArithmeticTypes.Add => _x - Math.Truncate(_y),
+                        ArithmeticTypes.Sub => _x + Math.Truncate(_y),
+                        _ => -1
+                    };
             }
             return -1;
         }
 
-        public double GetY() => y;
+        public double GetY() => _y;
     }
 }

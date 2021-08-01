@@ -1,6 +1,6 @@
 ﻿namespace MindLated.Protection.InvalidMD
 {
-    public static class MindLated_png
+    public static class MindLatedPng
     {
     }
 }

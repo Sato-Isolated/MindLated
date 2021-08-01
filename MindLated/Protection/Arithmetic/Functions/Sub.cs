@@ -4,15 +4,15 @@ using MindLated.Protection.Arithmetic.Utils;
 
 namespace MindLated.Protection.Arithmetic.Functions
 {
-    public class Sub : iFunction
+    public class Sub : Function
     {
-        public override ArithmeticTypes ArithmeticTypes => ArithmeticTypes.Sub;
+        public virtual ArithmeticTypes ArithmeticTypes => ArithmeticTypes.Sub;
 
-        public override ArithmeticVT Arithmetic(Instruction instruction, ModuleDef module)
+        public override ArithmeticVt Arithmetic(Instruction instruction, ModuleDef module)
         {
             if (!ArithmeticUtils.CheckArithmetic(instruction)) return null;
             var arithmeticEmulator = new ArithmeticEmulator(instruction.GetLdcI4Value(), ArithmeticUtils.GetY(instruction.GetLdcI4Value()), ArithmeticTypes);
-            return (new ArithmeticVT(new Value(arithmeticEmulator.GetValue(), arithmeticEmulator.GetY()), new Token(OpCodes.Sub), ArithmeticTypes));
+            return new ArithmeticVt(new Value(arithmeticEmulator.GetValue(), arithmeticEmulator.GetY()), new Token(OpCodes.Sub), ArithmeticTypes);
         }
     }
 }

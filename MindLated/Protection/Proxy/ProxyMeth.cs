@@ -8,8 +8,8 @@ namespace MindLated.Protection.Proxy
 {
     public static class ProxyMeth
     {
-        public static Random rand = new Random();
-        public static List<MemberRef> MemberRefList = new List<MemberRef>();
+        public static Random rand = new();
+        public static List<MemberRef> MemberRefList = new();
 
         //Scan de toutes les MemberRef
         public static void ScanMemberRef(ModuleDef module)
@@ -57,8 +57,8 @@ namespace MindLated.Protection.Proxy
                 var lst = new List<Instruction>();
                 var switchs = new Instruction(OpCodes.Switch);
                 meth.Body.Instructions.Add(switchs);
-                var br_s = new Instruction(OpCodes.Br_S);
-                meth.Body.Instructions.Add(br_s);
+                var brS = new Instruction(OpCodes.Br_S);
+                meth.Body.Instructions.Add(brS);
                 for (var i = 0; i < 5; i++)
                 {
                     for (var ia = 0; ia <= original.MethodSig.Params.Count - 1; ia++)
@@ -77,7 +77,7 @@ namespace MindLated.Protection.Proxy
                 var ldnull = Instruction.Create(OpCodes.Ldnull);
                 meth.Body.Instructions.Add(ldnull);
                 meth.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
-                br_s.Operand = ldnull;
+                brS.Operand = ldnull;
                 switchs.Operand = lst;
                 return meth;
             }
@@ -85,12 +85,6 @@ namespace MindLated.Protection.Proxy
             {
                 return null;
             }
-        }
-
-        public static IEnumerable<T> Randomize<T>(IEnumerable<T> source)
-        {
-            var rnd = new Random();
-            return source.OrderBy((item) => rnd.Next());
         }
 
         public static void Execute(ModuleDef module)
@@ -165,17 +159,17 @@ namespace MindLated.Protection.Proxy
 
     public static class EnumerableHelper
     {
-        private static readonly Random r;
+        private static readonly Random R;
 
         static EnumerableHelper()
         {
-            r = new Random();
+            R = new Random();
         }
 
-        public static E Random<E>(IEnumerable<E> input)
+        public static TE Random<TE>(IEnumerable<TE> input)
         {
-            var enumerable = input as E[] ?? input.ToArray();
-            return enumerable.ElementAt(r.Next(enumerable.Length));
+            var enumerable = input as TE[] ?? input.ToArray();
+            return enumerable.ElementAt(R.Next(enumerable.Length));
         }
     }
 

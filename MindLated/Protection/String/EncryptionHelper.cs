@@ -14,7 +14,7 @@ namespace MindLated.Protection.String
         private const string SaltKey = "2GM23j301t60Z96T";
         private const string VIKey = "IzTdhG6S8uwg141S";
 
-        private static List<string> _list = new List<string>();
+        private static List<string> _list = new();
 
         public static void Generate()
         {

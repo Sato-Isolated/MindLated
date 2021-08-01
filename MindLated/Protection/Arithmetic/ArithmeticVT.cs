@@ -1,22 +1,22 @@
 ﻿namespace MindLated.Protection.Arithmetic
 {
-    public class ArithmeticVT
+    public class ArithmeticVt
     {
-        private readonly Value value;
-        private readonly Token token;
-        private readonly ArithmeticTypes arithmeticTypes;
+        private readonly Value _value;
+        private readonly Token _token;
+        private readonly ArithmeticTypes _arithmeticTypes;
 
-        public ArithmeticVT(Value value, Token token, ArithmeticTypes arithmeticTypes)
+        public ArithmeticVt(Value value, Token token, ArithmeticTypes arithmeticTypes)
         {
-            this.value = value;
-            this.token = token;
-            this.arithmeticTypes = arithmeticTypes;
+            _value = value;
+            _token = token;
+            _arithmeticTypes = arithmeticTypes;
         }
 
-        public Value GetValue() => value;
+        public Value GetValue() => _value;
 
-        public Token GetToken() => token;
+        public Token GetToken() => _token;
 
-        public ArithmeticTypes GetArithmetic() => arithmeticTypes;
+        public ArithmeticTypes GetArithmetic() => _arithmeticTypes;
     }
 }

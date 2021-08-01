@@ -42,10 +42,10 @@ namespace MindLated.Services
         private static TypeDef PopulateContext(TypeDef typeDef, InjectContext ctx)
         {
             TypeDef ret;
-            if (!ctx.map.TryGetValue(typeDef, out var existing))
+            if (!ctx.Mep.TryGetValue(typeDef, out var existing))
             {
                 ret = Clone(typeDef);
-                ctx.map[typeDef] = ret;
+                ctx.Mep[typeDef] = ret;
             }
             else
                 ret = (TypeDef)existing;
@@ -54,17 +54,17 @@ namespace MindLated.Services
                 ret.NestedTypes.Add(PopulateContext(nestedType, ctx));
 
             foreach (var method in typeDef.Methods)
-                ret.Methods.Add((MethodDef)(ctx.map[method] = Clone(method)));
+                ret.Methods.Add((MethodDef)(ctx.Mep[method] = Clone(method)));
 
             foreach (var field in typeDef.Fields)
-                ret.Fields.Add((FieldDef)(ctx.map[field] = Clone(field)));
+                ret.Fields.Add((FieldDef)(ctx.Mep[field] = Clone(field)));
 
             return ret;
         }
 
         private static void CopyTypeDef(TypeDef typeDef, InjectContext ctx)
         {
-            var newTypeDef = (TypeDef)ctx.map[typeDef];
+            var newTypeDef = (TypeDef)ctx.Mep[typeDef];
 
             newTypeDef.BaseType = ctx.Importer.Import(typeDef.BaseType);
 
@@ -74,7 +74,7 @@ namespace MindLated.Services
 
         private static void CopyMethodDef(MethodDef methodDef, InjectContext ctx)
         {
-            var newMethodDef = (MethodDef)ctx.map[methodDef];
+            var newMethodDef = (MethodDef)ctx.Mep[methodDef];
 
             newMethodDef.Signature = ctx.Importer.Import(methodDef.Signature);
             newMethodDef.Parameters.UpdateParameterTypes();
@@ -153,7 +153,7 @@ namespace MindLated.Services
 
         private static void CopyFieldDef(FieldDef fieldDef, InjectContext ctx)
         {
-            var newFieldDef = (FieldDef)ctx.map[fieldDef];
+            var newFieldDef = (FieldDef)ctx.Mep[fieldDef];
 
             newFieldDef.Signature = ctx.Importer.Import(fieldDef.Signature);
         }
@@ -175,61 +175,56 @@ namespace MindLated.Services
 
         public static TypeDef Inject(TypeDef typeDef, ModuleDef target)
         {
-            var ctx = new InjectContext(typeDef.Module, target);
+            var ctx = new InjectContext(target);
             PopulateContext(typeDef, ctx);
             Copy(typeDef, ctx, true);
-            return (TypeDef)ctx.map[typeDef];
+            return (TypeDef)ctx.Mep[typeDef];
         }
 
         public static MethodDef Inject(MethodDef methodDef, ModuleDef target)
         {
-            var ctx = new InjectContext(methodDef.Module, target);
-            ctx.map[methodDef] = Clone(methodDef);
+            var ctx = new InjectContext(target);
+            ctx.Mep[methodDef] = Clone(methodDef);
             CopyMethodDef(methodDef, ctx);
-            return (MethodDef)ctx.map[methodDef];
+            return (MethodDef)ctx.Mep[methodDef];
         }
 
         public static IEnumerable<IDnlibDef> Inject(TypeDef typeDef, TypeDef newType, ModuleDef target)
         {
-            var ctx = new InjectContext(typeDef.Module, target);
-            ctx.map[typeDef] = newType;
+            var ctx = new InjectContext(target);
+            ctx.Mep[typeDef] = newType;
             PopulateContext(typeDef, ctx);
             Copy(typeDef, ctx, false);
-            return ctx.map.Values.Except(new[] { newType });
+            return ctx.Mep.Values.Except(new[] { newType });
         }
 
         private class InjectContext : ImportMapper
         {
-            public readonly Dictionary<IDnlibDef, IDnlibDef> map = new Dictionary<IDnlibDef, IDnlibDef>();
-
-            public readonly ModuleDef OriginModule;
+            public readonly Dictionary<IDnlibDef, IDnlibDef> Mep = new();
 
             public readonly ModuleDef TargetModule;
 
-            public readonly Importer importer;
-
-            public InjectContext(ModuleDef module, ModuleDef target)
+            public InjectContext(ModuleDef target)
             {
-                OriginModule = module;
                 TargetModule = target;
-                importer = new Importer(target, ImporterOptions.TryToUseTypeDefs, new GenericParamContext(), this);
+                Importer = new Importer(target, ImporterOptions.TryToUseTypeDefs, new GenericParamContext(), this);
             }
 
-            public Importer Importer => importer;
+            public Importer Importer { get; }
 
             public override ITypeDefOrRef Map(ITypeDefOrRef typeDefOrRef)
             {
-                return typeDefOrRef is TypeDef typeDef && map.ContainsKey(typeDef) ? (TypeDef)map[typeDef] : null;
+                return typeDefOrRef is TypeDef typeDef && Mep.ContainsKey(typeDef) ? (TypeDef)Mep[typeDef] : null;
             }
 
             public override IMethod Map(MethodDef methodDef)
             {
-                return map.ContainsKey(methodDef) ? (MethodDef)map[methodDef] : null;
+                return Mep.ContainsKey(methodDef) ? (MethodDef)Mep[methodDef] : null;
             }
 
             public override IField Map(FieldDef fieldDef)
             {
-                return map.ContainsKey(fieldDef) ? (FieldDef)map[fieldDef] : null;
+                return Mep.ContainsKey(fieldDef) ? (FieldDef)Mep[fieldDef] : null;
             }
         }
     }

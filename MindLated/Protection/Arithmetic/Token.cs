@@ -4,23 +4,23 @@ namespace MindLated.Protection.Arithmetic
 {
     public class Token
     {
-        private readonly OpCode opCode;
-        private readonly object Operand;
+        private readonly OpCode _opCode;
+        private readonly object _operand;
 
-        public Token(OpCode opCode, object Operand)
+        public Token(OpCode opCode, object operand)
         {
-            this.opCode = opCode;
-            this.Operand = Operand;
+            _opCode = opCode;
+            _operand = operand;
         }
 
         public Token(OpCode opCode)
         {
-            this.opCode = opCode;
-            this.Operand = null;
+            _opCode = opCode;
+            _operand = null;
         }
 
-        public OpCode GetOpCode() => opCode;
+        public OpCode GetOpCode() => _opCode;
 
-        public object GetOperand() => Operand;
+        public object GetOperand() => _operand;
     }
 }

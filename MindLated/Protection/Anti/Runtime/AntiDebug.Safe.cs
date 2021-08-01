@@ -7,7 +7,7 @@ namespace MindLated.Protection.Anti.Runtime
     internal static class AntiDebugSafe
     {
         [DllImport("ntdll.dll", CharSet = CharSet.Auto)]
-        public static extern int NtQueryInformationProcess(IntPtr test, int test2, int[] test3, int test4, ref int test5);
+        private static extern int NtQueryInformationProcess(IntPtr test, int test2, int[] test3, int test4, ref int test5);
 
         private static void Initialize()
         {

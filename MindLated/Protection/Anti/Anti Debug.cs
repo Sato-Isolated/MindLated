@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace MindLated.Protection.Anti
 {
-    public static class Anti_Debug
+    public static class AntiDebug
     {
         public static void Execute(ModuleDef module)
         {

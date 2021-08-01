@@ -2,17 +2,17 @@
 {
     public class Value
     {
-        private readonly double x;
-        private readonly double y;
+        private readonly double _x;
+        private readonly double _y;
 
         public Value(double x, double y)
         {
-            this.x = x;
-            this.y = y;
+            _x = x;
+            _y = y;
         }
 
-        public double GetX() => x;
+        public double GetX() => _x;
 
-        public double GetY() => y;
+        public double GetY() => _y;
     }
 }

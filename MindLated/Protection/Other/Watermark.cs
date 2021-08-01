@@ -7,9 +7,10 @@ namespace MindLated.Protection.Other
     {
         public static void Execute(ModuleDefMD md)
         {
-            foreach (ModuleDefMD module in md.Assembly.Modules)
+            foreach (var moduleDef in md.Assembly.Modules)
             {
-                TypeRef attrRef = module.CorLibTypes.GetTypeRef("System", "Attribute");
+                var module = (ModuleDefMD)moduleDef;
+                var attrRef = module.CorLibTypes.GetTypeRef("System", "Attribute");
                 var attrType = new TypeDefUser("", "MindLated", attrRef);
                 module.Types.Add(attrType);
 

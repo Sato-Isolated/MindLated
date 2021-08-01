@@ -10,17 +10,17 @@ namespace MindLated.Protection.Anti.Runtime
             ExecuteReadWrite = 0x40,
         }
 
-        public static unsafe void CopyBlock(void* destination, void* source, uint byteCount)
+        private static unsafe void CopyBlock(void* destination, void* source, uint byteCount)
         {
         }
 
-        public static unsafe void InitBlock(void* startAddress, byte value, uint byteCount)
+        private static unsafe void InitBlock(void* startAddress, byte value, uint byteCount)
         {
         }
 
         [DllImport("kernel32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool VirtualProtect(
+        private static extern bool VirtualProtect(
             IntPtr lpAddress,
             uint dwSize,
             [MarshalAs(UnmanagedType.U4)] MemoryProtection flNewProtect,

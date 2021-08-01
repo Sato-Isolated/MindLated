@@ -10,9 +10,9 @@ namespace MindLated.Protection.CtrlFlow
         {
             var blocks = new List<Block>();
             var block = new Block();
-            var Id = 0;
+            var id = 0;
             var usage = 0;
-            block.Number = Id;
+            block.Number = id;
             block.Instructions.Add(Instruction.Create(OpCodes.Nop));
             blocks.Add(block);
             block = new Block();
@@ -39,7 +39,7 @@ namespace MindLated.Protection.CtrlFlow
                     {
                         if ((usage == 0 || instruction.OpCode == OpCodes.Ret) && handlers.Count == 0)
                         {
-                            block.Number = ++Id;
+                            block.Number = ++id;
                             blocks.Add(block);
                             block = new Block();
                         }
