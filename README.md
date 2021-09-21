@@ -5,7 +5,7 @@ I add things when I feel like it. (i'm learning)
 
 work only for crack me (not sure at 100% completely unstable and not optimized) 
 
-if you want to help me by improving the obfuscator you can check the project
+if you want to help me by improving the obfuscator you can do an PR
 
 I am looking for a very nice theme if anyone has one do an issues please :)
 
