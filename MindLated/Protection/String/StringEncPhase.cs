@@ -12,9 +12,9 @@ namespace MindLated.Protection.String
 {
     public static class StringEncPhase
     {
-        private const string PasswordHash = "p7K95451qB88sZ7J";
-        private const string SaltKey = "2GM23j301t60Z96T";
-        private const string ViKey = "IzTdhG6S8uwg141S";
+        private static string key1 = Renamer.RenamerPhase.GenerateString(Renamer.RenamerPhase.RenameMode.Key);
+        private static string key2 = Renamer.RenamerPhase.GenerateString(Renamer.RenamerPhase.RenameMode.Key);
+        private static string key3 = Renamer.RenamerPhase.GenerateString(Renamer.RenamerPhase.RenameMode.Key);
 
         private static void InjectClass(ModuleDef module)
         {
@@ -42,12 +42,15 @@ namespace MindLated.Protection.String
         public static void Execute(ModuleDef module)
         {
             InjectClass(module);
+            var p = Renamer.RenamerPhase.GenerateString(Renamer.RenamerPhase.RenameMode.Normal);
             foreach (var type in module.GetTypes())
             {
                 if (type.IsGlobalModuleType) continue;
+
                 foreach (var method in type.Methods)
                 {
                     if (!method.HasBody) continue;
+
                     var instr = method.Body.Instructions;
                     for (var i = 0; i < instr.Count; i++)
                     {
@@ -68,15 +71,50 @@ namespace MindLated.Protection.String
             }
             File.WriteAllLines($"{Path.GetTempPath()}List.txt", Str);
             var bytes = File.ReadAllBytes($"{Path.GetTempPath()}List.txt");
-            module.Resources.Add(new EmbeddedResource("MindLated.zero", Hush(bytes), ManifestResourceAttributes.Public));
+            module.Resources.Add(new EmbeddedResource(p, Hush(bytes), ManifestResourceAttributes.Public));
+            foreach (var type in module.GetTypes())
+            {
+                foreach (var method in type.Methods)
+                {
+                    if (!method.HasBody) continue;
+
+                    var instr = method.Body.Instructions;
+                    for (var i = 0; i < instr.Count; i++)
+                    {
+                        if (instr[i].OpCode == OpCodes.Ldstr)
+                        {
+                            if (instr[i].Operand as string == "%Replace")
+                            {
+                                instr[i].Operand = p;
+                            }
+                            if (instr[i].Operand as string == "%Key1")
+                            {
+                                instr[i].Operand = key1;
+                            }
+                            if (instr[i].Operand as string == "%Key2")
+                            {
+                                instr[i].Operand = key2;
+                            }
+                            if (instr[i].Operand as string == "%Key3")
+                            {
+                                instr[i].Operand = key3;
+                            }
+                        }
+                    }
+                    method.Body.SimplifyBranches();
+                }
+            }
             File.Delete($"{Path.GetTempPath()}List.txt");
+            var time = DateTime.Now.ToString("hh:mm:ss");
         }
 
-        private static byte[] Hush(byte[] text)
+
+
+        private static byte[] Hush(IReadOnlyList<byte> text)
         {
-            var key = new Rfc2898DeriveBytes(PasswordHash, Encoding.ASCII.GetBytes(SaltKey)).GetBytes(256 / 8);
-            var xor = new byte[text.Length];
-            for (var i = 0; i < text.Length; i++)
+            var key = new Rfc2898DeriveBytes(key1, Encoding.ASCII.GetBytes(key2)).GetBytes(256 / 8);
+            var xor = new byte[text.Count];
+            for (var i = 0; i < text.Count; i++)
             {
                 xor[i] = (byte)(text[i] ^ key[i % key.Length]);
             }
@@ -85,19 +123,17 @@ namespace MindLated.Protection.String
 
         private static string Encrypt(string plainText)
         {
+
             var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
-            var keyBytes = new Rfc2898DeriveBytes(PasswordHash, Encoding.ASCII.GetBytes(SaltKey)).GetBytes(256 / 8);
+            var keyBytes = new Rfc2898DeriveBytes(key1, Encoding.ASCII.GetBytes(key2)).GetBytes(256 / 8);
             var symmetricKey = new RijndaelManaged { Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7 };
-            var encryptor = symmetricKey.CreateEncryptor(keyBytes, Encoding.ASCII.GetBytes(ViKey));
-            byte[] cipherTextBytes;
+            var encryptor = symmetricKey.CreateEncryptor(keyBytes, Encoding.ASCII.GetBytes(key3));
             using var memoryStream = new MemoryStream();
-            using (var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
-            {
-                cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
-                cryptoStream.FlushFinalBlock();
-                cipherTextBytes = memoryStream.ToArray();
-                cryptoStream.Close();
-            }
+            using var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write);
+            cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
+            cryptoStream.FlushFinalBlock();
+            var cipherTextBytes = memoryStream.ToArray();
+            cryptoStream.Close();
             memoryStream.Close();
             return Convert.ToBase64String(cipherTextBytes);
         }

@@ -109,6 +109,7 @@ namespace MindLated.Protection.Renamer
         public enum RenameMode
         {
             Ascii,
+            Key,
             Normal
         }
 
@@ -128,6 +129,7 @@ namespace MindLated.Protection.Renamer
             return mode switch
             {
                 RenameMode.Ascii => RandomString(Random.Next(1, 7), Ascii),
+                RenameMode.Key => RandomString(16, Ascii),
                 RenameMode.Normal => GetRandomName(),
                 _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
             };

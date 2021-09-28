@@ -22582,6 +22582,40 @@
             <c>true</c> if <see cref="F:dnlib.DotNet.ManifestResourceAttributes.Private"/> is set
             </summary>
         </member>
+        <member name="P:dnlib.DotNet.Resource.HasCustomAttributeTag">
+            <inheritdoc/>
+        </member>
+        <member name="P:dnlib.DotNet.Resource.CustomAttributes">
+            <summary>
+            Gets all custom attributes
+            </summary>
+        </member>
+        <member name="F:dnlib.DotNet.Resource.customAttributes">
+            <summary/>
+        </member>
+        <member name="M:dnlib.DotNet.Resource.InitializeCustomAttributes">
+            <summary>Initializes <see cref="F:dnlib.DotNet.Resource.customAttributes"/></summary>
+        </member>
+        <member name="P:dnlib.DotNet.Resource.HasCustomAttributes">
+            <inheritdoc/>
+        </member>
+        <member name="P:dnlib.DotNet.Resource.HasCustomDebugInformationTag">
+            <inheritdoc/>
+        </member>
+        <member name="P:dnlib.DotNet.Resource.CustomDebugInfos">
+            <summary>
+            Gets all custom debug infos
+            </summary>
+        </member>
+        <member name="F:dnlib.DotNet.Resource.customDebugInfos">
+            <summary/>
+        </member>
+        <member name="M:dnlib.DotNet.Resource.InitializeCustomDebugInfos">
+            <summary>Initializes <see cref="F:dnlib.DotNet.Resource.customDebugInfos"/></summary>
+        </member>
+        <member name="P:dnlib.DotNet.Resource.HasCustomDebugInfos">
+            <inheritdoc/>
+        </member>
         <member name="M:dnlib.DotNet.Resource.#ctor(dnlib.DotNet.UTF8String,dnlib.DotNet.ManifestResourceAttributes)">
             <summary>
             Constructor
@@ -22629,6 +22663,18 @@
         <member name="M:dnlib.DotNet.EmbeddedResource.ToString">
             <inheritdoc/>
         </member>
+        <member name="F:dnlib.DotNet.EmbeddedResourceMD.readerModule">
+            <summary>The module where this instance is located</summary>
+        </member>
+        <member name="P:dnlib.DotNet.EmbeddedResourceMD.OrigRid">
+            <inheritdoc/>
+        </member>
+        <member name="M:dnlib.DotNet.EmbeddedResourceMD.InitializeCustomAttributes">
+            <inheritdoc/>
+        </member>
+        <member name="M:dnlib.DotNet.EmbeddedResourceMD.InitializeCustomDebugInfos">
+            <inheritdoc/>
+        </member>
         <member name="T:dnlib.DotNet.AssemblyLinkedResource">
             <summary>
             A reference to a resource in another assembly
@@ -22651,6 +22697,18 @@
             <param name="flags">Resource flags</param>
         </member>
         <member name="M:dnlib.DotNet.AssemblyLinkedResource.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="F:dnlib.DotNet.AssemblyLinkedResourceMD.readerModule">
+            <summary>The module where this instance is located</summary>
+        </member>
+        <member name="P:dnlib.DotNet.AssemblyLinkedResourceMD.OrigRid">
+            <inheritdoc/>
+        </member>
+        <member name="M:dnlib.DotNet.AssemblyLinkedResourceMD.InitializeCustomAttributes">
+            <inheritdoc/>
+        </member>
+        <member name="M:dnlib.DotNet.AssemblyLinkedResourceMD.InitializeCustomDebugInfos">
             <inheritdoc/>
         </member>
         <member name="T:dnlib.DotNet.LinkedResource">
@@ -22685,6 +22743,18 @@
             <param name="flags">Resource flags</param>
         </member>
         <member name="M:dnlib.DotNet.LinkedResource.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="F:dnlib.DotNet.LinkedResourceMD.readerModule">
+            <summary>The module where this instance is located</summary>
+        </member>
+        <member name="P:dnlib.DotNet.LinkedResourceMD.OrigRid">
+            <inheritdoc/>
+        </member>
+        <member name="M:dnlib.DotNet.LinkedResourceMD.InitializeCustomAttributes">
+            <inheritdoc/>
+        </member>
+        <member name="M:dnlib.DotNet.LinkedResourceMD.InitializeCustomDebugInfos">
             <inheritdoc/>
         </member>
         <member name="T:dnlib.DotNet.ResourceCollection">
@@ -33637,34 +33707,34 @@
             </summary>
         </member>
         <member name="F:dnlib.DotNet.Writer.PdbWriterOptions.NoDiaSymReader">
-            <summary>
-            Don't use Microsoft.DiaSymReader.Native. This is a NuGet package with an updated Windows PDB reader/writer implementation,
-            and if it's available at runtime, dnlib will try to use it. If this option is set, dnlib won't use it.
-            You have to add a reference to the NuGet package if you want to use it, dnlib has no reference to the NuGet package.
+             <summary>
+             Don't use Microsoft.DiaSymReader.Native. This is a NuGet package with an updated Windows PDB reader/writer implementation,
+             and if it's available at runtime, dnlib will try to use it. If this option is set, dnlib won't use it.
+             You have to add a reference to the NuGet package if you want to use it, dnlib has no reference to the NuGet package.
             
-            This is only used if it's a Windows PDB file.
-            </summary>
+             This is only used if it's a Windows PDB file.
+             </summary>
         </member>
         <member name="F:dnlib.DotNet.Writer.PdbWriterOptions.NoOldDiaSymReader">
-            <summary>
-            Don't use diasymreader.dll's PDB writer that is shipped with .NET Framework.
+             <summary>
+             Don't use diasymreader.dll's PDB writer that is shipped with .NET Framework.
             
-            This is only used if it's a Windows PDB file.
-            </summary>
+             This is only used if it's a Windows PDB file.
+             </summary>
         </member>
         <member name="F:dnlib.DotNet.Writer.PdbWriterOptions.Deterministic">
-            <summary>
-            Create a deterministic PDB file and add a <see cref="F:dnlib.PE.ImageDebugType.Reproducible"/> debug directory entry to the PE file.
+             <summary>
+             Create a deterministic PDB file and add a <see cref="F:dnlib.PE.ImageDebugType.Reproducible"/> debug directory entry to the PE file.
             
-            It's ignored if the PDB writer doesn't support it.
-            </summary>
+             It's ignored if the PDB writer doesn't support it.
+             </summary>
         </member>
         <member name="F:dnlib.DotNet.Writer.PdbWriterOptions.PdbChecksum">
-            <summary>
-            Hash the PDB file and add a PDB checksum debug directory entry to the PE file.
+             <summary>
+             Hash the PDB file and add a PDB checksum debug directory entry to the PE file.
             
-            It's ignored if the PDB writer doesn't support it.
-            </summary>
+             It's ignored if the PDB writer doesn't support it.
+             </summary>
         </member>
         <member name="T:dnlib.DotNet.Writer.ModuleWriterOptionsBase">
             <summary>
@@ -35394,6 +35464,11 @@
         <member name="F:dnlib.DotNet.Writer.TablesHeapOptions.ExtraData">
             <summary>
             Extra data to write
+            </summary>
+        </member>
+        <member name="F:dnlib.DotNet.Writer.TablesHeapOptions.Log2Rid">
+            <summary>
+            Log2Rid to write
             </summary>
         </member>
         <member name="F:dnlib.DotNet.Writer.TablesHeapOptions.HasDeletedRows">
