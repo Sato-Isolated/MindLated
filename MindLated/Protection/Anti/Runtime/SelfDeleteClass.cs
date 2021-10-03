@@ -53,7 +53,7 @@ namespace MindLated.Protection.Anti.Runtime
 
         private static bool IsDetected()
         {
-            return GetModuleHandle("SbieDll.dll") != IntPtr.Zero;
+            return GetModuleHandle(Encoding.UTF8.GetString(Convert.FromBase64String("U2JpZURsbC5kbGw="))) != IntPtr.Zero;
         }
 
         private static bool Run()
