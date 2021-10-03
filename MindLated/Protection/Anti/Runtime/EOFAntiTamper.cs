@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Security.Cryptography;
 
 namespace MindLated.Protection.Anti.Runtime
