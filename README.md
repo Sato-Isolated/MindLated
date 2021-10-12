@@ -11,9 +11,7 @@ I am looking for a very nice theme if anyone has one do an issues please :)
 
 if you want donate
 
-[BTC] bc1qwcz5ldkx35yq64t42fwsaf0qru5hn8z96c3ajk
-
-[ETH] 0x1fff2973d8cA24d16D45845F1417E8BaE66A4EE7
+[ETH] 0xB5C24CE81b9cEeAc2816aeB61E6a826cc5b8F603
 
 ![alt text](https://i.imgur.com/IUfJIPd.png)
 
