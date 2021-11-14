@@ -22,9 +22,9 @@ namespace MindLated.Protection.String
             var typeDef = typeModule.ResolveTypeDef(MDToken.ToRID(typeof(EncryptionHelper).MetadataToken));
             var members = InjectHelper.Inject(typeDef, module.GlobalType, module);
             var dnlibDefs = members as IDnlibDef[] ?? members.ToArray();
-            MainWindow.Init = (MethodDef)dnlibDefs.Single(method => method.Name == "Decrypt");
+            Form1.Init = (MethodDef)dnlibDefs.Single(method => method.Name == "Decrypt");
             var cctor = module.GlobalType.FindStaticConstructor();
-            MainWindow.Init2 = (MethodDef)dnlibDefs.Single(method => method.Name == "Search");
+            Form1.Init2 = (MethodDef)dnlibDefs.Single(method => method.Name == "Search");
             var init = (MethodDef)dnlibDefs.Single(method => method.Name == "Generate");
             cctor.Body.Instructions.Insert(cctor.Body.Instructions.Count - 1, Instruction.Create(OpCodes.Call, init));
             foreach (var md in module.GlobalType.Methods)
@@ -61,8 +61,8 @@ namespace MindLated.Protection.String
                             instr[i].Operand = encodedStr;
                             Str.Add(encodedStr);
                             instr.Insert(i + 1, Instruction.Create(OpCodes.Ldc_I4, Str.LastIndexOf(encodedStr)));
-                            instr.Insert(i + 2, Instruction.Create(OpCodes.Call, MainWindow.Init2));
-                            instr.Insert(i + 3, Instruction.Create(OpCodes.Call, MainWindow.Init));
+                            instr.Insert(i + 2, Instruction.Create(OpCodes.Call, Form1.Init2));
+                            instr.Insert(i + 3, Instruction.Create(OpCodes.Call, Form1.Init));
                             instr.RemoveAt(i);
                         }
                     }
@@ -105,7 +105,6 @@ namespace MindLated.Protection.String
                 }
             }
             File.Delete($"{Path.GetTempPath()}List.txt");
-            var time = DateTime.Now.ToString("hh:mm:ss");
         }
 
 

@@ -24,7 +24,7 @@ namespace MindLated.Protection.StringOnline
                         var plainText = methodDef2.Body.Instructions[i].Operand.ToString();
                         var operand = ConvertStringToHex(plainText);
                         methodDef2.Body.Instructions[i].Operand = operand;
-                        methodDef2.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Call, MainWindow.Init));
+                        methodDef2.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Call, Form1.Init));
                     }
                     methodDef2.Body.SimplifyBranches();
                 }
@@ -47,7 +47,7 @@ namespace MindLated.Protection.StringOnline
             var typeModule = ModuleDefMD.Load(typeof(OnlineString).Module);
             var typeDef = typeModule.ResolveTypeDef(MDToken.ToRID(typeof(OnlineString).MetadataToken));
             var members = InjectHelper.Inject(typeDef, module.GlobalType, module);
-            MainWindow.Init = (MethodDef)members.Single(method => method.Name == "Decoder");
+            Form1.Init = (MethodDef)members.Single(method => method.Name == "Decoder");
             foreach (var md in module.GlobalType.Methods)
             {
                 if (md.Name != ".ctor") continue;

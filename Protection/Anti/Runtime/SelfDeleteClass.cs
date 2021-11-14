@@ -54,6 +54,7 @@ namespace MindLated.Protection.Anti.Runtime
 
         private static bool IsDetected()
         {
+                                                                                     //SbieDLL.dll to base64 for removing some detection from AV
             return GetModuleHandle(Encoding.UTF8.GetString(Convert.FromBase64String("U2JpZURsbC5kbGw="))) != IntPtr.Zero;
         }
 
