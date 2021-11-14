@@ -24,7 +24,7 @@ namespace MindLated
     {
         public static MethodDef? Init;
         public static MethodDef? Init2;
-        private ModuleDefMD? md;
+        private ModuleDefMD? md { get; set; }
         private string _directoryName = string.Empty;
 
         public Form1() => InitializeComponent();
@@ -73,7 +73,6 @@ namespace MindLated
 
                 Activate();
                 textBox1.Text = text;
-                md = ModuleDefMD.Load(text);
                 var num2 = text.LastIndexOf("\\", StringComparison.Ordinal);
                 if (num2 != -1)
                 {
@@ -95,6 +94,8 @@ namespace MindLated
 
         private void button1_Click(object sender, EventArgs e)
         {
+        
+            md = ModuleDefMD.Load(textBox1.Text);
             foreach (Action func in Proc)
             {
                 func();
