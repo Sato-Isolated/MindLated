@@ -11,7 +11,7 @@ namespace MindLated.Protection.Arithmetic.Functions
         public override ArithmeticVt Arithmetic(Instruction instruction, ModuleDef module)
         {
             var generator = new Generator.Generator();
-            if (!ArithmeticUtils.CheckArithmetic(instruction)) return null;
+            if (!ArithmeticUtils.CheckArithmetic(instruction)) return null!;
             var arithmeticEmulator = new ArithmeticEmulator(instruction.GetLdcI4Value(), generator.Next(), ArithmeticTypes);
             return new ArithmeticVt(new Value(arithmeticEmulator.GetValue(), arithmeticEmulator.GetY()), new Token(OpCodes.Xor), ArithmeticTypes);
         }

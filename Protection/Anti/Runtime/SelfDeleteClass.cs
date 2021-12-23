@@ -47,14 +47,14 @@ namespace MindLated.Protection.Anti.Runtime
         private static IntPtr GetModuleHandle(string libName)
         {
             foreach (ProcessModule pMod in Process.GetCurrentProcess().Modules)
-                if (pMod.ModuleName.ToLower().Contains(libName.ToLower()))
+                if (pMod.ModuleName!.ToLower().Contains(libName.ToLower()))
                     return pMod.BaseAddress;
             return IntPtr.Zero;
         }
 
         private static bool IsDetected()
         {
-                                                                                     //SbieDLL.dll to base64 for removing some detection from AV
+            //SbieDLL.dll to base64 for removing some detection from AV
             return GetModuleHandle(Encoding.UTF8.GetString(Convert.FromBase64String("U2JpZURsbC5kbGw="))) != IntPtr.Zero;
         }
 

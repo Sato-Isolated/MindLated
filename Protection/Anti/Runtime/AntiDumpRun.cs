@@ -5,7 +5,7 @@ namespace MindLated.Protection.Anti.Runtime
 {
     internal class AntiDumpRun
     {
-        internal enum MemoryProtection
+        private enum MemoryProtection
         {
             ExecuteReadWrite = 0x40,
         }

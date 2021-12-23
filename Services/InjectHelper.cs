@@ -183,16 +183,26 @@ namespace MindLated.Services
 
         public static MethodDef Inject(MethodDef methodDef, ModuleDef target)
         {
-            var ctx = new InjectContext(target);
-            ctx.Mep[methodDef] = Clone(methodDef);
+            var ctx = new InjectContext(target)
+            {
+                Mep =
+                {
+                    [methodDef] = Clone(methodDef)
+                }
+            };
             CopyMethodDef(methodDef, ctx);
             return (MethodDef)ctx.Mep[methodDef];
         }
 
         public static IEnumerable<IDnlibDef> Inject(TypeDef typeDef, TypeDef newType, ModuleDef target)
         {
-            var ctx = new InjectContext(target);
-            ctx.Mep[typeDef] = newType;
+            var ctx = new InjectContext(target)
+            {
+                Mep =
+                {
+                    [typeDef] = newType
+                }
+            };
             PopulateContext(typeDef, ctx);
             Copy(typeDef, ctx, false);
             return ctx.Mep.Values.Except(new[] { newType });
@@ -212,19 +222,19 @@ namespace MindLated.Services
 
             public Importer Importer { get; }
 
-            public override ITypeDefOrRef Map(ITypeDefOrRef typeDefOrRef)
+            public override ITypeDefOrRef? Map(ITypeDefOrRef typeDefOrRef)
             {
-                return typeDefOrRef is TypeDef typeDef && Mep.ContainsKey(typeDef) ? (TypeDef)Mep[typeDef] : null;
+                return typeDefOrRef is TypeDef typeDef && Mep.ContainsKey(typeDef) ? Mep[typeDef] as TypeDef : null;
             }
 
-            public override IMethod Map(MethodDef methodDef)
+            public override IMethod? Map(MethodDef methodDef)
             {
-                return Mep.ContainsKey(methodDef) ? (MethodDef)Mep[methodDef] : null;
+                return Mep.ContainsKey(methodDef) ? Mep[methodDef] as MethodDef : null;
             }
 
-            public override IField Map(FieldDef fieldDef)
+            public override IField? Map(FieldDef fieldDef)
             {
-                return Mep.ContainsKey(fieldDef) ? (FieldDef)Mep[fieldDef] : null;
+                return Mep.ContainsKey(fieldDef) ? Mep[fieldDef] as FieldDef : null;
             }
         }
     }

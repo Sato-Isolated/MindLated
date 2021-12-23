@@ -15,7 +15,7 @@ namespace MindLated.Protection.String
         public static void Generate()
         {
             using var manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("%Replace");
-            using var streamReader = new StreamReader(new MemoryStream(UnHush(Read(manifestResourceStream))));
+            using var streamReader = new StreamReader(new MemoryStream(UnHush(Read(manifestResourceStream!))));
             _list = streamReader.ReadToEnd().Split(new[]
             {
                 Environment.NewLine

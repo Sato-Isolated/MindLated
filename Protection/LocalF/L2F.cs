@@ -38,7 +38,7 @@ namespace MindLated.Protection.LocalF
                 else
                     def = _convertedLocals[local];
 
-                var eq = t.OpCode.Code switch
+                var eq = t.OpCode?.Code switch
                 {
                     Code.Ldloc => OpCodes.Ldsfld,
                     Code.Ldloc_S => OpCodes.Ldsfld,

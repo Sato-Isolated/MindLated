@@ -8,11 +8,11 @@ namespace MindLated.Protection.Proxy
 {
     public static class ProxyMeth
     {
-        public static Random rand = new();
-        public static List<MemberRef> MemberRefList = new();
+        private static readonly Random Rand = new();
+        private static readonly List<MemberRef> MemberRefList = new();
 
         //Scan de toutes les MemberRef
-        public static void ScanMemberRef(ModuleDef module)
+        private static void ScanMemberRef(ModuleDef module)
         {
             foreach (var type in module.Types)
             {
@@ -39,7 +39,7 @@ namespace MindLated.Protection.Proxy
             }
         }
 
-        public static MethodDef GenerateSwitch(MemberRef original, ModuleDef md)
+        private static MethodDef GenerateSwitch(MemberRef original, ModuleDef md)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace MindLated.Protection.Proxy
                 type.Add(md.CorLibTypes.Int32);
                 var methImplFlags = MethodImplAttributes.IL | MethodImplAttributes.Managed;
                 var methFlags = MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.ReuseSlot;
-                MethodDef meth = new MethodDefUser($"ProxyMeth{rand.Next(0, int.MaxValue)}", MethodSig.CreateStatic(original.MethodSig.RetType, type.ToArray()), methImplFlags, methFlags)
+                MethodDef meth = new MethodDefUser($"ProxyMeth{Rand.Next(0, int.MaxValue)}", MethodSig.CreateStatic(original.MethodSig.RetType, type.ToArray()), methImplFlags, methFlags)
                 {
                     Body = new CilBody()
                 };
@@ -83,7 +83,7 @@ namespace MindLated.Protection.Proxy
             }
             catch
             {
-                return null;
+                return null!;
             }
         }
 
@@ -109,7 +109,7 @@ namespace MindLated.Protection.Proxy
                                 method.DeclaringType.Methods.Add(proxy);
                                 instr[i].OpCode = OpCodes.Call;
                                 instr[i].Operand = proxy;
-                                var random = rand.Next(0, 5);
+                                var random = Rand.Next(0, 5);
                                 for (var b = 0; b < proxy.Body.Instructions.Count - 1; b++)
                                 {
                                     if (proxy.Body.Instructions[b].OpCode == OpCodes.Ldc_I4)

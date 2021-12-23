@@ -11,7 +11,7 @@ namespace MindLated.Protection.Arithmetic.Functions.Maths
 
         public override ArithmeticVt Arithmetic(Instruction instruction, ModuleDef module)
         {
-            if (!ArithmeticUtils.CheckArithmetic(instruction)) return null;
+            if (!ArithmeticUtils.CheckArithmetic(instruction)) return null!;
             var arithmeticTypes = new List<ArithmeticTypes> { ArithmeticTypes.Add, ArithmeticTypes.Sub };
             var arithmeticEmulator = new ArithmeticEmulator(instruction.GetLdcI4Value(), ArithmeticUtils.GetY(instruction.GetLdcI4Value()), ArithmeticTypes);
             return new ArithmeticVt(new Value(arithmeticEmulator.GetValue(arithmeticTypes), arithmeticEmulator.GetY()), new Token(ArithmeticUtils.GetOpCode(arithmeticEmulator.GetType), module.Import(ArithmeticUtils.GetMethod(ArithmeticTypes))), ArithmeticTypes);

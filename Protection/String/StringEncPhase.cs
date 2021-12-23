@@ -12,9 +12,9 @@ namespace MindLated.Protection.String
 {
     public static class StringEncPhase
     {
-        private static string key1 = Renamer.RenamerPhase.GenerateString(Renamer.RenamerPhase.RenameMode.Key);
-        private static string key2 = Renamer.RenamerPhase.GenerateString(Renamer.RenamerPhase.RenameMode.Key);
-        private static string key3 = Renamer.RenamerPhase.GenerateString(Renamer.RenamerPhase.RenameMode.Key);
+        private static readonly string Key1 = Renamer.RenamerPhase.GenerateString(Renamer.RenamerPhase.RenameMode.Key);
+        private static readonly string Key2 = Renamer.RenamerPhase.GenerateString(Renamer.RenamerPhase.RenameMode.Key);
+        private static readonly string Key3 = Renamer.RenamerPhase.GenerateString(Renamer.RenamerPhase.RenameMode.Key);
 
         private static void InjectClass(ModuleDef module)
         {
@@ -57,7 +57,7 @@ namespace MindLated.Protection.String
                         if (instr[i].OpCode == OpCodes.Ldstr)
                         {
                             var originalStr = instr[i].Operand as string;
-                            var encodedStr = Encrypt(originalStr);
+                            var encodedStr = Encrypt(originalStr!);
                             instr[i].Operand = encodedStr;
                             Str.Add(encodedStr);
                             instr.Insert(i + 1, Instruction.Create(OpCodes.Ldc_I4, Str.LastIndexOf(encodedStr)));
@@ -89,15 +89,15 @@ namespace MindLated.Protection.String
                             }
                             if (instr[i].Operand as string == "%Key1")
                             {
-                                instr[i].Operand = key1;
+                                instr[i].Operand = Key1;
                             }
                             if (instr[i].Operand as string == "%Key2")
                             {
-                                instr[i].Operand = key2;
+                                instr[i].Operand = Key2;
                             }
                             if (instr[i].Operand as string == "%Key3")
                             {
-                                instr[i].Operand = key3;
+                                instr[i].Operand = Key3;
                             }
                         }
                     }
@@ -107,11 +107,9 @@ namespace MindLated.Protection.String
             File.Delete($"{Path.GetTempPath()}List.txt");
         }
 
-
-
         private static byte[] Hush(IReadOnlyList<byte> text)
         {
-            var key = new Rfc2898DeriveBytes(key1, Encoding.ASCII.GetBytes(key2)).GetBytes(256 / 8);
+            var key = new Rfc2898DeriveBytes(Key1, Encoding.ASCII.GetBytes(Key2)).GetBytes(256 / 8);
             var xor = new byte[text.Count];
             for (var i = 0; i < text.Count; i++)
             {
@@ -122,11 +120,10 @@ namespace MindLated.Protection.String
 
         private static string Encrypt(string plainText)
         {
-
             var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
-            var keyBytes = new Rfc2898DeriveBytes(key1, Encoding.ASCII.GetBytes(key2)).GetBytes(256 / 8);
+            var keyBytes = new Rfc2898DeriveBytes(Key1, Encoding.ASCII.GetBytes(Key2)).GetBytes(256 / 8);
             var symmetricKey = new RijndaelManaged { Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7 };
-            var encryptor = symmetricKey.CreateEncryptor(keyBytes, Encoding.ASCII.GetBytes(key3));
+            var encryptor = symmetricKey.CreateEncryptor(keyBytes, Encoding.ASCII.GetBytes(Key3));
             using var memoryStream = new MemoryStream();
             using var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write);
             cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);

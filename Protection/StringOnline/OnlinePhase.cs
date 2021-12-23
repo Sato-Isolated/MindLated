@@ -22,7 +22,7 @@ namespace MindLated.Protection.StringOnline
                     {
                         if (methodDef2.Body.Instructions[i].OpCode != OpCodes.Ldstr) continue;
                         var plainText = methodDef2.Body.Instructions[i].Operand.ToString();
-                        var operand = ConvertStringToHex(plainText);
+                        var operand = ConvertStringToHex(plainText!);
                         methodDef2.Body.Instructions[i].Operand = operand;
                         methodDef2.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Call, Form1.Init));
                     }

@@ -23,7 +23,7 @@ namespace MindLated.Protection.CtrlFlow
             }
         }
 
-        public static void ExecuteMethod(MethodDef method)
+        private static void ExecuteMethod(MethodDef method)
         {
             method.Body.SimplifyMacros(method.Parameters);
             var blocks = BlockParser.ParseMethod(method);
@@ -68,17 +68,17 @@ namespace MindLated.Protection.CtrlFlow
                 method.Body.Instructions.Add(lastBlock);
         }
 
-        public static Random rnd = new();
+        private static readonly Random Rnd = new();
 
-        public static List<Block> Randomize(List<Block> input)
+        private static List<Block> Randomize(List<Block> input)
         {
             var ret = new List<Block>();
             foreach (var group in input)
-                ret.Insert(rnd.Next(0, ret.Count), group);
+                ret.Insert(Rnd.Next(0, ret.Count), group);
             return ret;
         }
 
-        public static List<Instruction> Calc(int value)
+        private static List<Instruction> Calc(int value)
         {
             var instructions = new List<Instruction> { Instruction.Create(OpCodes.Ldc_I4, value) };
             return instructions;

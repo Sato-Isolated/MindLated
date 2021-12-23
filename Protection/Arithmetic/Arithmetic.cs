@@ -9,7 +9,7 @@ namespace MindLated.Protection.Arithmetic
 {
     public static class Arithmetic
     {
-        private static ModuleDef _moduleDef1;
+        private static ModuleDef _moduleDef1 = null!;
 
         private static readonly List<Function> Tasks = new()
         {
@@ -49,7 +49,6 @@ namespace MindLated.Protection.Arithmetic
                         {
                             var iFunction = Tasks[generator.Next(5)];
                             var lstInstr = GenerateBody(iFunction.Arithmetic(mDef.Body.Instructions[i], moduleDef));
-                            if (lstInstr == null) continue;
                             mDef.Body.Instructions[i].OpCode = OpCodes.Nop;
                             foreach (var instr in lstInstr)
                             {
@@ -61,7 +60,6 @@ namespace MindLated.Protection.Arithmetic
                         {
                             var iFunction = Tasks[generator.Next(Tasks.Count)];
                             var lstInstr = GenerateBody(iFunction.Arithmetic(mDef.Body.Instructions[i], moduleDef));
-                            if (lstInstr == null) continue;
                             mDef.Body.Instructions[i].OpCode = OpCodes.Nop;
                             foreach (var instr in lstInstr)
                             {
