@@ -94,417 +94,40 @@ namespace MindLated
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            Md = ModuleDefMD.Load(textBox1.Text);
-            foreach (Action func in _proc)
+            try
             {
-                func();
+                Md = ModuleDefMD.Load(textBox1.Text);
+                foreach (Action func in _proc)
+                {
+                    func();
+                }
+                var text2 = Path.GetDirectoryName(textBox1.Text);
+                if (text2 != null && !text2.EndsWith("\\"))
+                    text2 += "\\";
+                var path = $"{text2}{Path.GetFileNameWithoutExtension(textBox1.Text)}_protected{Path.GetExtension(textBox1.Text)}";
+
+                var opts = new ModuleWriterOptions(Md)
+                {
+                    Logger = DummyLogger.NoThrowInstance
+                };
+                Md.Write(path, opts);
+
+                AppendMsg(richTextBox1, Color.Red, $"Save: {path}", true);
             }
-            var text2 = Path.GetDirectoryName(textBox1.Text);
-            if (text2 != null && !text2.EndsWith("\\"))
-                text2 += "\\";
-            var path = $"{text2}{Path.GetFileNameWithoutExtension(textBox1.Text)}_protected{Path.GetExtension(textBox1.Text)}";
-
-            var opts = new ModuleWriterOptions(Md)
+            catch (Exception ex)
             {
-                Logger = DummyLogger.NoThrowInstance
-            };
-            Md.Write(path, opts);
-
-            AppendMsg(richTextBox1, Color.Red, $"Save: {path}", true);
-        }
-
-        private readonly List<Action> _proc = new();
-
-        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-            {
-                _proc.Add(ProcessStringEncrypt);
-                listBox1.Items.Add("-> String Encrypt");
-            }
-            else
-            {
-                _proc.Remove(ProcessStringEncrypt);
-                listBox1.Items.Remove("-> String Encrypt");
+                MessageBox.Show("No file found!", "Error!");
             }
         }
 
-        private void ProcessStringEncrypt()
-        {
-            StringEncPhase.Execute(Md);
-        }
+        private readonly List<Action> _proc = new(); 
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox2.Checked)
-            {
-                _proc.Add(ProcessOnlineStringDecryption);
-                listBox1.Items.Add("-> OnlineStrDecrypt");
-            }
-            else
-            {
-                _proc.Remove(ProcessOnlineStringDecryption);
-                listBox1.Items.Remove("-> OnlineStrDecrypt");
-            }
-        }
-
-        private void ProcessOnlineStringDecryption()
-        {
-            OnlinePhase.Execute(Md);
-        }
-
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox3.Checked)
-            {
-                _proc.Add(ProcessControlFlow);
-                listBox1.Items.Add("-> ControlFlow");
-            }
-            else
-            {
-                _proc.Remove(ProcessControlFlow);
-                listBox1.Items.Remove("-> ControlFlow");
-            }
-        }
-
-        private void ProcessControlFlow()
-        {
-            ControlFlowObfuscation.Execute(Md);
-        }
-
-        private void checkBox4_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox4.Checked)
-            {
-                _proc.Add(ProcessIntConfusion);
-                listBox1.Items.Add("-> IntConfusion");
-            }
-            else
-            {
-                _proc.Remove(ProcessIntConfusion);
-                listBox1.Items.Remove("-> IntConfusion");
-            }
-        }
-
-        private void ProcessIntConfusion()
-        {
-            AddIntPhase.Execute2(Md);
-        }
-
-        private void checkBox5_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox5.Checked)
-            {
-                _proc.Add(ProcessArithmetic);
-                listBox1.Items.Add("-> Arithmetic");
-            }
-            else
-            {
-                _proc.Remove(ProcessArithmetic);
-                listBox1.Items.Remove("-> Arithmetic");
-            }
-        }
-
-        private void ProcessArithmetic()
-        {
-            Arithmetic.Execute(Md);
-        }
-
-        private void checkBox6_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox6.Checked)
-            {
-                _proc.Add(ProcessLocalToField);
-                listBox1.Items.Add("-> L2F");
-            }
-            else
-            {
-                _proc.Remove(ProcessLocalToField);
-                listBox1.Items.Remove("-> L2F");
-            }
-        }
-
-        private void ProcessLocalToField()
-        {
-            L2F.Execute(Md);
-        }
-
-        private void checkBox7_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox7.Checked)
-            {
-                _proc.Add(ProcessLocalToFieldV2);
-                listBox1.Items.Add("-> L2FV2");
-            }
-            else
-            {
-                _proc.Remove(ProcessLocalToFieldV2);
-                listBox1.Items.Remove("-> L2FV2");
-            }
-        }
-
-        private void ProcessLocalToFieldV2()
-        {
-            L2FV2.Execute(Md);
-        }
-
-        private void checkBox8_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox8.Checked)
-            {
-                _proc.Add(ProcessCalli);
-                listBox1.Items.Add("-> Calli");
-            }
-            else
-            {
-                _proc.Remove(ProcessCalli);
-                listBox1.Items.Remove("-> Calli");
-            }
-        }
-
-        private void ProcessCalli()
-        {
-            Calli.Execute(Md);
-        }
-
-        private void checkBox9_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox9.Checked)
-            {
-                _proc.Add(ProcessProxyMeth);
-                listBox1.Items.Add("-> ProxyMeth");
-            }
-            else
-            {
-                _proc.Remove(ProcessProxyMeth);
-                listBox1.Items.Remove("-> ProxyMeth");
-            }
-        }
-
-        private void ProcessProxyMeth()
-        {
-            ProxyMeth.Execute(Md);
-        }
-
-        private void checkBox10_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox10.Checked)
-            {
-                _proc.Add(ProcessProxyInt);
-                listBox1.Items.Add("-> ProxyInt");
-            }
-            else
-            {
-                _proc.Remove(ProcessProxyInt);
-                listBox1.Items.Remove("-> ProxyInt");
-            }
-        }
-
-        private void ProcessProxyInt()
-        {
-            ProxyInt.Execute(Md);
-        }
-
-        private void checkBox11_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox11.Checked)
-            {
-                _proc.Add(ProcessProxyString);
-                listBox1.Items.Add("-> ProxyString");
-            }
-            else
-            {
-                _proc.Remove(ProcessProxyString);
-                listBox1.Items.Remove("-> ProxyString");
-            }
-        }
-
-        private void ProcessProxyString()
-        {
-            ProxyString.Execute(Md);
-        }
-
-        private void checkBox12_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox12.Checked)
-            {
-                _proc.Add(ProcessRenamer);
-                listBox1.Items.Add("-> Renamer");
-            }
-            else
-            {
-                _proc.Remove(ProcessRenamer);
-                listBox1.Items.Remove("-> Renamer");
-            }
-        }
-
-        private void ProcessRenamer()
-        {
-            RenamerPhase.ExecuteClassRenaming(Md);
-            RenamerPhase.ExecuteFieldRenaming(Md);
-            RenamerPhase.ExecuteMethodRenaming(Md);
-            RenamerPhase.ExecuteModuleRenaming(Md);
-            RenamerPhase.ExecuteNamespaceRenaming(Md);
-            RenamerPhase.ExecutePropertiesRenaming(Md);
-        }
-
-        private void checkBox13_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox13.Checked)
-            {
-                _proc.Add(ProcessJumpCflow);
-                listBox1.Items.Add("-> JumpCflow");
-            }
-            else
-            {
-                _proc.Remove(ProcessJumpCflow);
-                listBox1.Items.Remove("-> JumpCflow");
-            }
-        }
-
-        private void ProcessJumpCflow()
-        {
-            JumpCFlow.Execute(Md);
-        }
-
-        private void checkBox14_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox14.Checked)
-            {
-                _proc.Add(ProcessAntiDebug);
-                listBox1.Items.Add("-> Anti Debug");
-            }
-            else
-            {
-                _proc.Remove(ProcessAntiDebug);
-                listBox1.Items.Remove("-> Anti Debug");
-            }
-        }
-
-        private void ProcessAntiDebug()
-        {
-            AntiDebug.Execute(Md);
-        }
-
-        private void checkBox15_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox15.Checked)
-            {
-                _proc.Add(ProcessAntiDump);
-                listBox1.Items.Add("-> Anti Dump");
-            }
-            else
-            {
-                _proc.Remove(ProcessAntiDump);
-                listBox1.Items.Remove("-> Anti Dump");
-            }
-        }
-
-        private void ProcessAntiDump()
-        {
-            AntiDump.Execute(Md);
-        }
-
-        private void checkBox16_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox16.Checked)
-            {
-                _proc.Add(ProcessAntiTamper);
-                listBox1.Items.Add("-> Anti Tamper");
-            }
-            else
-            {
-                _proc.Remove(ProcessAntiTamper);
-                listBox1.Items.Remove("-> Anti Tamper");
-            }
-        }
-
-        private void ProcessAntiTamper()
-        {
-            AntiTamper.Execute(Md);
-        }
-
-        private void checkBox17_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox17.Checked)
-            {
-                _proc.Add(ProcessInvalidMd);
-                listBox1.Items.Add("-> InvalidMD");
-            }
-            else
-            {
-                _proc.Remove(ProcessInvalidMd);
-                listBox1.Items.Remove("-> InvalidMD");
-            }
-        }
-
-        private void ProcessInvalidMd()
-        {
-            InvalidMDPhase.Execute(Md.Assembly);
-        }
-
-        private void checkBox18_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox18.Checked)
-            {
-                _proc.Add(ProcessAntiDe4dot);
-                listBox1.Items.Add("-> AntiDe4dot");
-            }
-            else
-            {
-                _proc.Remove(ProcessAntiDe4dot);
-                listBox1.Items.Remove("-> AntiDe4dot");
-            }
-        }
-
-        private void ProcessAntiDe4dot()
-        {
-            AntiDe4dot.Execute(Md.Assembly);
-        }
-
-        private void checkBox19_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox19.Checked)
-            {
-                _proc.Add(ProcessStackUnfConfusion);
-                listBox1.Items.Add("-> StackUnfConfusion");
-            }
-            else
-            {
-                _proc.Remove(ProcessStackUnfConfusion);
-                listBox1.Items.Remove("-> StackUnfConfusion");
-            }
-        }
-
-        private void ProcessStackUnfConfusion()
-        {
-            StackUnfConfusion.Execute(Md);
-        }
-
-        private void checkBox20_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox20.Checked)
-            {
-                _proc.Add(ProcessAntimanything);
-                listBox1.Items.Add("-> Anti manything");
-            }
-            else
-            {
-                _proc.Remove(ProcessAntimanything);
-                listBox1.Items.Remove("-> Anti manything");
-            }
-        }
-
-        private void ProcessAntimanything()
-        {
-            Antimanything.Execute(Md);
-        }
 
         private void btn_file_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Select your file";
-            
+
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 textBox1.Text = ofd.FileName;
@@ -531,6 +154,309 @@ namespace MindLated
                 }
                 btn_select.Text = selectAll;
             }
+        }
+
+        //////////////////////////////////////
+        ///   Method for adjusting list
+        /////////////////////////////////////
+
+        private void adjustProcess(CheckBox checkBox, Action action, string item)
+        {
+            if (checkBox.Checked)
+            {
+                _proc.Add(action);
+                listBox1.Items.Add(item);
+            }
+            else
+            {
+                _proc.Remove(action);
+                listBox1.Items.Remove(item);
+            }
+        }
+
+        //////////////////////////////////////
+        ///       String encryption
+        /////////////////////////////////////
+
+        private void cB_StringEncryption_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_StringEncryption, ProcessStringEncrypt, "-> String Encrypt");
+        }
+
+        private void ProcessStringEncrypt()
+        {
+            StringEncPhase.Execute(Md);
+        }
+
+        //////////////////////////////////////
+        ///    String Online Decryption
+        /////////////////////////////////////
+
+        private void cB_StringOnlineDecryption_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_StringOnlineDecryption, ProcessOnlineStringDecryption, "-> OnlineStrDecrypt");
+        }
+
+        private void ProcessOnlineStringDecryption()
+        {
+            OnlinePhase.Execute(Md);
+        }
+
+        //////////////////////////////////////
+        ///         Control Flow
+        /////////////////////////////////////
+
+        private void cB_ControlFlow_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_ControlFlow, ProcessControlFlow, "-> ControlFlow");
+        }
+
+        private void ProcessControlFlow()
+        {
+            ControlFlowObfuscation.Execute(Md);
+        }
+
+        //////////////////////////////////////
+        ///          IntConfusion
+        /////////////////////////////////////
+
+        private void cB_IntConfusion_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_IntConfusion, ProcessIntConfusion, "-> IntConfusion");
+        }
+
+        private void ProcessIntConfusion()
+        {
+            AddIntPhase.Execute2(Md);
+        }
+
+        //////////////////////////////////////
+        ///           Arithmetic
+        /////////////////////////////////////
+        private void cB_Arithmetic_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_Arithmetic, ProcessArithmetic, "-> Arithmetic");
+        }
+
+        private void ProcessArithmetic()
+        {
+            Arithmetic.Execute(Md);
+        }
+
+        //////////////////////////////////////
+        ///         Local to Field
+        /////////////////////////////////////
+
+        private void cB_Local2Field_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_Local2Field, ProcessLocalToField, "-> L2F");
+        }
+
+        private void ProcessLocalToField()
+        {
+            L2F.Execute(Md);
+        }
+
+        //////////////////////////////////////
+        ///        Local to Field V2
+        /////////////////////////////////////
+
+        private void cB_Local2FieldV2_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_Local2FieldV2, ProcessLocalToFieldV2, "-> L2FV2");
+        }
+
+        private void ProcessLocalToFieldV2()
+        {
+            L2FV2.Execute(Md);
+        }
+
+        //////////////////////////////////////
+        ///           Proxy Meth
+        /////////////////////////////////////
+
+        private void cB_ProxyMeth_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_ProxyMeth, ProcessProxyMeth, "-> ProxyMeth");
+        }
+
+        private void ProcessProxyMeth()
+        {
+            ProxyMeth.Execute(Md);
+        }
+
+        //////////////////////////////////////
+        ///           Proxy Int
+        /////////////////////////////////////
+
+        private void cB_ProxyInt_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_ProxyInt, ProcessProxyInt, "-> ProxyInt");
+        }
+
+        private void ProcessProxyInt()
+        {
+            ProxyInt.Execute(Md);
+        }
+
+        //////////////////////////////////////
+        ///         Proxy Strings
+        /////////////////////////////////////
+
+        private void cB_ProxyStrings_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_ProxyStrings, ProcessProxyString, "-> ProxyString");
+        }
+
+        private void ProcessProxyString()
+        {
+            ProxyString.Execute(Md);
+        }
+
+        //////////////////////////////////////
+        ///             ReName
+        /////////////////////////////////////
+
+        private void cB_Renamer_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_Renamer, ProcessRenamer, "-> Renamer");
+        }
+
+        private void ProcessRenamer()
+        {
+            RenamerPhase.ExecuteClassRenaming(Md);
+            RenamerPhase.ExecuteFieldRenaming(Md);
+            RenamerPhase.ExecuteMethodRenaming(Md);
+            RenamerPhase.ExecuteModuleRenaming(Md);
+            RenamerPhase.ExecuteNamespaceRenaming(Md);
+            RenamerPhase.ExecutePropertiesRenaming(Md);
+        }
+
+        //////////////////////////////////////
+        ///          JumpCFlow
+        /////////////////////////////////////
+
+        private void cB_JumpCflow_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_JumpCflow, ProcessJumpCflow, "-> JumpCflow");
+        }
+
+        private void ProcessJumpCflow()
+        {
+            JumpCFlow.Execute(Md);
+        }
+
+        //////////////////////////////////////
+        ///           AntiDebug
+        /////////////////////////////////////
+
+        private void cB_AntiDebug_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_AntiDebug, ProcessAntiDebug, "-> Anti Debug");
+        }
+
+        private void ProcessAntiDebug()
+        {
+            AntiDebug.Execute(Md);
+        }
+
+        //////////////////////////////////////
+        ///             Calli
+        /////////////////////////////////////
+
+        private void cB_Calli_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_Calli, ProcessCalli, "-> Calli");
+        }
+
+        private void ProcessCalli()
+        {
+            Calli.Execute(Md);
+        }
+
+        //////////////////////////////////////
+        ///          Invalid MD
+        /////////////////////////////////////
+
+        private void cB_InvalidMD_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_InvalidMD, ProcessInvalidMd, "-> InvalidMD");
+        }
+
+        private void ProcessInvalidMd()
+        {
+            InvalidMDPhase.Execute(Md.Assembly);
+        }
+
+
+        //////////////////////////////////////
+        ///           Anti De4Dot
+        /////////////////////////////////////
+
+        private void cB_AntiD4D_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_AntiD4D, ProcessAntiDe4dot, "-> AntiDe4dot");
+        }
+
+        private void ProcessAntiDe4dot()
+        {
+            AntiDe4dot.Execute(Md.Assembly);
+        }
+
+        //////////////////////////////////////
+        ///       StackUnfConfusion
+        /////////////////////////////////////
+        
+        private void cB_StackUnfConfusion_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_StackUnfConfusion, ProcessStackUnfConfusion, "-> StackUnfConfusion");
+        }
+
+        private void ProcessStackUnfConfusion()
+        {
+            StackUnfConfusion.Execute(Md);
+        }
+
+        //////////////////////////////////////
+        ///         AntiManything
+        /////////////////////////////////////
+
+        private void cB_AntiManything_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_AntiManything, ProcessAntimanything, "-> Anti manything");
+        }
+
+        private void ProcessAntimanything()
+        {
+            Antimanything.Execute(Md);
+        }
+
+        //////////////////////////////////////
+        ///          Anti Tamper
+        /////////////////////////////////////
+
+        private void cB_AntiTamper_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_AntiTamper, ProcessAntiTamper, "-> Anti Tamper");
+        }
+
+        private void ProcessAntiTamper()
+        {
+            AntiTamper.Execute(Md);
+        }
+
+        //////////////////////////////////////
+        ///           Anti Dump
+        /////////////////////////////////////
+
+        private void cB_AntiDump_CheckedChanged(object sender, EventArgs e)
+        {
+            adjustProcess(cB_AntiDump, ProcessAntiDump, "-> Anti Dump");
+        }
+
+        private void ProcessAntiDump()
+        {
+            AntiDump.Execute(Md);
         }
     }
 }

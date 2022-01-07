@@ -31,31 +31,34 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.checkBox11 = new System.Windows.Forms.CheckBox();
-            this.checkBox12 = new System.Windows.Forms.CheckBox();
-            this.checkBox13 = new System.Windows.Forms.CheckBox();
-            this.checkBox14 = new System.Windows.Forms.CheckBox();
-            this.checkBox15 = new System.Windows.Forms.CheckBox();
-            this.checkBox16 = new System.Windows.Forms.CheckBox();
-            this.checkBox17 = new System.Windows.Forms.CheckBox();
-            this.checkBox18 = new System.Windows.Forms.CheckBox();
-            this.checkBox19 = new System.Windows.Forms.CheckBox();
+            this.cB_StringEncryption = new System.Windows.Forms.CheckBox();
+            this.cB_StringOnlineDecryption = new System.Windows.Forms.CheckBox();
+            this.cB_ControlFlow = new System.Windows.Forms.CheckBox();
+            this.cB_IntConfusion = new System.Windows.Forms.CheckBox();
+            this.cB_Arithmetic = new System.Windows.Forms.CheckBox();
+            this.cB_Local2Field = new System.Windows.Forms.CheckBox();
+            this.cB_Local2FieldV2 = new System.Windows.Forms.CheckBox();
+            this.cB_Calli = new System.Windows.Forms.CheckBox();
+            this.cB_ProxyMeth = new System.Windows.Forms.CheckBox();
+            this.cB_ProxyInt = new System.Windows.Forms.CheckBox();
+            this.cB_ProxyStrings = new System.Windows.Forms.CheckBox();
+            this.cB_Renamer = new System.Windows.Forms.CheckBox();
+            this.cB_JumpCflow = new System.Windows.Forms.CheckBox();
+            this.cB_AntiDebug = new System.Windows.Forms.CheckBox();
+            this.cB_AntiDump = new System.Windows.Forms.CheckBox();
+            this.cB_AntiTamper = new System.Windows.Forms.CheckBox();
+            this.cB_InvalidMD = new System.Windows.Forms.CheckBox();
+            this.cB_AntiD4D = new System.Windows.Forms.CheckBox();
+            this.cB_StackUnfConfusion = new System.Windows.Forms.CheckBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.checkBox20 = new System.Windows.Forms.CheckBox();
+            this.cB_AntiManything = new System.Windows.Forms.CheckBox();
             this.btn_file = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_select = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,233 +89,233 @@
             this.listBox1.Size = new System.Drawing.Size(144, 359);
             this.listBox1.TabIndex = 1;
             // 
-            // checkBox1
+            // cB_StringEncryption
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox1.Location = new System.Drawing.Point(10, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(117, 19);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "String Encryption";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
+            this.cB_StringEncryption.AutoSize = true;
+            this.cB_StringEncryption.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_StringEncryption.Location = new System.Drawing.Point(10, 3);
+            this.cB_StringEncryption.Name = "cB_StringEncryption";
+            this.cB_StringEncryption.Size = new System.Drawing.Size(117, 19);
+            this.cB_StringEncryption.TabIndex = 2;
+            this.cB_StringEncryption.Text = "String Encryption";
+            this.cB_StringEncryption.UseVisualStyleBackColor = true;
+            this.cB_StringEncryption.CheckedChanged += new System.EventHandler(this.cB_StringEncryption_CheckedChanged);
             // 
-            // checkBox2
+            // cB_StringOnlineDecryption
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox2.Location = new System.Drawing.Point(10, 28);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(156, 19);
-            this.checkBox2.TabIndex = 3;
-            this.checkBox2.Text = "String Online Decryption";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.cB_StringOnlineDecryption.AutoSize = true;
+            this.cB_StringOnlineDecryption.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_StringOnlineDecryption.Location = new System.Drawing.Point(10, 28);
+            this.cB_StringOnlineDecryption.Name = "cB_StringOnlineDecryption";
+            this.cB_StringOnlineDecryption.Size = new System.Drawing.Size(156, 19);
+            this.cB_StringOnlineDecryption.TabIndex = 3;
+            this.cB_StringOnlineDecryption.Text = "String Online Decryption";
+            this.cB_StringOnlineDecryption.UseVisualStyleBackColor = true;
+            this.cB_StringOnlineDecryption.CheckedChanged += new System.EventHandler(this.cB_StringOnlineDecryption_CheckedChanged);
             // 
-            // checkBox3
+            // cB_ControlFlow
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox3.Location = new System.Drawing.Point(10, 53);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(94, 19);
-            this.checkBox3.TabIndex = 4;
-            this.checkBox3.Text = "Control Flow";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            this.cB_ControlFlow.AutoSize = true;
+            this.cB_ControlFlow.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_ControlFlow.Location = new System.Drawing.Point(10, 53);
+            this.cB_ControlFlow.Name = "cB_ControlFlow";
+            this.cB_ControlFlow.Size = new System.Drawing.Size(94, 19);
+            this.cB_ControlFlow.TabIndex = 4;
+            this.cB_ControlFlow.Text = "Control Flow";
+            this.cB_ControlFlow.UseVisualStyleBackColor = true;
+            this.cB_ControlFlow.CheckedChanged += new System.EventHandler(this.cB_ControlFlow_CheckedChanged);
             // 
-            // checkBox4
+            // cB_IntConfusion
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox4.Location = new System.Drawing.Point(10, 78);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(98, 19);
-            this.checkBox4.TabIndex = 5;
-            this.checkBox4.Text = "Int Confusion";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            this.cB_IntConfusion.AutoSize = true;
+            this.cB_IntConfusion.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_IntConfusion.Location = new System.Drawing.Point(10, 78);
+            this.cB_IntConfusion.Name = "cB_IntConfusion";
+            this.cB_IntConfusion.Size = new System.Drawing.Size(98, 19);
+            this.cB_IntConfusion.TabIndex = 5;
+            this.cB_IntConfusion.Text = "Int Confusion";
+            this.cB_IntConfusion.UseVisualStyleBackColor = true;
+            this.cB_IntConfusion.CheckedChanged += new System.EventHandler(this.cB_IntConfusion_CheckedChanged);
             // 
-            // checkBox5
+            // cB_Arithmetic
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox5.Location = new System.Drawing.Point(10, 102);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(82, 19);
-            this.checkBox5.TabIndex = 6;
-            this.checkBox5.Text = "Arithmetic";
-            this.checkBox5.UseVisualStyleBackColor = true;
-            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
+            this.cB_Arithmetic.AutoSize = true;
+            this.cB_Arithmetic.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_Arithmetic.Location = new System.Drawing.Point(10, 102);
+            this.cB_Arithmetic.Name = "cB_Arithmetic";
+            this.cB_Arithmetic.Size = new System.Drawing.Size(82, 19);
+            this.cB_Arithmetic.TabIndex = 6;
+            this.cB_Arithmetic.Text = "Arithmetic";
+            this.cB_Arithmetic.UseVisualStyleBackColor = true;
+            this.cB_Arithmetic.CheckedChanged += new System.EventHandler(this.cB_Arithmetic_CheckedChanged);
             // 
-            // checkBox6
+            // cB_Local2Field
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox6.Location = new System.Drawing.Point(10, 128);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(97, 19);
-            this.checkBox6.TabIndex = 7;
-            this.checkBox6.Text = "Local To Field";
-            this.checkBox6.UseVisualStyleBackColor = true;
-            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
+            this.cB_Local2Field.AutoSize = true;
+            this.cB_Local2Field.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_Local2Field.Location = new System.Drawing.Point(10, 128);
+            this.cB_Local2Field.Name = "cB_Local2Field";
+            this.cB_Local2Field.Size = new System.Drawing.Size(97, 19);
+            this.cB_Local2Field.TabIndex = 7;
+            this.cB_Local2Field.Text = "Local To Field";
+            this.cB_Local2Field.UseVisualStyleBackColor = true;
+            this.cB_Local2Field.CheckedChanged += new System.EventHandler(this.cB_Local2Field_CheckedChanged);
             // 
-            // checkBox7
+            // cB_Local2FieldV2
             // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox7.Location = new System.Drawing.Point(10, 153);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(113, 19);
-            this.checkBox7.TabIndex = 8;
-            this.checkBox7.Text = "Local To Field V2";
-            this.checkBox7.UseVisualStyleBackColor = true;
-            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox7_CheckedChanged);
+            this.cB_Local2FieldV2.AutoSize = true;
+            this.cB_Local2FieldV2.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_Local2FieldV2.Location = new System.Drawing.Point(10, 153);
+            this.cB_Local2FieldV2.Name = "cB_Local2FieldV2";
+            this.cB_Local2FieldV2.Size = new System.Drawing.Size(113, 19);
+            this.cB_Local2FieldV2.TabIndex = 8;
+            this.cB_Local2FieldV2.Text = "Local To Field V2";
+            this.cB_Local2FieldV2.UseVisualStyleBackColor = true;
+            this.cB_Local2FieldV2.CheckedChanged += new System.EventHandler(this.cB_Local2FieldV2_CheckedChanged);
             // 
-            // checkBox8
+            // cB_Calli
             // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox8.Location = new System.Drawing.Point(172, 153);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(49, 19);
-            this.checkBox8.TabIndex = 9;
-            this.checkBox8.Text = "Calli";
-            this.checkBox8.UseVisualStyleBackColor = true;
-            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
+            this.cB_Calli.AutoSize = true;
+            this.cB_Calli.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_Calli.Location = new System.Drawing.Point(172, 153);
+            this.cB_Calli.Name = "cB_Calli";
+            this.cB_Calli.Size = new System.Drawing.Size(49, 19);
+            this.cB_Calli.TabIndex = 9;
+            this.cB_Calli.Text = "Calli";
+            this.cB_Calli.UseVisualStyleBackColor = true;
+            this.cB_Calli.CheckedChanged += new System.EventHandler(this.cB_Calli_CheckedChanged);
             // 
-            // checkBox9
+            // cB_ProxyMeth
             // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox9.Location = new System.Drawing.Point(172, 3);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(87, 19);
-            this.checkBox9.TabIndex = 10;
-            this.checkBox9.Text = "Proxy Meth";
-            this.checkBox9.UseVisualStyleBackColor = true;
-            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
+            this.cB_ProxyMeth.AutoSize = true;
+            this.cB_ProxyMeth.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_ProxyMeth.Location = new System.Drawing.Point(172, 3);
+            this.cB_ProxyMeth.Name = "cB_ProxyMeth";
+            this.cB_ProxyMeth.Size = new System.Drawing.Size(87, 19);
+            this.cB_ProxyMeth.TabIndex = 10;
+            this.cB_ProxyMeth.Text = "Proxy Meth";
+            this.cB_ProxyMeth.UseVisualStyleBackColor = true;
+            this.cB_ProxyMeth.CheckedChanged += new System.EventHandler(this.cB_ProxyMeth_CheckedChanged);
             // 
-            // checkBox10
+            // cB_ProxyInt
             // 
-            this.checkBox10.AutoSize = true;
-            this.checkBox10.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox10.Location = new System.Drawing.Point(172, 28);
-            this.checkBox10.Name = "checkBox10";
-            this.checkBox10.Size = new System.Drawing.Size(73, 19);
-            this.checkBox10.TabIndex = 11;
-            this.checkBox10.Text = "Proxy Int";
-            this.checkBox10.UseVisualStyleBackColor = true;
-            this.checkBox10.CheckedChanged += new System.EventHandler(this.checkBox10_CheckedChanged);
+            this.cB_ProxyInt.AutoSize = true;
+            this.cB_ProxyInt.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_ProxyInt.Location = new System.Drawing.Point(172, 28);
+            this.cB_ProxyInt.Name = "cB_ProxyInt";
+            this.cB_ProxyInt.Size = new System.Drawing.Size(73, 19);
+            this.cB_ProxyInt.TabIndex = 11;
+            this.cB_ProxyInt.Text = "Proxy Int";
+            this.cB_ProxyInt.UseVisualStyleBackColor = true;
+            this.cB_ProxyInt.CheckedChanged += new System.EventHandler(this.cB_ProxyInt_CheckedChanged);
             // 
-            // checkBox11
+            // cB_ProxyStrings
             // 
-            this.checkBox11.AutoSize = true;
-            this.checkBox11.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox11.Location = new System.Drawing.Point(172, 53);
-            this.checkBox11.Name = "checkBox11";
-            this.checkBox11.Size = new System.Drawing.Size(95, 19);
-            this.checkBox11.TabIndex = 12;
-            this.checkBox11.Text = "Proxy Strings";
-            this.checkBox11.UseVisualStyleBackColor = true;
-            this.checkBox11.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.cB_ProxyStrings.AutoSize = true;
+            this.cB_ProxyStrings.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_ProxyStrings.Location = new System.Drawing.Point(172, 53);
+            this.cB_ProxyStrings.Name = "cB_ProxyStrings";
+            this.cB_ProxyStrings.Size = new System.Drawing.Size(95, 19);
+            this.cB_ProxyStrings.TabIndex = 12;
+            this.cB_ProxyStrings.Text = "Proxy Strings";
+            this.cB_ProxyStrings.UseVisualStyleBackColor = true;
+            this.cB_ProxyStrings.CheckedChanged += new System.EventHandler(this.cB_ProxyStrings_CheckedChanged);
             // 
-            // checkBox12
+            // cB_Renamer
             // 
-            this.checkBox12.AutoSize = true;
-            this.checkBox12.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox12.Location = new System.Drawing.Point(172, 77);
-            this.checkBox12.Name = "checkBox12";
-            this.checkBox12.Size = new System.Drawing.Size(73, 19);
-            this.checkBox12.TabIndex = 13;
-            this.checkBox12.Text = "Renamer";
-            this.checkBox12.UseVisualStyleBackColor = true;
-            this.checkBox12.CheckedChanged += new System.EventHandler(this.checkBox12_CheckedChanged);
+            this.cB_Renamer.AutoSize = true;
+            this.cB_Renamer.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_Renamer.Location = new System.Drawing.Point(172, 77);
+            this.cB_Renamer.Name = "cB_Renamer";
+            this.cB_Renamer.Size = new System.Drawing.Size(73, 19);
+            this.cB_Renamer.TabIndex = 13;
+            this.cB_Renamer.Text = "Renamer";
+            this.cB_Renamer.UseVisualStyleBackColor = true;
+            this.cB_Renamer.CheckedChanged += new System.EventHandler(this.cB_Renamer_CheckedChanged);
             // 
-            // checkBox13
+            // cB_JumpCflow
             // 
-            this.checkBox13.AutoSize = true;
-            this.checkBox13.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox13.Location = new System.Drawing.Point(172, 102);
-            this.checkBox13.Name = "checkBox13";
-            this.checkBox13.Size = new System.Drawing.Size(86, 19);
-            this.checkBox13.TabIndex = 14;
-            this.checkBox13.Text = "JumpCflow";
-            this.checkBox13.UseVisualStyleBackColor = true;
-            this.checkBox13.CheckedChanged += new System.EventHandler(this.checkBox13_CheckedChanged);
+            this.cB_JumpCflow.AutoSize = true;
+            this.cB_JumpCflow.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_JumpCflow.Location = new System.Drawing.Point(172, 102);
+            this.cB_JumpCflow.Name = "cB_JumpCflow";
+            this.cB_JumpCflow.Size = new System.Drawing.Size(86, 19);
+            this.cB_JumpCflow.TabIndex = 14;
+            this.cB_JumpCflow.Text = "JumpCflow";
+            this.cB_JumpCflow.UseVisualStyleBackColor = true;
+            this.cB_JumpCflow.CheckedChanged += new System.EventHandler(this.cB_JumpCflow_CheckedChanged);
             // 
-            // checkBox14
+            // cB_AntiDebug
             // 
-            this.checkBox14.AutoSize = true;
-            this.checkBox14.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox14.Location = new System.Drawing.Point(172, 127);
-            this.checkBox14.Name = "checkBox14";
-            this.checkBox14.Size = new System.Drawing.Size(86, 19);
-            this.checkBox14.TabIndex = 15;
-            this.checkBox14.Text = "Anti Debug";
-            this.checkBox14.UseVisualStyleBackColor = true;
-            this.checkBox14.CheckedChanged += new System.EventHandler(this.checkBox14_CheckedChanged);
+            this.cB_AntiDebug.AutoSize = true;
+            this.cB_AntiDebug.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_AntiDebug.Location = new System.Drawing.Point(172, 127);
+            this.cB_AntiDebug.Name = "cB_AntiDebug";
+            this.cB_AntiDebug.Size = new System.Drawing.Size(86, 19);
+            this.cB_AntiDebug.TabIndex = 15;
+            this.cB_AntiDebug.Text = "Anti Debug";
+            this.cB_AntiDebug.UseVisualStyleBackColor = true;
+            this.cB_AntiDebug.CheckedChanged += new System.EventHandler(this.cB_AntiDebug_CheckedChanged);
             // 
-            // checkBox15
+            // cB_AntiDump
             // 
-            this.checkBox15.AutoSize = true;
-            this.checkBox15.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox15.Location = new System.Drawing.Point(267, 128);
-            this.checkBox15.Name = "checkBox15";
-            this.checkBox15.Size = new System.Drawing.Size(84, 19);
-            this.checkBox15.TabIndex = 16;
-            this.checkBox15.Text = "Anti Dump";
-            this.checkBox15.UseVisualStyleBackColor = true;
-            this.checkBox15.CheckedChanged += new System.EventHandler(this.checkBox15_CheckedChanged);
+            this.cB_AntiDump.AutoSize = true;
+            this.cB_AntiDump.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_AntiDump.Location = new System.Drawing.Point(267, 128);
+            this.cB_AntiDump.Name = "cB_AntiDump";
+            this.cB_AntiDump.Size = new System.Drawing.Size(84, 19);
+            this.cB_AntiDump.TabIndex = 16;
+            this.cB_AntiDump.Text = "Anti Dump";
+            this.cB_AntiDump.UseVisualStyleBackColor = true;
+            this.cB_AntiDump.CheckedChanged += new System.EventHandler(this.cB_AntiDump_CheckedChanged);
             // 
-            // checkBox16
+            // cB_AntiTamper
             // 
-            this.checkBox16.AutoSize = true;
-            this.checkBox16.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox16.Location = new System.Drawing.Point(267, 103);
-            this.checkBox16.Name = "checkBox16";
-            this.checkBox16.Size = new System.Drawing.Size(90, 19);
-            this.checkBox16.TabIndex = 17;
-            this.checkBox16.Text = "Anti Tamper";
-            this.checkBox16.UseVisualStyleBackColor = true;
-            this.checkBox16.CheckedChanged += new System.EventHandler(this.checkBox16_CheckedChanged);
+            this.cB_AntiTamper.AutoSize = true;
+            this.cB_AntiTamper.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_AntiTamper.Location = new System.Drawing.Point(267, 103);
+            this.cB_AntiTamper.Name = "cB_AntiTamper";
+            this.cB_AntiTamper.Size = new System.Drawing.Size(90, 19);
+            this.cB_AntiTamper.TabIndex = 17;
+            this.cB_AntiTamper.Text = "Anti Tamper";
+            this.cB_AntiTamper.UseVisualStyleBackColor = true;
+            this.cB_AntiTamper.CheckedChanged += new System.EventHandler(this.cB_AntiTamper_CheckedChanged);
             // 
-            // checkBox17
+            // cB_InvalidMD
             // 
-            this.checkBox17.AutoSize = true;
-            this.checkBox17.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox17.Location = new System.Drawing.Point(267, 3);
-            this.checkBox17.Name = "checkBox17";
-            this.checkBox17.Size = new System.Drawing.Size(83, 19);
-            this.checkBox17.TabIndex = 18;
-            this.checkBox17.Text = "Invalid MD";
-            this.checkBox17.UseVisualStyleBackColor = true;
-            this.checkBox17.CheckedChanged += new System.EventHandler(this.checkBox17_CheckedChanged);
+            this.cB_InvalidMD.AutoSize = true;
+            this.cB_InvalidMD.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_InvalidMD.Location = new System.Drawing.Point(267, 3);
+            this.cB_InvalidMD.Name = "cB_InvalidMD";
+            this.cB_InvalidMD.Size = new System.Drawing.Size(83, 19);
+            this.cB_InvalidMD.TabIndex = 18;
+            this.cB_InvalidMD.Text = "Invalid MD";
+            this.cB_InvalidMD.UseVisualStyleBackColor = true;
+            this.cB_InvalidMD.CheckedChanged += new System.EventHandler(this.cB_InvalidMD_CheckedChanged);
             // 
-            // checkBox18
+            // cB_AntiD4D
             // 
-            this.checkBox18.AutoSize = true;
-            this.checkBox18.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox18.Location = new System.Drawing.Point(267, 28);
-            this.checkBox18.Name = "checkBox18";
-            this.checkBox18.Size = new System.Drawing.Size(88, 19);
-            this.checkBox18.TabIndex = 19;
-            this.checkBox18.Text = "Anti de4dot";
-            this.checkBox18.UseVisualStyleBackColor = true;
-            this.checkBox18.CheckedChanged += new System.EventHandler(this.checkBox18_CheckedChanged);
+            this.cB_AntiD4D.AutoSize = true;
+            this.cB_AntiD4D.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_AntiD4D.Location = new System.Drawing.Point(267, 28);
+            this.cB_AntiD4D.Name = "cB_AntiD4D";
+            this.cB_AntiD4D.Size = new System.Drawing.Size(88, 19);
+            this.cB_AntiD4D.TabIndex = 19;
+            this.cB_AntiD4D.Text = "Anti de4dot";
+            this.cB_AntiD4D.UseVisualStyleBackColor = true;
+            this.cB_AntiD4D.CheckedChanged += new System.EventHandler(this.cB_AntiD4D_CheckedChanged);
             // 
-            // checkBox19
+            // cB_StackUnfConfusion
             // 
-            this.checkBox19.AutoSize = true;
-            this.checkBox19.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox19.Location = new System.Drawing.Point(267, 53);
-            this.checkBox19.Name = "checkBox19";
-            this.checkBox19.Size = new System.Drawing.Size(128, 19);
-            this.checkBox19.TabIndex = 20;
-            this.checkBox19.Text = "StackUnfConfusion";
-            this.checkBox19.UseVisualStyleBackColor = true;
-            this.checkBox19.CheckedChanged += new System.EventHandler(this.checkBox19_CheckedChanged);
+            this.cB_StackUnfConfusion.AutoSize = true;
+            this.cB_StackUnfConfusion.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_StackUnfConfusion.Location = new System.Drawing.Point(267, 53);
+            this.cB_StackUnfConfusion.Name = "cB_StackUnfConfusion";
+            this.cB_StackUnfConfusion.Size = new System.Drawing.Size(128, 19);
+            this.cB_StackUnfConfusion.TabIndex = 20;
+            this.cB_StackUnfConfusion.Text = "StackUnfConfusion";
+            this.cB_StackUnfConfusion.UseVisualStyleBackColor = true;
+            this.cB_StackUnfConfusion.CheckedChanged += new System.EventHandler(this.cB_StackUnfConfusion_CheckedChanged);
             // 
             // richTextBox1
             // 
@@ -338,17 +341,17 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
-            // checkBox20
+            // cB_AntiManything
             // 
-            this.checkBox20.AutoSize = true;
-            this.checkBox20.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox20.Location = new System.Drawing.Point(267, 78);
-            this.checkBox20.Name = "checkBox20";
-            this.checkBox20.Size = new System.Drawing.Size(109, 19);
-            this.checkBox20.TabIndex = 23;
-            this.checkBox20.Text = "Anti Manything";
-            this.checkBox20.UseVisualStyleBackColor = true;
-            this.checkBox20.CheckedChanged += new System.EventHandler(this.checkBox20_CheckedChanged);
+            this.cB_AntiManything.AutoSize = true;
+            this.cB_AntiManything.ForeColor = System.Drawing.SystemColors.Control;
+            this.cB_AntiManything.Location = new System.Drawing.Point(267, 78);
+            this.cB_AntiManything.Name = "cB_AntiManything";
+            this.cB_AntiManything.Size = new System.Drawing.Size(109, 19);
+            this.cB_AntiManything.TabIndex = 23;
+            this.cB_AntiManything.Text = "Anti Manything";
+            this.cB_AntiManything.UseVisualStyleBackColor = true;
+            this.cB_AntiManything.CheckedChanged += new System.EventHandler(this.cB_AntiManything_CheckedChanged);
             // 
             // btn_file
             // 
@@ -367,26 +370,26 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.checkBox3);
-            this.panel1.Controls.Add(this.checkBox20);
-            this.panel1.Controls.Add(this.checkBox1);
-            this.panel1.Controls.Add(this.checkBox2);
-            this.panel1.Controls.Add(this.checkBox4);
-            this.panel1.Controls.Add(this.checkBox19);
-            this.panel1.Controls.Add(this.checkBox5);
-            this.panel1.Controls.Add(this.checkBox18);
-            this.panel1.Controls.Add(this.checkBox6);
-            this.panel1.Controls.Add(this.checkBox17);
-            this.panel1.Controls.Add(this.checkBox7);
-            this.panel1.Controls.Add(this.checkBox16);
-            this.panel1.Controls.Add(this.checkBox8);
-            this.panel1.Controls.Add(this.checkBox15);
-            this.panel1.Controls.Add(this.checkBox9);
-            this.panel1.Controls.Add(this.checkBox14);
-            this.panel1.Controls.Add(this.checkBox10);
-            this.panel1.Controls.Add(this.checkBox13);
-            this.panel1.Controls.Add(this.checkBox11);
-            this.panel1.Controls.Add(this.checkBox12);
+            this.panel1.Controls.Add(this.cB_ControlFlow);
+            this.panel1.Controls.Add(this.cB_AntiManything);
+            this.panel1.Controls.Add(this.cB_StringEncryption);
+            this.panel1.Controls.Add(this.cB_StringOnlineDecryption);
+            this.panel1.Controls.Add(this.cB_IntConfusion);
+            this.panel1.Controls.Add(this.cB_StackUnfConfusion);
+            this.panel1.Controls.Add(this.cB_Arithmetic);
+            this.panel1.Controls.Add(this.cB_AntiD4D);
+            this.panel1.Controls.Add(this.cB_Local2Field);
+            this.panel1.Controls.Add(this.cB_InvalidMD);
+            this.panel1.Controls.Add(this.cB_Local2FieldV2);
+            this.panel1.Controls.Add(this.cB_AntiTamper);
+            this.panel1.Controls.Add(this.cB_Calli);
+            this.panel1.Controls.Add(this.cB_AntiDump);
+            this.panel1.Controls.Add(this.cB_ProxyMeth);
+            this.panel1.Controls.Add(this.cB_AntiDebug);
+            this.panel1.Controls.Add(this.cB_ProxyInt);
+            this.panel1.Controls.Add(this.cB_JumpCflow);
+            this.panel1.Controls.Add(this.cB_ProxyStrings);
+            this.panel1.Controls.Add(this.cB_Renamer);
             this.panel1.Location = new System.Drawing.Point(9, 38);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(410, 177);
@@ -405,12 +408,44 @@
             this.btn_select.UseVisualStyleBackColor = false;
             this.btn_select.Click += new System.EventHandler(this.btn_select_Click);
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(9, 392);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(560, 17);
+            this.progressBar1.TabIndex = 27;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(6, 371);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 19);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "Status:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(53, 371);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 19);
+            this.label2.TabIndex = 29;
+            this.label2.Text = "Idle";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-            this.ClientSize = new System.Drawing.Size(578, 376);
+            this.ClientSize = new System.Drawing.Size(578, 416);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btn_select);
             this.Controls.Add(this.btn_file);
             this.Controls.Add(this.button1);
@@ -434,30 +469,33 @@
 
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.CheckBox checkBox7;
-        private System.Windows.Forms.CheckBox checkBox8;
-        private System.Windows.Forms.CheckBox checkBox9;
-        private System.Windows.Forms.CheckBox checkBox10;
-        private System.Windows.Forms.CheckBox checkBox11;
-        private System.Windows.Forms.CheckBox checkBox12;
-        private System.Windows.Forms.CheckBox checkBox13;
-        private System.Windows.Forms.CheckBox checkBox14;
-        private System.Windows.Forms.CheckBox checkBox15;
-        private System.Windows.Forms.CheckBox checkBox16;
-        private System.Windows.Forms.CheckBox checkBox17;
-        private System.Windows.Forms.CheckBox checkBox18;
-        private System.Windows.Forms.CheckBox checkBox19;
+        private System.Windows.Forms.CheckBox cB_StringEncryption;
+        private System.Windows.Forms.CheckBox cB_StringOnlineDecryption;
+        private System.Windows.Forms.CheckBox cB_ControlFlow;
+        private System.Windows.Forms.CheckBox cB_IntConfusion;
+        private System.Windows.Forms.CheckBox cB_Arithmetic;
+        private System.Windows.Forms.CheckBox cB_Local2Field;
+        private System.Windows.Forms.CheckBox cB_Local2FieldV2;
+        private System.Windows.Forms.CheckBox cB_Calli;
+        private System.Windows.Forms.CheckBox cB_ProxyMeth;
+        private System.Windows.Forms.CheckBox cB_ProxyInt;
+        private System.Windows.Forms.CheckBox cB_ProxyStrings;
+        private System.Windows.Forms.CheckBox cB_Renamer;
+        private System.Windows.Forms.CheckBox cB_JumpCflow;
+        private System.Windows.Forms.CheckBox cB_AntiDebug;
+        private System.Windows.Forms.CheckBox cB_AntiDump;
+        private System.Windows.Forms.CheckBox cB_AntiTamper;
+        private System.Windows.Forms.CheckBox cB_InvalidMD;
+        private System.Windows.Forms.CheckBox cB_AntiD4D;
+        private System.Windows.Forms.CheckBox cB_StackUnfConfusion;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.CheckBox checkBox20;
+        private System.Windows.Forms.CheckBox cB_AntiManything;
         private System.Windows.Forms.Button btn_file;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btn_select;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
