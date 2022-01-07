@@ -1,13 +1,12 @@
-# MindLated
-.net obfuscator
+# MindLatedEX
+MindLatedEX is a custom fork of the MindLated .NET obfuscator modified by KorolBlack.
+It features a new design, various new functions and multiple bugfixes.
+The aim of this fork is to make it more friendly to use for users and improve the methods overall.
 
-I add things when I feel like it. (i'm learning)
+![mindLated Mod](https://user-images.githubusercontent.com/70718908/148522515-064df8e2-70d8-4476-b037-ef7598361108.PNG)
 
-work only for crack me (not sure at 100% completely unstable and not optimized) 
+# Setup
+No Setup needed. Either compile the program yourself or get the latest compiled version.
 
-if you want to help me by improving the obfuscator you can do an PR
-
-![alt text](https://i.gyazo.com/577240e70840ae28d2b5dfcf764d877b.png)
-
-Example :
-![alt text](https://i.imgur.com/UnCLDVZ.png)
+# License
+This software is licensed under the MIT License.
