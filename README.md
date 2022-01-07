@@ -6,7 +6,7 @@ The aim of this fork is to make it more friendly to use for users and improve th
 ![mindLated Mod](https://user-images.githubusercontent.com/70718908/148522515-064df8e2-70d8-4476-b037-ef7598361108.PNG)
 
 # Requirements
-To run this program you need to install the .NET 5.0 Runtime provided [here](https://dotnet.microsoft.com/en-us/download)
+To run this program you need to install the .NET 5.0 Runtime provided [here](https://dotnet.microsoft.com/en-us/download).
 
 # Setup
 No Setup needed. Either compile the program yourself or get the latest compiled version.
