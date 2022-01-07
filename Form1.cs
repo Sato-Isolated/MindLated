@@ -499,5 +499,38 @@ namespace MindLated
         {
             Antimanything.Execute(Md);
         }
+
+        private void btn_file_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Select your file";
+            
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                textBox1.Text = ofd.FileName;
+            }
+        }
+
+        private void btn_select_Click(object sender, EventArgs e)
+        {
+            string selectAll = "Select all";
+            string unselectAll = "Unselect all";
+            if (btn_select.Text == selectAll)
+            {
+                foreach (CheckBox checkBox in panel1.Controls)
+                {
+                    checkBox.Checked = true;
+                }
+                btn_select.Text = unselectAll;
+            }
+            else
+            {
+                foreach (CheckBox checkbox in panel1.Controls)
+                {
+                    checkbox.Checked = false;
+                }
+                btn_select.Text = selectAll;
+            }
+        }
     }
 }
