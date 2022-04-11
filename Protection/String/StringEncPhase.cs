@@ -122,7 +122,7 @@ namespace MindLated.Protection.String
         {
             var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
             var keyBytes = new Rfc2898DeriveBytes(Key1, Encoding.ASCII.GetBytes(Key2)).GetBytes(256 / 8);
-            var symmetricKey = new RijndaelManaged { Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7 };
+            var symmetricKey = new AesCng { Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7 };
             var encryptor = symmetricKey.CreateEncryptor(keyBytes, Encoding.ASCII.GetBytes(Key3));
             using var memoryStream = new MemoryStream();
             using var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write);

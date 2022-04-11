@@ -59,7 +59,7 @@ namespace MindLated
         {
             try
             {
-                var array = (Array)e.Data.GetData(DataFormats.FileDrop);
+                var array = (Array)e.Data?.GetData(DataFormats.FileDrop)!;
                 var text = array.GetValue(0)!.ToString();
                 var num = text!.LastIndexOf(".", StringComparison.Ordinal);
                 if (num == -1)
@@ -90,7 +90,7 @@ namespace MindLated
             }
         }
 
-        private void TextBox1_DragEnter(object sender, DragEventArgs e) => e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None;
+        private void TextBox1_DragEnter(object sender, DragEventArgs e) => e.Effect = e.Data != null && e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None;
 
         private void Button1_Click(object sender, EventArgs e)
         {

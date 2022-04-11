@@ -53,8 +53,7 @@ namespace MindLated.Protection.String
                 var cipherTextBytes = Convert.FromBase64String(encryptedText);
                 var keyBytes = new Rfc2898DeriveBytes("%Key1", Encoding.ASCII.GetBytes("%Key2"))
                     .GetBytes(256 / 8);
-                var symmetricKey = new RijndaelManaged()
-                { Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7 };
+                var symmetricKey = new AesCng { Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7 };
 
                 var decryptor = symmetricKey.CreateDecryptor(keyBytes, Encoding.ASCII.GetBytes("%Key3"));
                 var memoryStream = new MemoryStream(cipherTextBytes);
