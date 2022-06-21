@@ -10,15 +10,14 @@ namespace MindLated.Protection.Other
         {
             foreach (var type in mod.Types)
             {
-                foreach (var dnlibDef in type.Methods)
+                foreach (var meth in type.Methods)
                 {
-                    var def = dnlibDef;
-                    if (def != null && !def.HasBody)
+                    if (meth is { HasBody: false })
                     {
                         break;
                     }
 
-                    var body = def?.Body;
+                    var body = meth?.Body;
                     var target = body?.Instructions[0];
                     var item = Instruction.Create(OpCodes.Br_S, target);
                     var instruction3 = Instruction.Create(OpCodes.Pop);

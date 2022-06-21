@@ -32,38 +32,38 @@ namespace MindLated.Protection.Arithmetic
             new Functions.Maths.Truncate()
         };
 
-        public static void Execute(ModuleDef moduleDef)
+        public static void Execute(ModuleDef module)
         {
-            _moduleDef1 = moduleDef;
+            _moduleDef1 = module;
             var generator = new Generator.Generator();
-            foreach (var tDef in moduleDef.Types)
+            foreach (var type in module.Types)
             {
-                foreach (var mDef in tDef.Methods)
+                foreach (var meth in type.Methods)
                 {
-                    if (!mDef.HasBody) continue;
-                    if (mDef.DeclaringType.IsGlobalModuleType) continue;
-                    for (var i = 0; i < mDef.Body.Instructions.Count; i++)
+                    if (!meth.HasBody) continue;
+                    if (meth.DeclaringType.IsGlobalModuleType) continue;
+                    for (var i = 0; i < meth.Body.Instructions.Count; i++)
                     {
-                        if (!ArithmeticUtils.CheckArithmetic(mDef.Body.Instructions[i])) continue;
-                        if (mDef.Body.Instructions[i].GetLdcI4Value() < 0)
+                        if (!ArithmeticUtils.CheckArithmetic(meth.Body.Instructions[i])) continue;
+                        if (meth.Body.Instructions[i].GetLdcI4Value() < 0)
                         {
                             var iFunction = Tasks[generator.Next(5)];
-                            var lstInstr = GenerateBody(iFunction.Arithmetic(mDef.Body.Instructions[i], moduleDef));
-                            mDef.Body.Instructions[i].OpCode = OpCodes.Nop;
+                            var lstInstr = GenerateBody(iFunction.Arithmetic(meth.Body.Instructions[i], module));
+                            meth.Body.Instructions[i].OpCode = OpCodes.Nop;
                             foreach (var instr in lstInstr)
                             {
-                                mDef.Body.Instructions.Insert(i + 1, instr);
+                                meth.Body.Instructions.Insert(i + 1, instr);
                                 i++;
                             }
                         }
                         else
                         {
                             var iFunction = Tasks[generator.Next(Tasks.Count)];
-                            var lstInstr = GenerateBody(iFunction.Arithmetic(mDef.Body.Instructions[i], moduleDef));
-                            mDef.Body.Instructions[i].OpCode = OpCodes.Nop;
+                            var lstInstr = GenerateBody(iFunction.Arithmetic(meth.Body.Instructions[i], module));
+                            meth.Body.Instructions[i].OpCode = OpCodes.Nop;
                             foreach (var instr in lstInstr)
                             {
-                                mDef.Body.Instructions.Insert(i + 1, instr);
+                                meth.Body.Instructions.Insert(i + 1, instr);
                                 i++;
                             }
                         }
@@ -74,28 +74,28 @@ namespace MindLated.Protection.Arithmetic
 
         private static List<Instruction> GenerateBody(ArithmeticVt arithmeticVTs)
         {
-            var instructions = new List<Instruction>();
+            var instr = new List<Instruction>();
             if (IsArithmetic(arithmeticVTs.GetArithmetic()))
             {
-                instructions.Add(new Instruction(OpCodes.Ldc_R8, arithmeticVTs.GetValue().GetX()));
-                instructions.Add(new Instruction(OpCodes.Ldc_R8, arithmeticVTs.GetValue().GetY()));
+                instr.Add(new Instruction(OpCodes.Ldc_R8, arithmeticVTs.GetValue().GetX()));
+                instr.Add(new Instruction(OpCodes.Ldc_R8, arithmeticVTs.GetValue().GetY()));
 
                 if (arithmeticVTs.GetToken().GetOperand() != null)
                 {
-                    instructions.Add(new Instruction(OpCodes.Call, arithmeticVTs.GetToken().GetOperand()));
+                    instr.Add(new Instruction(OpCodes.Call, arithmeticVTs.GetToken().GetOperand()));
                 }
-                instructions.Add(new Instruction(arithmeticVTs.GetToken().GetOpCode()));
-                instructions.Add(new Instruction(OpCodes.Call, _moduleDef1.Import(typeof(Convert).GetMethod("ToInt32", new[] { typeof(double) }))));
+                instr.Add(new Instruction(arithmeticVTs.GetToken().GetOpCode()));
+                instr.Add(new Instruction(OpCodes.Call, _moduleDef1.Import(typeof(Convert).GetMethod("ToInt32", new[] { typeof(double) }))));
                 //instructions.Add(new Instruction(OpCodes.Conv_I4));
             }
             else if (IsXor(arithmeticVTs.GetArithmetic()))
             {
-                instructions.Add(new Instruction(OpCodes.Ldc_I4, (int)arithmeticVTs.GetValue().GetX()));
-                instructions.Add(new Instruction(OpCodes.Ldc_I4, (int)arithmeticVTs.GetValue().GetY()));
-                instructions.Add(new Instruction(arithmeticVTs.GetToken().GetOpCode()));
-                instructions.Add(new Instruction(OpCodes.Conv_I4));
+                instr.Add(new Instruction(OpCodes.Ldc_I4, (int)arithmeticVTs.GetValue().GetX()));
+                instr.Add(new Instruction(OpCodes.Ldc_I4, (int)arithmeticVTs.GetValue().GetY()));
+                instr.Add(new Instruction(arithmeticVTs.GetToken().GetOpCode()));
+                instr.Add(new Instruction(OpCodes.Conv_I4));
             }
-            return instructions;
+            return instr;
         }
 
         private static bool IsArithmetic(ArithmeticTypes arithmetic)

@@ -14,18 +14,18 @@ namespace MindLated.Protection.LocalF
         {
             foreach (var type in module.Types.Where(x => x != module.GlobalType))
             {
-                foreach (var method2 in type.Methods.Where(x => x.HasBody && x.Body.HasInstructions && !x.IsConstructor))
+                foreach (var meth in type.Methods.Where(x => x.HasBody && x.Body.HasInstructions && !x.IsConstructor))
                 {
                     _convertedLocals = new Dictionary<Local, FieldDef>();
-                    Process(module, method2);
+                    Process(module, meth);
                 }
             }
         }
 
-        private static void Process(ModuleDef module, MethodDef method)
+        private static void Process(ModuleDef module, MethodDef meth)
         {
-            method.Body.SimplifyMacros(method.Parameters);
-            var instructions = method.Body.Instructions;
+            meth.Body.SimplifyMacros(meth.Parameters);
+            var instructions = meth.Body.Instructions;
             foreach (var t in instructions)
             {
                 if (t.Operand is not Local local) continue;
@@ -49,7 +49,7 @@ namespace MindLated.Protection.LocalF
                 t.OpCode = eq;
                 t.Operand = def;
             }
-            _convertedLocals.ToList().ForEach(x => method.Body.Variables.Remove(x.Key));
+            _convertedLocals.ToList().ForEach(x => meth.Body.Variables.Remove(x.Key));
             _convertedLocals = new Dictionary<Local, FieldDef>();
         }
     }

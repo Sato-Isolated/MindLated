@@ -47,11 +47,11 @@ namespace MindLated.Protection.String
             {
                 if (type.IsGlobalModuleType) continue;
 
-                foreach (var method in type.Methods)
+                foreach (var meth in type.Methods)
                 {
-                    if (!method.HasBody) continue;
+                    if (!meth.HasBody) continue;
 
-                    var instr = method.Body.Instructions;
+                    var instr = meth.Body.Instructions;
                     for (var i = 0; i < instr.Count; i++)
                     {
                         if (instr[i].OpCode == OpCodes.Ldstr)
@@ -66,7 +66,7 @@ namespace MindLated.Protection.String
                             instr.RemoveAt(i);
                         }
                     }
-                    method.Body.SimplifyBranches();
+                    meth.Body.SimplifyBranches();
                 }
             }
             File.WriteAllLines($"{Path.GetTempPath()}List.txt", Str);
@@ -74,11 +74,11 @@ namespace MindLated.Protection.String
             module.Resources.Add(new EmbeddedResource(p, Hush(bytes), ManifestResourceAttributes.Public));
             foreach (var type in module.GetTypes())
             {
-                foreach (var method in type.Methods)
+                foreach (var meth in type.Methods)
                 {
-                    if (!method.HasBody) continue;
+                    if (!meth.HasBody) continue;
 
-                    var instr = method.Body.Instructions;
+                    var instr = meth.Body.Instructions;
                     for (var i = 0; i < instr.Count; i++)
                     {
                         if (instr[i].OpCode == OpCodes.Ldstr)
@@ -101,7 +101,7 @@ namespace MindLated.Protection.String
                             }
                         }
                     }
-                    method.Body.SimplifyBranches();
+                    meth.Body.SimplifyBranches();
                 }
             }
             File.Delete($"{Path.GetTempPath()}List.txt");

@@ -16,15 +16,15 @@ namespace MindLated.Protection.Proxy
         {
             foreach (var type in module.Types)
             {
-                foreach (var method in type.Methods)
+                foreach (var meth in type.Methods)
                 {
-                    if (!method.HasBody || !method.Body.HasInstructions) continue;
-                    for (var i = 0; i < method.Body.Instructions.Count - 1; i++)
+                    if (!meth.HasBody || !meth.Body.HasInstructions) continue;
+                    for (var i = 0; i < meth.Body.Instructions.Count - 1; i++)
                     {
-                        if (method.Body.Instructions[i].OpCode != OpCodes.Call) continue;
+                        if (meth.Body.Instructions[i].OpCode != OpCodes.Call) continue;
                         try
                         {
-                            var original = (MemberRef)method.Body.Instructions[i].Operand;
+                            var original = (MemberRef)meth.Body.Instructions[i].Operand;
                             if (!original.HasThis)
                             {
                                 MemberRefList.Add(original);
@@ -93,20 +93,20 @@ namespace MindLated.Protection.Proxy
             foreach (var type in module.GetTypes())
             {
                 if (type.IsGlobalModuleType) continue;
-                foreach (var method in type.Methods.ToArray())
+                foreach (var meth in type.Methods.ToArray())
                 {
-                    if (!method.HasBody || method.Name.Contains("ProxyMeth")) continue;
-                    var instr = method.Body.Instructions;
+                    if (!meth.HasBody || meth.Name.Contains("ProxyMeth")) continue;
+                    var instr = meth.Body.Instructions;
                     for (var i = 0; i < instr.Count; i++)
                     {
-                        if (method.Body.Instructions[i].OpCode != OpCodes.Call) continue;
+                        if (meth.Body.Instructions[i].OpCode != OpCodes.Call) continue;
                         try
                         {
-                            var original = (MemberRef)method.Body.Instructions[i].Operand;
+                            var original = (MemberRef)meth.Body.Instructions[i].Operand;
                             if (!original.HasThis)
                             {
                                 var proxy = GenerateSwitch(original, module);
-                                method.DeclaringType.Methods.Add(proxy);
+                                meth.DeclaringType.Methods.Add(proxy);
                                 instr[i].OpCode = OpCodes.Call;
                                 instr[i].Operand = proxy;
                                 var random = Rand.Next(0, 5);
@@ -127,7 +127,7 @@ namespace MindLated.Protection.Proxy
                                     }
                                 }
 
-                                method.Body.Instructions.Insert(i, Instruction.CreateLdcI4(random));
+                                meth.Body.Instructions.Insert(i, Instruction.CreateLdcI4(random));
 
                                 /*   MethodSig originalsignature = original.MethodSig;
                                    var methImplFlags = MethodImplAttributes.IL | MethodImplAttributes.Managed;

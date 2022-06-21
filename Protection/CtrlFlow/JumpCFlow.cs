@@ -10,14 +10,14 @@ namespace MindLated.Protection.CtrlFlow
         {
             foreach (var type in module.Types)
             {
-                foreach (var method in type.Methods.ToArray())
+                foreach (var meth in type.Methods.ToArray())
                 {
-                    if (!method.HasBody || !method.Body.HasInstructions || method.Body.HasExceptionHandlers) continue;
-                    for (var i = 0; i < method.Body.Instructions.Count - 2; i++)
+                    if (!meth.HasBody || !meth.Body.HasInstructions || meth.Body.HasExceptionHandlers) continue;
+                    for (var i = 0; i < meth.Body.Instructions.Count - 2; i++)
                     {
-                        var inst = method.Body.Instructions[i + 1];
-                        method.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Ldstr, Renamer.RenamerPhase.GenerateString(Renamer.RenamerPhase.RenameMode.Ascii)));
-                        method.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Br_S, inst));
+                        var inst = meth.Body.Instructions[i + 1];
+                        meth.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Ldstr, Renamer.RenamerPhase.GenerateString(Renamer.RenamerPhase.RenameMode.Ascii)));
+                        meth.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Br_S, inst));
                         i += 2;
                     }
                 }

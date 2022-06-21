@@ -11,33 +11,33 @@ namespace MindLated.Protection.Other
         {
             foreach (var type in module.Types.ToArray())
             {
-                foreach (var method in type.Methods.ToArray())
+                foreach (var meth in type.Methods.ToArray())
                 {
-                    if (!method.HasBody) continue;
-                    if (!method.Body.HasInstructions) continue;
-                    if (method.FullName.Contains("My.")) continue;
-                    if (method.FullName.Contains(".My")) continue;
-                    if (method.FullName.Contains("Costura")) continue;
-                    if (method.IsConstructor) continue;
-                    if (method.DeclaringType.IsGlobalModuleType) continue;
-                    for (var i = 0; i < method.Body.Instructions.Count - 1; i++)
+                    if (!meth.HasBody) continue;
+                    if (!meth.Body.HasInstructions) continue;
+                    if (meth.FullName.Contains("My.")) continue;
+                    if (meth.FullName.Contains(".My")) continue;
+                    if (meth.FullName.Contains("Costura")) continue;
+                    if (meth.IsConstructor) continue;
+                    if (meth.DeclaringType.IsGlobalModuleType) continue;
+                    for (var i = 0; i < meth.Body.Instructions.Count - 1; i++)
                     {
                         try
                         {
-                            if (method.Body.Instructions[i].ToString().Contains("ISupportInitialize") || method.Body.Instructions[i].OpCode != OpCodes.Call &&
-                                method.Body.Instructions[i].OpCode != OpCodes.Callvirt &&
-                                method.Body.Instructions[i].OpCode != OpCodes.Ldloc_S) continue;
+                            if (meth.Body.Instructions[i].ToString().Contains("ISupportInitialize") || meth.Body.Instructions[i].OpCode != OpCodes.Call &&
+                                meth.Body.Instructions[i].OpCode != OpCodes.Callvirt &&
+                                meth.Body.Instructions[i].OpCode != OpCodes.Ldloc_S) continue;
 
-                            if (method.Body.Instructions[i].ToString().Contains("Object") || method.Body.Instructions[i].OpCode != OpCodes.Call &&
-                                method.Body.Instructions[i].OpCode != OpCodes.Callvirt &&
-                                method.Body.Instructions[i].OpCode != OpCodes.Ldloc_S) continue;
+                            if (meth.Body.Instructions[i].ToString().Contains("Object") || meth.Body.Instructions[i].OpCode != OpCodes.Call &&
+                                meth.Body.Instructions[i].OpCode != OpCodes.Callvirt &&
+                                meth.Body.Instructions[i].OpCode != OpCodes.Ldloc_S) continue;
 
                             try
                             {
-                                var membertocalli = (MemberRef)method.Body.Instructions[i].Operand;
-                                method.Body.Instructions[i].OpCode = OpCodes.Calli;
-                                method.Body.Instructions[i].Operand = membertocalli.MethodSig;
-                                method.Body.Instructions.Insert(i, Instruction.Create(OpCodes.Ldftn, membertocalli));
+                                var membertocalli = (MemberRef)meth.Body.Instructions[i].Operand;
+                                meth.Body.Instructions[i].OpCode = OpCodes.Calli;
+                                meth.Body.Instructions[i].Operand = membertocalli.MethodSig;
+                                meth.Body.Instructions.Insert(i, Instruction.Create(OpCodes.Ldftn, membertocalli));
                             }
                             catch (Exception)
                             {

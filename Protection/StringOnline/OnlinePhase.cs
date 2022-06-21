@@ -14,19 +14,19 @@ namespace MindLated.Protection.StringOnline
             foreach (var type in module.GetTypes())
             {
                 if (type.IsGlobalModuleType) continue;
-                foreach (var methodDef2 in type.Methods)
+                foreach (var meth in type.Methods)
                 {
-                    if (!methodDef2.HasBody || !methodDef2.Body.HasInstructions) continue;
-                    if (methodDef2.Name.Contains("Decoder")) continue;
-                    for (var i = 0; i < methodDef2.Body.Instructions.Count; i++)
+                    if (!meth.HasBody || !meth.Body.HasInstructions) continue;
+                    if (meth.Name.Contains("Decoder")) continue;
+                    for (var i = 0; i < meth.Body.Instructions.Count; i++)
                     {
-                        if (methodDef2.Body.Instructions[i].OpCode != OpCodes.Ldstr) continue;
-                        var plainText = methodDef2.Body.Instructions[i].Operand.ToString();
+                        if (meth.Body.Instructions[i].OpCode != OpCodes.Ldstr) continue;
+                        var plainText = meth.Body.Instructions[i].Operand.ToString();
                         var operand = ConvertStringToHex(plainText!);
-                        methodDef2.Body.Instructions[i].Operand = operand;
-                        methodDef2.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Call, Form1.Init));
+                        meth.Body.Instructions[i].Operand = operand;
+                        meth.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Call, Form1.Init));
                     }
-                    methodDef2.Body.SimplifyBranches();
+                    meth.Body.SimplifyBranches();
                 }
             }
         }

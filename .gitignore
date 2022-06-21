@@ -2,3 +2,5 @@
 **/obj/*
 .vs/MindLated/v16/.suo
 /.vs/MindLated/v17
+*.vsidx
+*.lock

@@ -10,13 +10,13 @@ namespace MindLated.Protection.Proxy
             foreach (var type in module.GetTypes())
             {
                 if (type.IsGlobalModuleType) continue;
-                foreach (var method in type.Methods)
+                foreach (var meth in type.Methods)
                 {
-                    if (!method.HasBody) continue;
-                    var instr = method.Body.Instructions;
+                    if (!meth.HasBody) continue;
+                    var instr = meth.Body.Instructions;
                     for (var i = 0; i < instr.Count; i++)
                     {
-                        if (method.Body.Instructions[i].IsLdcI4())
+                        if (meth.Body.Instructions[i].IsLdcI4())
                         {
                             var methImplFlags = MethodImplAttributes.IL | MethodImplAttributes.Managed;
                             var methFlags = MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.ReuseSlot;
@@ -31,7 +31,7 @@ namespace MindLated.Protection.Proxy
                             instr[i].OpCode = OpCodes.Call;
                             instr[i].Operand = meth1;
                         }
-                        else if (method.Body.Instructions[i].OpCode == OpCodes.Ldc_R4)
+                        else if (meth.Body.Instructions[i].OpCode == OpCodes.Ldc_R4)
                         {
                             var methImplFlags = MethodImplAttributes.IL | MethodImplAttributes.Managed;
                             var methFlags = MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.ReuseSlot;
@@ -41,7 +41,7 @@ namespace MindLated.Protection.Proxy
                             module.GlobalType.Methods.Add(meth1);
                             meth1.Body = new CilBody();
                             meth1.Body.Variables.Add(new Local(module.CorLibTypes.Double));
-                            meth1.Body.Instructions.Add(Instruction.Create(OpCodes.Ldc_R4, (float)method.Body.Instructions[i].Operand));
+                            meth1.Body.Instructions.Add(Instruction.Create(OpCodes.Ldc_R4, (float)meth.Body.Instructions[i].Operand));
                             meth1.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
                             instr[i].OpCode = OpCodes.Call;
                             instr[i].Operand = meth1;

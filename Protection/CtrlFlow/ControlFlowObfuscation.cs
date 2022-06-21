@@ -10,62 +10,62 @@ namespace MindLated.Protection.CtrlFlow
     {
         public static void Execute(ModuleDefMD md)
         {
-            foreach (var tDef in md.Types)
+            foreach (var type in md.Types)
             {
-                if (tDef == md.GlobalType) continue;
-                foreach (var mDef in tDef.Methods)
+                if (type == md.GlobalType) continue;
+                foreach (var meth in type.Methods)
                 {
-                    if (mDef.Name.StartsWith("get_") || mDef.Name.StartsWith("set_")) continue;
-                    if (!mDef.HasBody || mDef.IsConstructor) continue;
-                    mDef.Body.SimplifyBranches();
-                    ExecuteMethod(mDef);
+                    if (meth.Name.StartsWith("get_") || meth.Name.StartsWith("set_")) continue;
+                    if (!meth.HasBody || meth.IsConstructor) continue;
+                    meth.Body.SimplifyBranches();
+                    ExecuteMethod(meth);
                 }
             }
         }
 
-        private static void ExecuteMethod(MethodDef method)
+        private static void ExecuteMethod(MethodDef meth)
         {
-            method.Body.SimplifyMacros(method.Parameters);
-            var blocks = BlockParser.ParseMethod(method);
+            meth.Body.SimplifyMacros(meth.Parameters);
+            var blocks = BlockParser.ParseMethod(meth);
             blocks = Randomize(blocks);
-            method.Body.Instructions.Clear();
-            var local = new Local(method.Module.CorLibTypes.Int32);
-            method.Body.Variables.Add(local);
+            meth.Body.Instructions.Clear();
+            var local = new Local(meth.Module.CorLibTypes.Int32);
+            meth.Body.Variables.Add(local);
             var target = Instruction.Create(OpCodes.Nop);
             var instr = Instruction.Create(OpCodes.Br, target);
             foreach (var instruction in Calc(0))
-                method.Body.Instructions.Add(instruction);
-            method.Body.Instructions.Add(Instruction.Create(OpCodes.Stloc, local));
-            method.Body.Instructions.Add(Instruction.Create(OpCodes.Br, instr));
-            method.Body.Instructions.Add(target);
+                meth.Body.Instructions.Add(instruction);
+            meth.Body.Instructions.Add(Instruction.Create(OpCodes.Stloc, local));
+            meth.Body.Instructions.Add(Instruction.Create(OpCodes.Br, instr));
+            meth.Body.Instructions.Add(target);
             foreach (var block in blocks.Where(block => block != blocks.Single(x => x.Number == blocks.Count - 1)))
             {
-                method.Body.Instructions.Add(Instruction.Create(OpCodes.Ldloc, local));
+                meth.Body.Instructions.Add(Instruction.Create(OpCodes.Ldloc, local));
                 foreach (var instruction in Calc(block.Number))
-                    method.Body.Instructions.Add(instruction);
-                method.Body.Instructions.Add(Instruction.Create(OpCodes.Ceq));
+                    meth.Body.Instructions.Add(instruction);
+                meth.Body.Instructions.Add(Instruction.Create(OpCodes.Ceq));
                 var instruction4 = Instruction.Create(OpCodes.Nop);
-                method.Body.Instructions.Add(Instruction.Create(OpCodes.Brfalse, instruction4));
+                meth.Body.Instructions.Add(Instruction.Create(OpCodes.Brfalse, instruction4));
 
                 foreach (var instruction in block.Instructions)
-                    method.Body.Instructions.Add(instruction);
+                    meth.Body.Instructions.Add(instruction);
 
                 foreach (var instruction in Calc(block.Number + 1))
-                    method.Body.Instructions.Add(instruction);
+                    meth.Body.Instructions.Add(instruction);
 
-                method.Body.Instructions.Add(Instruction.Create(OpCodes.Stloc, local));
-                method.Body.Instructions.Add(instruction4);
+                meth.Body.Instructions.Add(Instruction.Create(OpCodes.Stloc, local));
+                meth.Body.Instructions.Add(instruction4);
             }
-            method.Body.Instructions.Add(Instruction.Create(OpCodes.Ldloc, local));
+            meth.Body.Instructions.Add(Instruction.Create(OpCodes.Ldloc, local));
             foreach (var instruction in Calc(blocks.Count - 1))
-                method.Body.Instructions.Add(instruction);
-            method.Body.Instructions.Add(Instruction.Create(OpCodes.Ceq));
-            method.Body.Instructions.Add(Instruction.Create(OpCodes.Brfalse, instr));
-            method.Body.Instructions.Add(Instruction.Create(OpCodes.Br, blocks.Single(x => x.Number == blocks.Count - 1).Instructions[0]));
-            method.Body.Instructions.Add(instr);
+                meth.Body.Instructions.Add(instruction);
+            meth.Body.Instructions.Add(Instruction.Create(OpCodes.Ceq));
+            meth.Body.Instructions.Add(Instruction.Create(OpCodes.Brfalse, instr));
+            meth.Body.Instructions.Add(Instruction.Create(OpCodes.Br, blocks.Single(x => x.Number == blocks.Count - 1).Instructions[0]));
+            meth.Body.Instructions.Add(instr);
 
             foreach (var lastBlock in blocks.Single(x => x.Number == blocks.Count - 1).Instructions)
-                method.Body.Instructions.Add(lastBlock);
+                meth.Body.Instructions.Add(lastBlock);
         }
 
         private static readonly Random Rnd = new();

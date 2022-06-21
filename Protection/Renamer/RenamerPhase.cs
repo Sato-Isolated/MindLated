@@ -47,7 +47,7 @@ namespace MindLated.Protection.Renamer
 
         private static readonly Dictionary<string, string> Names = new();
 
-        public static ModuleDefMD ExecuteClassRenaming(ModuleDefMD module)
+        public static void ExecuteClassRenaming(ModuleDefMD module)
         {
             foreach (var type in module.GetTypes())
             {
@@ -65,10 +65,11 @@ namespace MindLated.Protection.Renamer
                     type.Name = newName;
                 }
             }
-            return ApplyChangesToResourcesClasses(module);
+
+            ApplyChangesToResourcesClasses(module);
         }
 
-        private static ModuleDefMD ApplyChangesToResourcesClasses(ModuleDefMD module)
+        private static void ApplyChangesToResourcesClasses(ModuleDefMD module)
         {
             var moduleToRename = module;
 
@@ -104,10 +105,9 @@ namespace MindLated.Protection.Renamer
                     }
                 }
             }
-            return moduleToRename;
         }
 
-        public static ModuleDefMD ExecuteFieldRenaming(ModuleDefMD module)
+        public static void ExecuteFieldRenaming(ModuleDefMD module)
         {
             foreach (var type in module.GetTypes())
             {
@@ -127,10 +127,10 @@ namespace MindLated.Protection.Renamer
                 }
             }
 
-            return ApplyChangesToResourcesField(module);
+            ApplyChangesToResourcesField(module);
         }
 
-        private static ModuleDefMD ApplyChangesToResourcesField(ModuleDefMD module)
+        private static void ApplyChangesToResourcesField(ModuleDefMD module)
         {
             foreach (var type in module.GetTypes())
             {
@@ -154,10 +154,9 @@ namespace MindLated.Protection.Renamer
                     }
                 }
             }
-            return module;
         }
 
-        public static ModuleDefMD ExecuteMethodRenaming(ModuleDefMD module)
+        public static void ExecuteMethodRenaming(ModuleDefMD module)
         {
             foreach (var type in module.GetTypes())
             {
@@ -176,7 +175,6 @@ namespace MindLated.Protection.Renamer
                     method.Name = GenerateString(RenameMode.Ascii);
                 }
             }
-            return module;
         }
 
         public static void ExecuteModuleRenaming(ModuleDefMD mod)
@@ -199,7 +197,7 @@ namespace MindLated.Protection.Renamer
             }
         }
 
-        public static ModuleDefMD ExecuteNamespaceRenaming(ModuleDefMD module)
+        public static void ExecuteNamespaceRenaming(ModuleDefMD module)
         {
             foreach (var type in module.GetTypes())
             {
@@ -219,10 +217,10 @@ namespace MindLated.Protection.Renamer
                 }
             }
 
-            return ApplyChangesToResourcesNamespace(module);
+            ApplyChangesToResourcesNamespace(module);
         }
 
-        private static ModuleDefMD ApplyChangesToResourcesNamespace(ModuleDefMD module)
+        private static void ApplyChangesToResourcesNamespace(ModuleDefMD module)
         {
             foreach (var resource in module.Resources)
             {
@@ -253,10 +251,9 @@ namespace MindLated.Protection.Renamer
                     }
                 }
             }
-            return module;
         }
 
-        public static ModuleDefMD ExecutePropertiesRenaming(ModuleDefMD module)
+        public static void ExecutePropertiesRenaming(ModuleDefMD module)
         {
             foreach (var type in module.GetTypes())
             {
@@ -267,7 +264,6 @@ namespace MindLated.Protection.Renamer
                     property.Name = GenerateString(RenameMode.Ascii);
                 }
             }
-            return module;
         }
     }
 }

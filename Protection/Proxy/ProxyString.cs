@@ -10,10 +10,10 @@ namespace MindLated.Protection.Proxy
             foreach (var type in module.GetTypes())
             {
                 if (type.IsGlobalModuleType) continue;
-                foreach (var method in type.Methods)
+                foreach (var meth in type.Methods)
                 {
-                    if (!method.HasBody) continue;
-                    var instr = method.Body.Instructions;
+                    if (!meth.HasBody) continue;
+                    var instr = meth.Body.Instructions;
                     foreach (var t in instr)
                     {
                         if (t.OpCode != OpCodes.Ldstr) continue;

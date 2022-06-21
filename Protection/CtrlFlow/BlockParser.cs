@@ -6,7 +6,7 @@ namespace MindLated.Protection.CtrlFlow
 {
     public class BlockParser
     {
-        public static List<Block> ParseMethod(MethodDef method)
+        public static List<Block> ParseMethod(MethodDef meth)
         {
             var blocks = new List<Block>();
             var block = new Block();
@@ -17,14 +17,14 @@ namespace MindLated.Protection.CtrlFlow
             blocks.Add(block);
             block = new Block();
             var handlers = new Stack<ExceptionHandler>();
-            foreach (var instruction in method.Body.Instructions)
+            foreach (var instruction in meth.Body.Instructions)
             {
-                foreach (var eh in method.Body.ExceptionHandlers)
+                foreach (var eh in meth.Body.ExceptionHandlers)
                 {
                     if (eh.HandlerStart == instruction || eh.TryStart == instruction || eh.FilterStart == instruction)
                         handlers.Push(eh);
                 }
-                foreach (var eh in method.Body.ExceptionHandlers)
+                foreach (var eh in meth.Body.ExceptionHandlers)
                 {
                     if (eh.HandlerEnd == instruction || eh.TryEnd == instruction)
                         handlers.Pop();
