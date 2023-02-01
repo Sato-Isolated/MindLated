@@ -92,10 +92,15 @@ internal class RenamerPhase
     {
         foreach (var type in module.GetTypes())
         {
-            if (type.IsGlobalModuleType) continue;
+            if (type.IsGlobalModuleType)
+                continue;
 
             if (type.Name == "GeneratedInternalTypeHelper" || type.Name == "Resources" || type.Name == "Settings")
                 continue;
+
+            if (type.FullName.Contains(".My"))
+                continue;
+
             if (Names.TryGetValue(type.Name, out var nameValue))
             {
                 type.Name = nameValue;
@@ -116,12 +121,10 @@ internal class RenamerPhase
     private static void ApplyChangesToResourcesClasses(ModuleDefMD module)
     {
         var moduleToRename = module;
-
         foreach (var resource in moduleToRename.Resources)
         foreach (var item in Names)
             if (resource.Name.Contains(item.Key))
                 resource.Name = resource.Name.Replace(item.Key, item.Value);
-
         foreach (var type in moduleToRename.GetTypes())
         foreach (var property in type.Properties)
         {
@@ -145,6 +148,8 @@ internal class RenamerPhase
         {
             if (type.IsGlobalModuleType) continue;
 
+            if (type.FullName.Contains(".My"))
+                continue;
             foreach (var field in type.Fields)
                 if (Names.TryGetValue(field.Name, out var nameValue))
                 {
@@ -162,14 +167,18 @@ internal class RenamerPhase
         ApplyChangesToResourcesField(module);
     }
 
-    private static ModuleDefMD ApplyChangesToResourcesField(ModuleDefMD module)
+    private static void ApplyChangesToResourcesField(ModuleDefMD module)
     {
-        foreach (var typeDef in module.GetTypes())
-            if (!typeDef.IsGlobalModuleType)
-                foreach (var methodDef in typeDef.Methods)
+        foreach (var type in module.GetTypes())
+            if (!type.IsGlobalModuleType)
+            {
+                if (type.FullName.Contains(".My"))
+                    continue;
+                foreach (var methodDef in type.Methods)
                     if (methodDef.Name != "InitializeComponent")
                     {
                         if (!methodDef.HasBody) continue;
+
                         IList<Instruction> instructions = methodDef.Body.Instructions;
                         for (var i = 0; i < instructions.Count - 3; i++)
                             if (instructions[i].OpCode == OpCodes.Ldstr)
@@ -177,8 +186,7 @@ internal class RenamerPhase
                                     if (keyValuePair.Key == instructions[i].Operand.ToString())
                                         instructions[i].Operand = keyValuePair.Value;
                     }
-
-        return module;
+            }
     }
 
     public static void ExecuteMethodRenaming(ModuleDefMD module)
@@ -186,6 +194,8 @@ internal class RenamerPhase
         foreach (var type in module.GetTypes())
         {
             if (type.IsGlobalModuleType) continue;
+            if (type.FullName.Contains(".My"))
+                continue;
 
             if (type.Name == "GeneratedInternalTypeHelper") continue;
 
@@ -229,6 +239,9 @@ internal class RenamerPhase
         {
             if (type.IsGlobalModuleType) continue;
 
+            if (type.FullName.Contains(".My"))
+                continue;
+
             if (type.Namespace == "") continue;
 
             if (Names.TryGetValue(type.Namespace, out var nameValue))
@@ -256,8 +269,7 @@ internal class RenamerPhase
         foreach (var type in module.GetTypes())
         foreach (var property in type.Properties)
         {
-            if (property.Name != "ResourceManager")
-                continue;
+            if (property.Name != "ResourceManager") continue;
 
             var instr = property.GetMethod.Body.Instructions;
 
