@@ -43,7 +43,7 @@ public partial class Form1 : Form
                 using var temp = new RichTextBox();
                 temp.SelectionColor = color;
                 if (autoTime)
-                    temp.AppendText(DateTime.Now.ToString("HH:mm:ss"));
+                    temp.AppendText(DateTime.Now.ToString("HH:mm:ss") + " ");
                 temp.AppendText(text);
                 rtb.Select(rtb.Rtf.Length, 0);
                 rtb.SelectedRtf = temp.Rtf;
@@ -178,12 +178,12 @@ public partial class Form1 : Form
                 Watermark.Execute(Md);
                 break;
             case Protection.Renamer:
+                RenamerPhase.ExecuteNamespaceRenaming(Md);
+                RenamerPhase.ExecuteModuleRenaming(Md);
                 RenamerPhase.ExecuteClassRenaming(Md);
+                RenamerPhase.ExecutePropertiesRenaming(Md);
                 RenamerPhase.ExecuteFieldRenaming(Md);
                 RenamerPhase.ExecuteMethodRenaming(Md);
-                RenamerPhase.ExecuteModuleRenaming(Md);
-                RenamerPhase.ExecuteNamespaceRenaming(Md);
-                RenamerPhase.ExecutePropertiesRenaming(Md);
                 break;
             case Protection.StackUnf:
                 StackUnfConfusion.Execute(Md);

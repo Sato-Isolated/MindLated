@@ -4,3 +4,5 @@
 /.vs/MindLated/v17
 *.vsidx
 *.lock
+MindLated.sln.DotSettings.user
+.vs/MindLated/DesignTimeBuild/.dtbcache.v2

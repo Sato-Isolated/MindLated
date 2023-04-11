@@ -80,7 +80,7 @@ internal class RenamerPhase
     {
         return mode switch
         {
-            RenameMode.Ascii => RandomString(Random.Next(1, 7), Ascii),
+            RenameMode.Ascii => RandomString(Random.Next(3, 12), Ascii),
             RenameMode.Key => RandomString(16, Ascii),
             RenameMode.Normal => GetRandomName(),
             _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
@@ -90,24 +90,26 @@ internal class RenamerPhase
 
     public static void ExecuteClassRenaming(ModuleDefMD module)
     {
-        foreach (var type in module.GetTypes())
+        foreach (TypeDef? type in module.GetTypes())
         {
             if (type.IsGlobalModuleType)
+            {
                 continue;
+            }
 
             if (type.Name == "GeneratedInternalTypeHelper" || type.Name == "Resources" || type.Name == "Settings")
+            {
                 continue;
+            }
 
-            if (type.FullName.Contains(".My"))
-                continue;
 
-            if (Names.TryGetValue(type.Name, out var nameValue))
+            if (Names.TryGetValue(type.Name, out string? nameValue))
             {
                 type.Name = nameValue;
             }
             else
             {
-                var newName = GenerateString(RenameMode.Ascii);
+                string newName = GenerateString(RenameMode.Ascii);
 
                 Names.Add(type.Name, newName);
                 type.Name = newName;
@@ -120,48 +122,74 @@ internal class RenamerPhase
 
     private static void ApplyChangesToResourcesClasses(ModuleDefMD module)
     {
-        var moduleToRename = module;
-        foreach (var resource in moduleToRename.Resources)
-        foreach (var item in Names)
-            if (resource.Name.Contains(item.Key))
-                resource.Name = resource.Name.Replace(item.Key, item.Value);
-        foreach (var type in moduleToRename.GetTypes())
-        foreach (var property in type.Properties)
+        ModuleDefMD moduleToRename = module;
+        foreach (Resource? resource in moduleToRename.Resources)
         {
-            if (property.Name != "ResourceManager")
-                continue;
+            foreach (KeyValuePair<string, string> item in Names)
+            {
+                if (resource.Name.Contains(item.Key))
+                {
+                    resource.Name = resource.Name.Replace(item.Key, item.Value);
+                }
+            }
+        }
 
-            var instr = property.GetMethod.Body.Instructions;
+        foreach (TypeDef? type in moduleToRename.GetTypes())
+        {
+            foreach (PropertyDef? property in type.Properties)
+            {
+                if (property.Name != "ResourceManager")
+                {
+                    continue;
+                }
 
-            for (var i = 0; i < instr.Count - 3; i++)
-                if (instr[i].OpCode == OpCodes.Ldstr)
-                    foreach (var item in Names.Where(item =>
-                                 item.Key == instr[i].Operand.ToString()))
-                        instr[i].Operand = item.Value;
+                IList<Instruction>? instr = property.GetMethod.Body.Instructions;
+
+                for (int i = 0; i < instr.Count - 3; i++)
+                {
+                    if (instr[i].OpCode == OpCodes.Ldstr)
+                    {
+                        foreach (KeyValuePair<string, string> item in Names.Where(item =>
+                                     item.Key == instr[i].Operand.ToString()))
+                        {
+                            instr[i].Operand = item.Value;
+                        }
+                    }
+                }
+            }
         }
     }
 
 
     public static void ExecuteFieldRenaming(ModuleDefMD module)
     {
-        foreach (var type in module.GetTypes())
+        foreach (TypeDef? type in module.GetTypes())
         {
-            if (type.IsGlobalModuleType) continue;
-
-            if (type.FullName.Contains(".My"))
+            if (type.IsGlobalModuleType)
+            {
                 continue;
-            foreach (var field in type.Fields)
-                if (Names.TryGetValue(field.Name, out var nameValue))
+            }
+
+            foreach (FieldDef? field in type.Fields)
+            {
+                if (field.IsInitOnly)
+                {
+                    continue;
+                }
+
+                if (field.HasCustomAttributes) continue;
+                if (Names.TryGetValue(field.Name, out string? nameValue))
                 {
                     field.Name = nameValue;
                 }
                 else
                 {
-                    var newName = GenerateString(RenameMode.Ascii);
+                    string newName = GenerateString(RenameMode.Ascii);
 
                     Names.Add(field.Name, newName);
                     field.Name = newName;
                 }
+            }
         }
 
         ApplyChangesToResourcesField(module);
@@ -169,41 +197,71 @@ internal class RenamerPhase
 
     private static void ApplyChangesToResourcesField(ModuleDefMD module)
     {
-        foreach (var type in module.GetTypes())
+        foreach (TypeDef? type in module.GetTypes())
+        {
             if (!type.IsGlobalModuleType)
             {
-                if (type.FullName.Contains(".My"))
-                    continue;
-                foreach (var methodDef in type.Methods)
+            
+                foreach (MethodDef? methodDef in type.Methods)
+                {
                     if (methodDef.Name != "InitializeComponent")
                     {
-                        if (!methodDef.HasBody) continue;
+                        if (!methodDef.HasBody)
+                        {
+                            continue;
+                        }
 
                         IList<Instruction> instructions = methodDef.Body.Instructions;
-                        for (var i = 0; i < instructions.Count - 3; i++)
+                        for (int i = 0; i < instructions.Count - 3; i++)
+                        {
                             if (instructions[i].OpCode == OpCodes.Ldstr)
-                                foreach (var keyValuePair in Names)
+                            {
+                                foreach (KeyValuePair<string, string> keyValuePair in Names)
+                                {
                                     if (keyValuePair.Key == instructions[i].Operand.ToString())
+                                    {
                                         instructions[i].Operand = keyValuePair.Value;
+                                    }
+                                }
+                            }
+                        }
                     }
+                }
             }
+        }
     }
 
     public static void ExecuteMethodRenaming(ModuleDefMD module)
     {
-        foreach (var type in module.GetTypes())
+        foreach (TypeDef? type in module.GetTypes())
         {
-            if (type.IsGlobalModuleType) continue;
-            if (type.FullName.Contains(".My"))
-                continue;
-
-            if (type.Name == "GeneratedInternalTypeHelper") continue;
-
-            foreach (var method in type.Methods)
+            if (type.IsGlobalModuleType)
             {
-                if (!method.HasBody) continue;
+                continue;
+            }
 
-                if (method.Name == ".ctor" || method.Name == ".cctor") continue;
+
+            if (type.Name == "GeneratedInternalTypeHelper")
+            {
+                continue;
+            }
+
+            foreach (MethodDef? method in type.Methods)
+            {
+                if (!method.HasBody)
+                {
+                    continue;
+                }
+
+                if (method.IsVirtual || method.IsSpecialName)
+                {
+                    continue;
+                }
+
+                if (method.Name == ".ctor" || method.Name == ".cctor")
+                {
+                    continue;
+                }
 
                 method.Name = GenerateString(RenameMode.Ascii);
             }
@@ -212,13 +270,17 @@ internal class RenamerPhase
 
     public static void ExecuteModuleRenaming(ModuleDefMD mod)
     {
-        foreach (var module in mod.Assembly.Modules)
+        foreach (ModuleDef? module in mod.Assembly.Modules)
         {
-            var isWpf = false;
-            foreach (var asmRef in module.GetAssemblyRefs())
+            bool isWpf = false;
+            foreach (AssemblyRef? asmRef in module.GetAssemblyRefs())
+            {
                 if (asmRef.Name == "WindowsBase" || asmRef.Name == "PresentationCore" ||
                     asmRef.Name == "PresentationFramework" || asmRef.Name == "System.Xaml")
+                {
                     isWpf = true;
+                }
+            }
 
             if (!isWpf)
             {
@@ -235,22 +297,25 @@ internal class RenamerPhase
 
     public static void ExecuteNamespaceRenaming(ModuleDefMD module)
     {
-        foreach (var type in module.GetTypes())
+        foreach (TypeDef? type in module.GetTypes())
         {
-            if (type.IsGlobalModuleType) continue;
-
-            if (type.FullName.Contains(".My"))
+            if (type.IsGlobalModuleType)
+            {
                 continue;
+            }
 
-            if (type.Namespace == "") continue;
+            if (type.Namespace == "")
+            {
+                continue;
+            }
 
-            if (Names.TryGetValue(type.Namespace, out var nameValue))
+            if (Names.TryGetValue(type.Namespace, out string? nameValue))
             {
                 type.Namespace = nameValue;
             }
             else
             {
-                var newName = GenerateString(RenameMode.Ascii);
+                string newName = GenerateString(RenameMode.Ascii);
 
                 Names.Add(type.Namespace, newName);
                 type.Namespace = newName;
@@ -262,32 +327,54 @@ internal class RenamerPhase
 
     private static void ApplyChangesToResourcesNamespace(ModuleDefMD module)
     {
-        foreach (var resource in module.Resources)
-        foreach (var item in Names.Where(item => resource.Name.Contains(item.Key)))
-            resource.Name = resource.Name.Replace(item.Key, item.Value);
-
-        foreach (var type in module.GetTypes())
-        foreach (var property in type.Properties)
+        foreach (Resource? resource in module.Resources)
         {
-            if (property.Name != "ResourceManager") continue;
+            foreach (KeyValuePair<string, string> item in Names.Where(item => resource.Name.Contains(item.Key)))
+            {
+                resource.Name = resource.Name.Replace(item.Key, item.Value);
+            }
+        }
 
-            var instr = property.GetMethod.Body.Instructions;
+        foreach (TypeDef? type in module.GetTypes())
+        {
+            foreach (PropertyDef? property in type.Properties)
+            {
+                if (property.Name != "ResourceManager")
+                {
+                    continue;
+                }
+                
 
-            for (var i = 0; i < instr.Count - 3; i++)
-                if (instr[i].OpCode == OpCodes.Ldstr)
-                    foreach (var item in Names.Where(item =>
-                                 item.Key == instr[i].Operand.ToString()))
-                        instr[i].Operand = item.Value;
+                IList<Instruction>? instr = property.GetMethod.Body.Instructions;
+
+                for (int i = 0; i < instr.Count - 3; i++)
+                {
+                    if (instr[i].OpCode == OpCodes.Ldstr)
+                    {
+                        foreach (KeyValuePair<string, string> item in Names.Where(item =>
+                                     item.Key == instr[i].Operand.ToString()))
+                        {
+                            instr[i].Operand = item.Value;
+                        }
+                    }
+                }
+            }
         }
     }
 
     public static void ExecutePropertiesRenaming(ModuleDefMD module)
     {
-        foreach (var type in module.GetTypes())
+        foreach (TypeDef? type in module.GetTypes())
         {
-            if (type.IsGlobalModuleType) continue;
+            if (type.IsGlobalModuleType)
+            {
+                continue;
+            }
 
-            foreach (var property in type.Properties) property.Name = GenerateString(RenameMode.Ascii);
+            foreach (PropertyDef? property in type.Properties)
+            {
+                property.Name = GenerateString(RenameMode.Ascii);
+            }
         }
     }
 }
