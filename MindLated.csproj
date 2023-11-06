@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="dnlib" Version="4.1.0" />
+    <PackageReference Include="dnlib" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
