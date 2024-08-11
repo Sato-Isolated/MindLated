@@ -6,7 +6,7 @@
 ## English
 
 ### Overview
-One day, I might release the private version of the obfuscator, which offers more protection, the ability to choose the protection for each method, and a better interface etc.
+One day, I might release a private version of the obfuscator, which offers more protection, the ability to choose the protection for each method, a better interface, etc.
 
 ### Issues
 If you encounter any problems with the current code, please open an issue, and I will see what I can do.
@@ -17,14 +17,13 @@ For the time being, I don't plan to add any further protection.
 ## Français
 
 ### Aperçu
-Un jour peut-être, je sortirai la version privée de l'obfuscateur, offrant plus de protection, la possibilité de choisir la protection de chaque méthode, et une meilleure interface etc.
+Un jour, je sortirais la version privée de l'obfuscateur, offrant plus de protection, la possibilité de choisir la protection de chaque méthode, une meilleure interface, etc.
 
 ### Problèmes
 Si vous rencontrez des problèmes avec le code actuel, ouvrez une issue et je verrai ce que je peux faire.
 
 ### Mises à jour
-Dans l'instant je ne prévois pas de rajouter d'autre protection.
-
+Pour le moment, je ne prévois pas d'ajouter d'autres protections.
 
 <h3 align="left">☕ Support</h3>
 <p align="left">If you'd like to support me, you can do so via Ko-fi. Every bit of support is greatly appreciated!</p>
