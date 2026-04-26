@@ -24,6 +24,7 @@ namespace MindLated.Protection.LocalF
 
         private static void Process(ModuleDef module, MethodDef meth)
         {
+            meth.Body.SimplifyMacros(meth.Parameters);
             var instructions = meth.Body.Instructions;
             foreach (var t in instructions)
             {
@@ -41,24 +42,18 @@ namespace MindLated.Protection.LocalF
                 var eq = t.OpCode?.Code switch
                 {
                     Code.Ldloc => OpCodes.Ldsfld,
-                    Code.Ldloc_S => OpCodes.Ldsfld,
-                    Code.Ldloc_0 => OpCodes.Ldsfld,
-                    Code.Ldloc_1 => OpCodes.Ldsfld,
-                    Code.Ldloc_2 => OpCodes.Ldsfld,
-                    Code.Ldloc_3 => OpCodes.Ldsfld,
                     Code.Ldloca => OpCodes.Ldsflda,
-                    Code.Ldloca_S => OpCodes.Ldsflda,
                     Code.Stloc => OpCodes.Stsfld,
-                    Code.Stloc_0 => OpCodes.Stsfld,
-                    Code.Stloc_1 => OpCodes.Stsfld,
-                    Code.Stloc_2 => OpCodes.Stsfld,
-                    Code.Stloc_3 => OpCodes.Stsfld,
-                    Code.Stloc_S => OpCodes.Stsfld,
                     _ => null
                 };
+                if (eq == null) continue;
+
                 t.OpCode = eq;
                 t.Operand = def;
             }
+
+            _convertedLocals.ToList().ForEach(x => meth.Body.Variables.Remove(x.Key));
+            _convertedLocals = new Dictionary<Local, FieldDef>();
         }
     }
 }

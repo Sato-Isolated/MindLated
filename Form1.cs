@@ -11,6 +11,7 @@ using MindLated.Protection.Proxy;
 using MindLated.Protection.Renamer;
 using MindLated.Protection.String;
 using MindLated.Protection.StringOnline;
+using MindLated.Services;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -90,6 +91,7 @@ public partial class Form1 : Form
     {
         Md = ModuleDefMD.Load(textBox1.Text);
         foreach (var func in _func) func();
+        var postProcessReport = IlPostProcessor.ProcessModule(Md);
         var text2 = Path.GetDirectoryName(textBox1.Text);
         if (text2 != null && !text2.EndsWith("\\"))
             text2 += "\\";
@@ -101,6 +103,13 @@ public partial class Form1 : Form
             Logger = DummyLogger.NoThrowInstance
         };
         Md.Write(path, opts);
+
+        if (postProcessReport.SkippedMethods > 0)
+        {
+            AppendMsg(richTextBox1, Color.DarkOrange,
+                $"IL post-pass: {postProcessReport.ProcessedMethods} processed, {postProcessReport.SkippedMethods} skipped",
+                true);
+        }
 
         AppendMsg(richTextBox1, Color.Red, $"Save: {path}", true);
     }
@@ -124,7 +133,10 @@ public partial class Form1 : Form
         switch (protect)
         {
             case Protection.Calli:
-                Calli.Execute(Md);
+                var calliReport = Calli.Execute(Md);
+                AppendMsg(richTextBox1, Color.DarkOrange,
+                    $"Calli: {calliReport.TransformedCalls} transformed, {calliReport.SkippedCalls} skipped",
+                    true);
                 break;
             case Protection.ControlFlow:
                 ControlFlowObfuscation.Execute(Md);

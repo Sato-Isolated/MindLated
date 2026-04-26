@@ -1,8 +1,14 @@
 **/bin/*
 **/obj/*
-.vs/MindLated/v16/.suo
+.vs/
 /.vs/MindLated/v17
 *.vsidx
 *.lock
 MindLated.sln.DotSettings.user
 .vs/MindLated/DesignTimeBuild/.dtbcache.v2
+.github/agents/
+.github/instructions/
+.github/cil.md
+.serena/memories/
+.!.serena/memories/
+.vscode/

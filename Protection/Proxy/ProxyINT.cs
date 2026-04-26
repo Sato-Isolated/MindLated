@@ -36,11 +36,11 @@ namespace MindLated.Protection.Proxy
                             var methImplFlags = MethodImplAttributes.IL | MethodImplAttributes.Managed;
                             var methFlags = MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.ReuseSlot;
                             var meth1 = new MethodDefUser(Renamer.RenamerPhase.GenerateString(Renamer.RenamerPhase.RenameMode.Normal),
-                                        MethodSig.CreateStatic(module.CorLibTypes.Double),
+                                        MethodSig.CreateStatic(module.CorLibTypes.Single),
                                         methImplFlags, methFlags);
                             module.GlobalType.Methods.Add(meth1);
                             meth1.Body = new CilBody();
-                            meth1.Body.Variables.Add(new Local(module.CorLibTypes.Double));
+                            meth1.Body.Variables.Add(new Local(module.CorLibTypes.Single));
                             meth1.Body.Instructions.Add(Instruction.Create(OpCodes.Ldc_R4, (float)meth.Body.Instructions[i].Operand));
                             meth1.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
                             instr[i].OpCode = OpCodes.Call;
