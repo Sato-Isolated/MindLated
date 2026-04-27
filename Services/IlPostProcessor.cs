@@ -28,6 +28,10 @@ internal static class IlPostProcessor
                     body.OptimizeBranches();
                     body.OptimizeMacros();
                     body.UpdateInstructionOffsets();
+                    var instructionCount = body.Instructions.Count;
+                    var conservativeMinStack = (ushort)Math.Min(ushort.MaxValue, Math.Max(8, instructionCount + 8));
+                    body.MaxStack = conservativeMinStack;
+                    body.KeepOldMaxStack = true;
                     processedMethods++;
                 }
                 catch
