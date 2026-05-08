@@ -6,75 +6,181 @@ namespace MindLated.Protection.INT
 {
     public static class AddIntPhase
     {
-        /*public static void Execute(ModuleDef module)
+        private static readonly Random Random = new();
+
+        public static void Execute2(ModuleDef module)
         {
             foreach (var type in module.GetTypes())
             {
                 if (type.IsGlobalModuleType) continue;
-                foreach (var methodDef2 in type.Methods)
+                foreach (var method in type.Methods)
                 {
-                    if (!methodDef2.HasBody) continue;
-                    var instr = methodDef2.Body.Instructions;
-                    for (var i = 0; i < instr.Count; i++)
+                    if (!method.HasBody) continue;
+
+                    var body = method.Body;
+                    var instructions = body.Instructions;
+                    for (var i = 0; i < instructions.Count; i++)
                     {
-                        if (!methodDef2.Body.Instructions[i].IsLdcI4()) continue;
-                        var rnd = new Random();
-                        var randomuint = rnd.Next(2147483647);
-                        methodDef2.Body.Instructions.Insert(i + 1, Instruction.Create(OpCodes.Sizeof, methodDef2.Module.Import(typeof(bool))));
-                        methodDef2.Body.Instructions.Insert(i + 2, Instruction.Create(OpCodes.Add));
-                        methodDef2.Body.Instructions.Insert(i + 3, Instruction.Create(OpCodes.Ldc_R8, Math.PI / 2));
-                        methodDef2.Body.Instructions.Insert(i + 4, Instruction.Create(OpCodes.Call, methodDef2.Module.Import(typeof(Math).GetMethod("Sin", new Type[] { typeof(double) }))));
-                        methodDef2.Body.Instructions.Insert(i + 5, Instruction.Create(OpCodes.Conv_I4));
-                        methodDef2.Body.Instructions.Insert(i + 6, Instruction.Create(OpCodes.Sub));
-                        methodDef2.Body.Instructions.Insert(i + 7, Instruction.Create(OpCodes.Sizeof, methodDef2.Module.Import(typeof(bool))));
-                        methodDef2.Body.Instructions.Insert(i + 8, Instruction.Create(OpCodes.Add));
-                        methodDef2.Body.Instructions.Insert(i + 9, Instruction.Create(OpCodes.Ldc_R8, Math.PI / randomuint));
-                        methodDef2.Body.Instructions.Insert(i + 10, Instruction.Create(OpCodes.Call, methodDef2.Module.Import(typeof(Math).GetMethod("Cos", new Type[] { typeof(double) }))));
-                        methodDef2.Body.Instructions.Insert(i + 11, Instruction.Create(OpCodes.Conv_I4));
-                        methodDef2.Body.Instructions.Insert(i + 12, Instruction.Create(OpCodes.Sub));
+                        var instr = instructions[i];
+                        if (!instr.IsLdcI4()) continue;
+
+                        var originalValue = instr.GetLdcI4Value();
+                        i += ApplyObfuscationPattern(body, i, module, originalValue);
                     }
+
+                    body.SimplifyBranches();
                 }
             }
-        }*/
+        }
 
-        public static void Execute2(ModuleDef md)
+        private static int ApplyObfuscationPattern(CilBody body, int index, ModuleDef module, int originalValue)
         {
-            foreach (var type in md.GetTypes())
+            return Random.Next(5) switch
             {
-                if (type.IsGlobalModuleType) continue;
-                foreach (var meth in type.Methods)
-                {
-                    if (!meth.HasBody) continue;
-                    {
-                        for (var i = 0; i < meth.Body.Instructions.Count; i++)
-                        {
-                            if (!meth.Body.Instructions[i].IsLdcI4()) continue;
-                            var numorig = new Random(Guid.NewGuid().GetHashCode()).Next();
-                            var div = new Random(Guid.NewGuid().GetHashCode()).Next();
-                            var num = numorig ^ div;
+                0 => InsertXorNoise(body, index, originalValue),
+                1 => InsertAddSubLocalNoise(body, index, module, originalValue),
+                2 => InsertDoubleNegBranchNoise(body, index, originalValue),
+                3 => InsertSizeofNoise(body, index, module, originalValue),
+                _ => InsertOrAndNoise(body, index, originalValue)
+            };
+        }
 
-                            var nop = OpCodes.Nop.ToInstruction();
+        private static int InsertXorNoise(CilBody body, int index, int originalValue)
+        {
+            var instructions = body.Instructions;
+            var noise = GetNonZeroRandom();
+            var target = Instruction.Create(OpCodes.Nop);
 
-                            var local = new Local(meth.Module.ImportAsTypeSig(typeof(int)));
-                            meth.Body.Variables.Add(local);
+            instructions[index].OpCode = OpCodes.Ldc_I4;
+            instructions[index].Operand = originalValue ^ noise;
 
-                            meth.Body.Instructions.Insert(i + 1, OpCodes.Stloc.ToInstruction(local));
-                            meth.Body.Instructions.Insert(i + 2, Instruction.Create(OpCodes.Ldc_I4, meth.Body.Instructions[i].GetLdcI4Value() - sizeof(float)));
-                            meth.Body.Instructions.Insert(i + 3, Instruction.Create(OpCodes.Ldc_I4, num));
-                            meth.Body.Instructions.Insert(i + 4, Instruction.Create(OpCodes.Ldc_I4, div));
-                            meth.Body.Instructions.Insert(i + 5, Instruction.Create(OpCodes.Xor));
-                            meth.Body.Instructions.Insert(i + 6, Instruction.Create(OpCodes.Ldc_I4, numorig));
-                            meth.Body.Instructions.Insert(i + 7, Instruction.Create(OpCodes.Bne_Un, nop));
-                            meth.Body.Instructions.Insert(i + 8, Instruction.Create(OpCodes.Ldc_I4, 2));
-                            meth.Body.Instructions.Insert(i + 9, OpCodes.Stloc.ToInstruction(local));
-                            meth.Body.Instructions.Insert(i + 10, Instruction.Create(OpCodes.Sizeof, meth.Module.Import(typeof(float))));
-                            meth.Body.Instructions.Insert(i + 11, Instruction.Create(OpCodes.Add));
-                            meth.Body.Instructions.Insert(i + 12, nop);
-                            i += 12;
-                        }
-                        meth.Body.SimplifyBranches();
-                    }
-                }
+            instructions.Insert(index + 1, Instruction.Create(OpCodes.Ldc_I4, noise));
+            instructions.Insert(index + 2, Instruction.Create(OpCodes.Xor));
+            instructions.Insert(index + 3, Instruction.Create(OpCodes.Ldc_I4_0));
+            instructions.Insert(index + 4, Instruction.Create(OpCodes.Brfalse_S, target));
+            instructions.Insert(index + 5, Instruction.Create(OpCodes.Nop));
+            instructions.Insert(index + 6, target);
+
+            return 6;
+        }
+
+        private static int InsertAddSubLocalNoise(CilBody body, int index, ModuleDef module, int originalValue)
+        {
+            var instructions = body.Instructions;
+            var offset = GetRandomSmallInt();
+            var local = AddLocal(body, module);
+            var target = Instruction.Create(OpCodes.Nop);
+
+            instructions[index].OpCode = OpCodes.Ldc_I4;
+            instructions[index].Operand = originalValue + offset;
+
+            instructions.Insert(index + 1, OpCodes.Stloc.ToInstruction(local));
+            instructions.Insert(index + 2, OpCodes.Ldloc.ToInstruction(local));
+            instructions.Insert(index + 3, Instruction.Create(OpCodes.Ldc_I4, offset));
+            instructions.Insert(index + 4, Instruction.Create(OpCodes.Sub));
+            instructions.Insert(index + 5, Instruction.Create(OpCodes.Ldc_I4, GetRandomInt()));
+            instructions.Insert(index + 6, Instruction.Create(OpCodes.Ldc_I4, GetRandomInt()));
+            instructions.Insert(index + 7, Instruction.Create(OpCodes.Ceq));
+            instructions.Insert(index + 8, Instruction.Create(OpCodes.Brtrue_S, target));
+            instructions.Insert(index + 9, Instruction.Create(OpCodes.Nop));
+            instructions.Insert(index + 10, target);
+
+            return 10;
+        }
+
+        private static int InsertDoubleNegBranchNoise(CilBody body, int index, int originalValue)
+        {
+            var instructions = body.Instructions;
+            var target = Instruction.Create(OpCodes.Nop);
+
+            instructions[index].OpCode = OpCodes.Ldc_I4;
+            instructions[index].Operand = originalValue;
+
+            instructions.Insert(index + 1, OpCodes.Neg.ToInstruction());
+            instructions.Insert(index + 2, OpCodes.Neg.ToInstruction());
+            instructions.Insert(index + 3, Instruction.Create(OpCodes.Ldc_I4, GetRandomInt()));
+            instructions.Insert(index + 4, Instruction.Create(OpCodes.Ldc_I4, GetRandomInt()));
+            instructions.Insert(index + 5, Instruction.Create(OpCodes.Ceq));
+            instructions.Insert(index + 6, Instruction.Create(OpCodes.Brtrue_S, target));
+            instructions.Insert(index + 7, Instruction.Create(OpCodes.Nop));
+            instructions.Insert(index + 8, target);
+
+            return 8;
+        }
+
+        private static int InsertSizeofNoise(CilBody body, int index, ModuleDef module, int originalValue)
+        {
+            var instructions = body.Instructions;
+            var target = Instruction.Create(OpCodes.Nop);
+
+            instructions[index].OpCode = OpCodes.Ldc_I4;
+            instructions[index].Operand = originalValue;
+
+            instructions.Insert(index + 1, Instruction.Create(OpCodes.Sizeof, module.Import(typeof(bool))));
+            instructions.Insert(index + 2, Instruction.Create(OpCodes.Conv_I4));
+            instructions.Insert(index + 3, Instruction.Create(OpCodes.Add));
+            instructions.Insert(index + 4, Instruction.Create(OpCodes.Sizeof, module.Import(typeof(bool))));
+            instructions.Insert(index + 5, Instruction.Create(OpCodes.Conv_I4));
+            instructions.Insert(index + 6, Instruction.Create(OpCodes.Sub));
+            instructions.Insert(index + 7, Instruction.Create(OpCodes.Ldc_I4_0));
+            instructions.Insert(index + 8, Instruction.Create(OpCodes.Brfalse_S, target));
+            instructions.Insert(index + 9, Instruction.Create(OpCodes.Nop));
+            instructions.Insert(index + 10, target);
+
+            return 10;
+        }
+
+        private static int InsertOrAndNoise(CilBody body, int index, int originalValue)
+        {
+            var instructions = body.Instructions;
+            var target = Instruction.Create(OpCodes.Nop);
+
+            instructions[index].OpCode = OpCodes.Ldc_I4;
+            instructions[index].Operand = originalValue;
+
+            instructions.Insert(index + 1, Instruction.Create(OpCodes.Ldc_I4_0));
+            instructions.Insert(index + 2, Instruction.Create(OpCodes.Or));
+            instructions.Insert(index + 3, Instruction.Create(OpCodes.Ldc_I4_M1));
+            instructions.Insert(index + 4, Instruction.Create(OpCodes.And));
+            instructions.Insert(index + 5, Instruction.Create(OpCodes.Ldc_I4, GetRandomInt()));
+            instructions.Insert(index + 6, Instruction.Create(OpCodes.Ldc_I4, GetRandomInt()));
+            instructions.Insert(index + 7, Instruction.Create(OpCodes.Ceq));
+            instructions.Insert(index + 8, Instruction.Create(OpCodes.Brtrue_S, target));
+            instructions.Insert(index + 9, Instruction.Create(OpCodes.Nop));
+            instructions.Insert(index + 10, target);
+
+            return 10;
+        }
+
+        private static Local AddLocal(CilBody body, ModuleDef module)
+        {
+            var local = new Local(module.CorLibTypes.Int32);
+            body.Variables.Add(local);
+            return local;
+        }
+
+        private static int GetNonZeroRandom()
+        {
+            lock (Random)
+            {
+                var value = Random.Next(int.MinValue, int.MaxValue);
+                return value != 0 ? value : 1;
+            }
+        }
+
+        private static int GetRandomInt()
+        {
+            lock (Random)
+            {
+                return Random.Next();
+            }
+        }
+
+        private static int GetRandomSmallInt()
+        {
+            lock (Random)
+            {
+                return Random.Next(1, 32);
             }
         }
     }
